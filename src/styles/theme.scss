@@ -1,0 +1,36 @@
+// theme.scss
+
+// 白天模式色值map
+@import './variable.scss'; // global css
+$theme-light: (
+  // 背景色
+  bg-default: $color-white,
+  // 边框色
+  border-primary: $color-primary,
+  // 文本色
+  text-default: $color-text-default
+);
+
+// 深色模式色值map
+$theme-dark: (
+  // 背景色
+  bg-default: $color-white-dark,
+  // 边框色
+  border-primary: $color-primary-dark,
+  // 文本色
+  text-default: $color-text-default-dark
+);
+
+// 主题名map
+$themes: (
+  light: $theme-light,
+  dark: $theme-dark,
+);
+
+@mixin setThemes($type: background-color, $typeColor: 'bg-default', $alpha: 1) {
+  @each $themename, $theme in $themes {
+    .theme-#{$themename} & {
+      #{$type}: rgba(map-get($map: $theme, $key: $typeColor), $alpha);
+    }
+  }
+}

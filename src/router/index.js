@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Layout from '@/layout'
 
 Vue.use(Router)
 
@@ -13,7 +14,18 @@ export const constantRoutes = [
     path: '/404',
     component: () => import('@/views/error-page/404'),
     hidden: true
-  } 
+  },
+  {
+    path: '/',
+    component: Layout,
+    /* children: [
+      {
+        path: 'home',
+        component: () => import('@/views/home/index'),
+        name: 'home',
+      }
+    ] */
+  },
 ]
 
 /**
