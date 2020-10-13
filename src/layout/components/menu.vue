@@ -22,7 +22,7 @@
 
 <script>
 	import zlSearch from '../../components/Search/search.vue'
-	import zlProfile from '../../components/Profile/index.vue'
+	import zlProfile from '../../components/Profile/index.vue' // 耦合的组件
 	
 	export default {
 		components: {

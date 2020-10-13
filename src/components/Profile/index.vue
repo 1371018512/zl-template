@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<img 
-			v-popover:popover1 
+			v-popover:popover1
 			:src="src" 
 			:style="hovered?ActiveProfileStyle:ProfileStyle" 
 			@mouseover="hovered=true"
@@ -94,6 +94,7 @@
 				},
 				ContainerStyle: {
 				},
+				//popover2: 'popover1',
 				hovered: false,
 				// todo: 数据不该放在此处
 				imgs: [
