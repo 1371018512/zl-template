@@ -22,5 +22,26 @@ module.exports = {
 				symbolId: "icon-[name]"
 			})
 			.end();
+	},
+	/*  // 老版本配置方法
+		proxyTable: {
+		'/apis': {
+			target: 'http://localhost:3000/',
+			changeOrigin: true,
+			parthRewrite: {
+				'^/apis': ''
+			}
+		}
+	} */
+	devServer: {
+		proxy: {
+			'/api': {
+				target: 'http://localhost:3000/',
+				changeOrigin: true,
+				pathRewrite: {
+					"^/api": "/", // rewrite path
+				},
+			}
+		}
 	}
 };

@@ -1,5 +1,5 @@
 <template>
-	<div :style="ContainerStyle">
+	<div>
 		<img 
 			v-popover:popover1 
 			:src="src" 
@@ -26,12 +26,6 @@
 				@mouseover.native="hoverEffectIn($event)"
 				@mouseleave.native="hoverEffectOut($event)"
 				>
-				<!-- <el-col :span="7"><img src="../../assets/logo.png" style="width: 100%;"></el-col>
-				<el-col :span="7"><img src="../../assets/logo.png" style="width: 100%;"></el-col>
-				<el-col :span="7"><img src="../../assets/logo.png" style="width: 100%;"></el-col>
-				<el-col :span="7"><img src="../../assets/logo.png" style="width: 100%;"></el-col>
-				<el-col :span="7"><img src="../../assets/logo.png" style="width: 100%;"></el-col>
-				<el-col :span="7"><img src="../../assets/logo.png" style="width: 100%;"></el-col> -->
 				<el-col 
 					:span="7" 
 					v-for="(item, index) in imgs" 
@@ -45,6 +39,8 @@
 			</el-main>
 		    <el-footer class="footer">
 				<el-col
+					@mouseover.native="ButtonIn($event)"
+					@mouseleave.native="ButtonOut($event)"
 					:span="11" 
 					style="text-align: center; cursor: pointer;">
 					<div>
@@ -53,11 +49,13 @@
 					</div>
 				</el-col>
 				<el-col
+					@mouseover.native="ButtonIn($event)"
+					@mouseleave.native="ButtonOut($event)"
 					:span="11" 
 					style="text-align: center; cursor: pointer;">
-					<div>
+					<div >
 						<i class="el-icon-circle-close"></i>
-						{{footerButton[0].name}}
+						{{footerButton[1].name}}
 					</div>
 				</el-col>
 			</el-footer>
@@ -74,10 +72,10 @@
 		    default:40,
 		  },
 		  src: {
-			default: require('../../assets/logo.png') 
+			default: require('../../assets/logo.png')
 		  }
 		},
-		mounted() {
+		created() {
 		},
 		data() {
 			return {
@@ -126,7 +124,15 @@
 			hoverEffectOut(e) {
 				this.activeImg = -1;
 				e.stopPropagation();
-			}
+			},
+			ButtonIn(e) {
+				let t = e.currentTarget;
+				t.classList.add('hoverButton');
+			},
+			ButtonOut(e) {
+				let t = e.currentTarget;
+				t.classList.remove('hoverButton');
+			},
 		}
 	}
 </script>
@@ -140,11 +146,16 @@
 	.dark-back {
 		background-color: #d2dcee;
 		border-radius: 5px;
+		transition: all 0.5s;
 	}
 	.footer {
 		padding: 0;
 		display: flex;
 		justify-content: space-between;
 		height: 30px !important;
+	}
+	.hoverButton {
+		transition: all 0.2s;
+		color: rgba(64, 158, 255, .9);
 	}
 </style>
