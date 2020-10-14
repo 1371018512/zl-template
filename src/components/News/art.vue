@@ -1,55 +1,56 @@
 <template>
 	<div>
-		<span class="title"><strong>{{title}}</strong></span>
-		<span :style="{ color: level[userLevel].color }">{{userName}}</span>
-		<img :src="badges[badgeList[0].type]"/>
-		<span style="display: inline-block;width: 30px;"></span>
-		<span>{{action}}</span>
-		<span class="pull-right">{{date}}</span>
+		<span class="title"><strong>{{news[index].art.title}}</strong></span>
+		<p class="content">
+			<span v-for="(item, index) in news[index].art.tag" class="green">
+				#{{item}}#
+			</span>
+			{{content}}
+			<span v-if="more" class="green">...查看更多</span>
+		</p>
+		<div class="badgeContainer">
+			<badge v-for="(item, index) in news[index].art.topic" :data="item"></badge>
+		</div>
 	</div>
 </template>
 
 <script>
-	import { mapGetters } from 'vuex'
-	import { formatTime } from '../../utils/index.js'
-	
+	import {
+		mapGetters
+	} from 'vuex'
+	import {
+		formatTime
+	} from '../../utils/index.js'
+	import Badge from '../badge/index.vue'
+
 	export default {
 		components: {
+			Badge
 		},
+		inject: ['news'],
 		computed: {
-		  ...mapGetters([
-		    'badges',
-			'level'
-		  ])
-		},
-		props: {
-		  data: {
-		    default: function() {
-				return {
-					userName: '今天也是没有收到offer的一天',
-					badgeList: [
-						{ 
-							name:'字节跳动_Data_后端开发工程师(准入职)',
-							type:'trainee',
-						},
-					],
-					action: '发表了',
-					date: new Date(),
-					userLevel: 6,
+			...mapGetters([
+				'badges',
+				'level'
+			]),
+			content() {
+				if (this.news[this.index].art.content.length < 100) {
+					return this.news[this.index].art.content;
+				} else {
+					this.more = true;
+					return this.news[this.index].art.content.slice(0, 100);
 				}
 			},
-		  },
-		  title: {
-			default: '网易互联网面试是否可推迟'
-		  }
+		},
+		props: {
+			index: {
+				type: Number,
+				default: 0,
+			}
 		},
 		data() {
 			return {
-				userName: this.data.userName,
-				badgeList: this.data.badgeList,
-				action: this.data.action,
-				date: formatTime(this.data.date, '{y}-{m}-{d}'),
-				userLevel: this.data.userLevel,
+				more: false,
 			};
 		},
 		methods: {}
@@ -60,5 +61,20 @@
 	.title {
 		font-size: 1.2em;
 		display: block;
+	}
+
+	.content {
+		line-height: 1.5em !important;
+		font-size: 13px;
+		margin: 5px 0;
+	}
+
+	.green {
+		color: #25bb9b;
+		cursor: pointer;
+	}
+
+	.badgeContainer {
+		padding: 10px 0;
 	}
 </style>

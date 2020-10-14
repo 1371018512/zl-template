@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/icons' // icon
 import '@/styles/index.scss' // global css
 import '@/styles/theme.scss' // global css
+import '@/assets/icon/iconfont.css'
 
 import './permission' // permission control
 

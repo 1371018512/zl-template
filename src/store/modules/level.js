@@ -17,7 +17,7 @@ const state = {
 			name: '出师牛',
 		},
 		4: {
-			color: '#42cdd2',
+			color: '#42c1a2',
 			name: '青出于蓝',
 		},
 		5: {

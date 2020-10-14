@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<span :style="{ color: level[userLevel].color }">{{userName}}</span>
-		<img :src="badges[badgeList[0].type]"/>
+		<span :style="{ color: level[news[index].user.userLevel].color }">{{news[index].user.userName}}</span>
+		<img v-for="(item, i) in news[index].user.badgeList" :src="badges[item.type]"/>
 		<span style="display: inline-block;width: 30px;"></span>
 		<span>{{action}}</span>
 		<span class="pull-right">{{date}}</span>
@@ -15,40 +15,32 @@
 	export default {
 		components: {
 		},
+		inject: ['news'],
 		computed: {
 		  ...mapGetters([
 		    'badges',
 			'level'
-		  ])
+		  ]),
+		  date() {
+		  	return formatTime(this.news[this.index].date, '{y}-{m}-{d}');
+		  },
 		},
 		props: {
-		  data: {
-		    default: function() {
-				return {
-					userName: '今天也是没有收到offer的一天',
-					badgeList: [
-						{ 
-							name:'字节跳动_Data_后端开发工程师(准入职)',
-							type:'trainee',
-						},
-					],
-					action: '发表了',
-					date: new Date(),
-					userLevel: 6,
-				}
-			},
-		  },
-		  jj: {
-			default: '11'
+		  index: {
+		    type: Number,
+		    default:0,
 		  }
+		},
+		mounted() {
+			if(this.news[this.index].art && this.news[this.index].art.title) {
+				this.action = '发表了';
+			}else {
+				this.action = '关注了';
+			}
 		},
 		data() {
 			return {
-				userName: this.data.userName,
-				badgeList: this.data.badgeList,
-				action: this.data.action,
-				date: formatTime(this.data.date, '{y}-{m}-{d}'),
-				userLevel: this.data.userLevel,
+				action: '',
 			};
 		},
 		methods: {}
