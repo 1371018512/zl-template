@@ -2,12 +2,24 @@
 	<div>
 		<div class="container">
 			<div class="profileContainer">
-				<zl-profile :src="news[index].follow.user.profile"/>
+				<zl-profile :src="news[index].follow.user.profile" v-popover:popover1/>
+				<el-popover ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="">
+					<zl-personal-detail
+						:index="index"
+						:data="news[index].follow.user"
+					/>
+				</el-popover>
 			</div>
 			<div class="infContainer">
-				<div :style="{ color: level[news[index].follow.user.userLevel].color }">
+				<div :style="{ color: level[news[index].follow.user.userLevel].color }" v-popover:popover2>
 					{{news[index].follow.user.userName}}
 				</div>
+				<el-popover ref="popover2" placement="bottom" title="" width="350" trigger="hover" content="">
+					<zl-personal-detail
+						:index="index"
+						:data="news[index].follow.user"
+					/>
+				</el-popover>
 				<div style="color: #b3b3b3;">
 					<span class="infDetail">
 						<span>学校</span>
@@ -33,11 +45,13 @@
 <script>
 	import { mapGetters } from 'vuex'
 	import zlProfile from '../Profile/profile2.vue'
+	import zlPersonalDetail from '../Popovers/PersonalDetail.vue'
 	
 	export default {
 		
 		components: {
 			zlProfile,
+			zlPersonalDetail
 		},
 		inject: ['news'],
 		computed: {

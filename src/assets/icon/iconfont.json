@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "846627",
+      "name": "phone",
+      "font_class": "phone",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "9810108",
+      "name": "分享",
+      "font_class": "fenxiang_2",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "10113916",
+      "name": "聊天",
+      "font_class": "liaotian",
+      "unicode": "e8a0",
+      "unicode_decimal": 59552
+    },
+    {
+      "icon_id": "3406917",
+      "name": "男",
+      "font_class": "nan",
+      "unicode": "e6ef",
+      "unicode_decimal": 59119
+    },
+    {
+      "icon_id": "3406919",
+      "name": "女",
+      "font_class": "nv",
+      "unicode": "e6f0",
+      "unicode_decimal": 59120
+    },
+    {
+      "icon_id": "11747372",
+      "name": "书本",
+      "font_class": "shuben",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "17512021",
+      "name": "menu-line",
+      "font_class": "menu-line",
+      "unicode": "e847",
+      "unicode_decimal": 59463
+    },
+    {
       "icon_id": "11746938",
       "name": "博士帽",
       "font_class": "boshimao",

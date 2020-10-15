@@ -35,7 +35,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
-        console.log(data)
         // 设置vuex
         commit('SET_TOKEN', data.token)
         // 设置浏览器中的cookie
@@ -51,7 +50,6 @@ const actions = {
   // 这里动态生成roles
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log(state.token)
       getInfo(state.token).then(response => {
         const { data } = response
 

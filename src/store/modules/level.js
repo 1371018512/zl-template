@@ -32,6 +32,11 @@ const state = {
 			color: '#f44c54',
 			name: '红名大佬',
 		},
+	},
+	BadgeImgs: {
+		'trainee': 'https://static.nowcoder.com/nc/image/identity/2.png',
+		'admission': 'https://static.nowcoder.com/nc/image/identity/3.png',
+		'formal': 'https://static.nowcoder.com/nc/image/identity/5.png',
 	}
 }
 

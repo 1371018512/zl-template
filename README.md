@@ -36,3 +36,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ##day3
 完成了登录，登录消息存储在localStorage中，但是用户的身份目前还没有作区分
 然后目前对于这个还没有作规划，所以先开发组件，等组件开发的差不多了开始理业务
+
+##day4
+完善了一下首页组件
+下一步完成详情弹出组件，以及个人详情页
+首要任务把详情页数据存到vuex中

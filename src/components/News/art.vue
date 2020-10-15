@@ -2,14 +2,16 @@
 	<div>
 		<span class="title"><strong>{{news[index].art.title}}</strong></span>
 		<p class="content">
-			<span v-for="(item, index) in news[index].art.tag" class="green">
+			<span v-for="(item, index) in news[index].art.tag" class="green" :key="item">
 				#{{item}}#
 			</span>
 			{{content}}
 			<span v-if="more" class="green">...查看更多</span>
 		</p>
 		<div class="badgeContainer">
-			<badge v-for="(item, index) in news[index].art.topic" :data="item"></badge>
+			<el-tag v-for="(item, index) in news[index].art.topic" size="mini" :key="item">
+				{{item}}
+			</el-tag>
 		</div>
 	</div>
 </template>
@@ -21,11 +23,9 @@
 	import {
 		formatTime
 	} from '../../utils/index.js'
-	import Badge from '../badge/index.vue'
 
 	export default {
 		components: {
-			Badge
 		},
 		inject: ['news'],
 		computed: {
@@ -76,5 +76,9 @@
 
 	.badgeContainer {
 		padding: 10px 0;
+	}
+	
+	.badgeContainer > *{
+		margin-right: 10px;
 	}
 </style>

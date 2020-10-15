@@ -23,5 +23,5 @@ export function setStorage(token) {
 }
 
 export function removeStorage() {
-  return localStorage.remove(TokenKey)
+  return localStorage.removeItem(TokenKey)
 }

@@ -1,10 +1,24 @@
 <template>
 	<el-container class="main">
+		<el-dialog :visible.sync="centerDialogVisible" width="800px">
+			<template v-slot:title>
+				<svg class="icon" aria-hidden="true" style="font-size: 25px;">
+				  <use xlink:href="#el-icon-zlliaotian"></use>
+				</svg>
+				Here might be a page title
+			</template>
+			<span>需要注意的是内容是默认不居中的</span>
+			<template v-slot:footer>
+			    <span slot="footer" class="dialog-footer">
+			    	<el-button @click="centerDialogVisible = false">取 消</el-button>
+			    	<el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+			    </span>
+			</template>
+		</el-dialog>
+		<el-button type="text" @click="centerDialogVisible = true">点击打开 Dialog</el-button>
+		<!-- 以上是文章详情页 -->
 		<el-aside width="600px">
-			<zl-news v-for="(item, i) in news" :index="i" />
-			<zl-news :index="1" />
-			<zl-news :index="1" />
-			<zl-news :index="1" />
+			<zl-news v-for="(item, i) in news" :index="i" :key='i' />
 		</el-aside>
 		<el-main>Main</el-main>
 	</el-container>
@@ -27,11 +41,17 @@
 		},
 		data() {
 			return {
+				centerDialogVisible: false,
 				news: [{
 					user: {
+						sex: 0,
+						belikes: 1100,
+						becollects: 1001,
+						codePass: 30,
+						problemPass: 37,
+						highquiltyOutput: 100,
 						userName: '今天也是没有收到offer的一天',
 						school: '华侨大学',
-						direction: '',
 						graduationYear: 2021,
 						direction: 'java工程师',
 						badgeList: [{
@@ -57,13 +77,26 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 							'面试'
 						],
 						date: new Date(),
+						lastModify: new Date(),
+						likes: 2,
+						collects: 0,
+						comments: {
+							length: 6,
+							data: ['', '', '', '', '', ''],
+						},
+						views: 1126,
 					},
 					date: new Date(),
 				}, {
 					user: {
+						sex: 0,
+						belikes: 1100,
+						becollects: 1001,
+						codePass: 30,
+						problemPass: 37,
+						highquiltyOutput: 100,
 						userName: '今天也是没有收到offer的一天',
 						school: '华侨大学',
-						direction: '',
 						graduationYear: 2021,
 						badgeList: [{
 							name: '字节跳动_Data_后端开发工程师(准入职)',
@@ -75,8 +108,17 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 					},
 					follow: {
 						user: {
+							sex: 1,
+							belikes: 1100,
+							becollects: 1001,
+							codePass: 30,
+							problemPass: 37,
+							highquiltyOutput: 100,
+							badgeList: [{
+								name: '字节跳动_Data_后端开发工程师(准入职)',
+								type: 'trainee',
+							}, ],
 							profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
-							badgeList: [],
 							userLevel: 2,
 							userName: 'shining4code',
 							school: '浙江大学',
@@ -95,11 +137,10 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 	}
 </script>
 
-<style>
+<style scoped>
 	.main {
 		padding-top: 60px;
 		flex-basis: 700px;
 		max-width: 950px;
 	}
-	
 </style>

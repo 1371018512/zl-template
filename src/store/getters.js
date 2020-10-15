@@ -11,7 +11,7 @@ const getters = {
   roles: state => state.user.roles,
   permission_routes: state => state.permission.routes,
   errorLogs: state => state.errorLog.logs,
-  badges: state => state.badges.imgs,
+  badges: state => state.level.BadgeImgs,
   level: state => state.level.levels,
 }
 export default getters

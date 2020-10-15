@@ -10,6 +10,7 @@ import '@/icons' // icon
 import '@/styles/index.scss' // global css
 import '@/styles/theme.scss' // global css
 import '@/assets/icon/iconfont.css'
+import '@/assets/icon/iconfont.js'
 
 import './permission' // permission control
 

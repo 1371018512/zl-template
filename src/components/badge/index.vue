@@ -1,8 +1,10 @@
 <template>
-	<div :class="hovered ? 'badge-hovered' : 'badge'" @mouseover="hover" @mouseleave="out">{{data}}</div>
+	<div :style="badgeStyle">{{data}}</div>
 </template>
 
 <script>
+	/* 自己写的标签样式 */
+	
 	export default {
 		computed: {
 		},
@@ -11,19 +13,27 @@
 				default: '网易',
 				type: String,
 			},
+			color: {
+				default: '#a1a1b3',
+				type: String,
+			}
 		},
 		data() {
 			return {
-				hovered: false,
+				badgeStyle: {
+					padding: '0px 15px',
+					borderRadius: '10px',
+					fontSize: '10px',
+					lineHeight: '20px',
+					border: '1px solid ' + this.color,
+					display: 'inline-block',
+					color: '#ffffff',
+					cursor: 'pointer',
+					background: this.color,
+				},
 			};
 		},
 		methods: {
-			hover() {
-				this.hovered = true;
-			},
-			out() {
-				this.hovered = false;
-			}
 		}
 	}
 </script>
@@ -36,21 +46,7 @@
 		line-height: 20px;
 		border: 1px solid #cccccc;
 		display: inline-block;
-		margin-left: 10px;
 		color: #cccccc;
-		cursor: pointer;
-		transition: all 0.3s;
-	}
-	
-	.badge-hovered {
-		padding: 0px 10px;
-		border-radius: 10px;
-		font-size: 10px;
-		line-height: 20px;
-		border: 1px solid #25bb9b;
-		display: inline-block;
-		margin-left: 10px;
-		color: #25bb9b;
 		cursor: pointer;
 		transition: all 0.3s;
 	}

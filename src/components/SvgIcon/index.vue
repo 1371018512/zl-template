@@ -22,7 +22,7 @@ export default {
     }
   },
   mounted() {
-	  console.log(`url(${this.iconClass}) no-repeat 50% 50%`)
+	  //console.log(`url(${this.iconClass}) no-repeat 50% 50%`)
   }, 
   computed: {
     isExternal() {
