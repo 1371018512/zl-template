@@ -50,9 +50,15 @@ const mutations = {
 const actions = {
 }
 
+const getters = {
+  user: state => state.user,
+  art: state => state.art,
+}
+
 export default {
   namespaced: true,
   state,
   mutations,
-  actions
+  actions,
+  getters,
 }

@@ -1,21 +1,15 @@
 <template>
 	<el-container class="main">
-		<el-dialog :visible.sync="centerDialogVisible" width="800px">
+		<el-dialog :visible.sync="DialogVisible" width="800px">
 			<template v-slot:title>
 				<svg class="icon" aria-hidden="true" style="font-size: 25px;">
 				  <use xlink:href="#el-icon-zlliaotian"></use>
 				</svg>
-				Here might be a page title
+				<span>{{$store.getters['artDetail/art'].title}}</span>
 			</template>
-			<span>需要注意的是内容是默认不居中的</span>
-			<template v-slot:footer>
-			    <span slot="footer" class="dialog-footer">
-			    	<el-button @click="centerDialogVisible = false">取 消</el-button>
-			    	<el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
-			    </span>
-			</template>
+			<zl-art-detail/>
 		</el-dialog>
-		<el-button type="text" @click="centerDialogVisible = true">点击打开 Dialog</el-button>
+		<el-button type="text" @click="DialogVisible = true">点击打开 Dialog</el-button>
 		<!-- 以上是文章详情页 -->
 		<el-aside width="600px">
 			<zl-news v-for="(item, i) in news" :index="i" :key='i' />
@@ -26,22 +20,30 @@
 
 <script>
 	import zlNews from '../../components/News/index.vue'
+	import zlArtDetail from '@/views/artDetail/index.vue'
+	
 	export default {
 		name: 'home',
 		components: {
 			zlNews,
+			zlArtDetail,
 		},
 		computed: {
 
+		},
+		watch: {
+		  
 		},
 		provide() {
 			return {
 				news: this.news,
 			};
 		},
+		mounted() {
+		},
 		data() {
 			return {
-				centerDialogVisible: false,
+				DialogVisible: false,
 				news: [{
 					user: {
 						sex: 0,
@@ -132,7 +134,6 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 			};
 		},
 		methods: {
-
 		}
 	}
 </script>

@@ -117,7 +117,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.image {
 		width: 100%;
 		transform: scale(1.075);
