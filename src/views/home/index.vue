@@ -1,6 +1,6 @@
 <template>
 	<el-container class="main">
-		<el-dialog :visible.sync="DialogVisible" width="800px">
+		<el-dialog :visible.sync="DialogVisible" width="700px" top="0">
 			<template v-slot:title>
 				<svg class="icon" aria-hidden="true" style="font-size: 25px;">
 				  <use xlink:href="#el-icon-zlliaotian"></use>

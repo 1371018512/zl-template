@@ -40,4 +40,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ##day4
 完善了一下首页组件
 下一步完成详情弹出组件，以及个人详情页
-首要任务把详情页数据存到vuex中
+首要任务把详情页数据存到vuex中 完成！

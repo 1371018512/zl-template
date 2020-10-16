@@ -37,28 +37,118 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 		likes: 2,
 		collects: 0,
 		comments: {
-			length: 6,
-			data: ['', '', '', '', '', ''],
+			length: 1,
+			data: [{
+				id: 1,
+				user: {
+					sex: 1,
+					belikes: 1100,
+					becollects: 1001,
+					codePass: 30,
+					problemPass: 37,
+					highquiltyOutput: 100,
+					badgeList: [{
+						name: '字节跳动_Data_后端开发工程师(准入职)',
+						type: 'trainee',
+					}, ],
+					profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
+					userLevel: 2,
+					userName: 'shining4code',
+					school: '浙江大学',
+					graduationYear: 2021,
+					direction: '产品',
+				},
+				target: {
+					sex: 0,
+					belikes: 1100,
+					becollects: 1001,
+					codePass: 30,
+					problemPass: 37,
+					highquiltyOutput: 100,
+					userName: '今天也是没有收到offer的一天',
+					school: '华侨大学',
+					graduationYear: 2021,
+					direction: 'java工程师',
+					badgeList: [{
+						name: '字节跳动_Data_后端开发工程师(准入职)',
+						type: 'trainee',
+					}, ],
+					userLevel: 6,
+					profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
+				},
+				content: '啊，老姐之前不是都到hr面了？',
+				date: new Date(),
+				recomments: {
+					length: 1,
+					data: [{
+						id: 2,
+						user: {
+							sex: 0,
+							belikes: 1100,
+							becollects: 1001,
+							codePass: 30,
+							problemPass: 37,
+							highquiltyOutput: 100,
+							userName: '今天也是没有收到offer的一天',
+							school: '华侨大学',
+							graduationYear: 2021,
+							direction: 'java工程师',
+							badgeList: [{
+								name: '字节跳动_Data_后端开发工程师(准入职)',
+								type: 'trainee',
+							}, ],
+							userLevel: 6,
+							profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
+						},
+						target: {
+							sex: 1,
+							belikes: 1100,
+							becollects: 1001,
+							codePass: 30,
+							problemPass: 37,
+							highquiltyOutput: 100,
+							badgeList: [{
+								name: '字节跳动_Data_后端开发工程师(准入职)',
+								type: 'trainee',
+							}, ],
+							profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
+							userLevel: 2,
+							userName: 'shining4code',
+							school: '浙江大学',
+							graduationYear: 2021,
+							direction: '产品',
+						},
+						content: '对啊对啊',
+						date: new Date(),
+						recomments: {
+							length: 0,
+							data: [],
+						},
+						likes: 1,
+						mothserId: 1, //id != motherid的后续回复添加到mother上
+					}],
+				},
+				likes: 1,
+				mothserId: 1,
+			}, ],
 		},
 		views: 1126,
 	},
 }
 
-const mutations = {
-}
+const mutations = {}
 
-const actions = {
-}
+const actions = {}
 
 const getters = {
-  user: state => state.user,
-  art: state => state.art,
+	user: state => state.user,
+	art: state => state.art,
 }
 
 export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions,
-  getters,
+	namespaced: true,
+	state,
+	mutations,
+	actions,
+	getters,
 }
