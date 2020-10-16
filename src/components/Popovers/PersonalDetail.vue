@@ -50,7 +50,7 @@
 		<div class="header">
 			<el-container>
 				<el-aside width="70px" class="header-aside">
-					<zl-profile2 :src="data.profile" :size="50" />
+					<zl-profile2 :data="data" :size="50" />
 				</el-aside>
 				<el-main class="header-main">
 					<div style="font-size: 15px;">
@@ -100,10 +100,6 @@
 		},
 		//inject: ['news'],
 		props: {
-			index: {
-				type: Number,
-				default: 0,
-			},
 			data: {},
 		},
 		data() {

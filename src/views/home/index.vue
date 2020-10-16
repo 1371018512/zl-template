@@ -9,7 +9,7 @@
 			</template>
 			<zl-art-detail/>
 		</el-dialog>
-		<el-button type="text" @click="DialogVisible = true">点击打开 Dialog</el-button>
+		<el-button type="text" @click="DialogVisible = true">点击打开测试页面详情</el-button>
 		<!-- 以上是文章详情页 -->
 		<el-aside width="600px">
 			<zl-news v-for="(item, i) in news" :index="i" :key='i' />

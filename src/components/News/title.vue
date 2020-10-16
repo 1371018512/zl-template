@@ -1,19 +1,6 @@
 <template>
 	<div>
-		<span :style="{ color: level[news[index].user.userLevel].color }" v-popover="'popover'">
-			{{news[index].user.userName}}
-		</span>
-		<el-popover ref="popover" placement="bottom" title="" width="350" trigger="hover" content="">
-			<zl-personal-detail
-				:index="index"
-				:data="news[index].user"
-			/>
-		</el-popover>
-		<template v-for="(item, i) in news[index].user.badgeList">
-			<el-tooltip effect="dark" :content="item.name" placement="bottom">
-				<img :src="badges[item.type]" :key="i"/>
-			</el-tooltip>
-		</template>
+		<zl-name :data="news[index].user"/>
 		<span style="display: inline-block;width: 30px;"></span>
 		<span>{{action}}</span>
 		<span class="pull-right">{{date}}</span>
@@ -23,11 +10,13 @@
 <script>
 	import { mapGetters } from 'vuex'
 	import { formatTime } from '../../utils/index.js'
+	import zlName from '@/components/name/index.vue'
 	import zlPersonalDetail from '@/components/Popovers/PersonalDetail.vue'
 	
 	export default {
 		components: {
-			zlPersonalDetail
+			zlPersonalDetail,
+			zlName
 		},
 		inject: ['news'],
 		computed: {

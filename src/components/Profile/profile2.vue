@@ -1,25 +1,25 @@
 <template>
 	<div>
-		<img v-popover:popover1 :src="src" :style="hovered?ActiveProfileStyle:ProfileStyle" @mouseover="hovered=true"
-		 @mouseout="hovered=false" />
+		<img :src="data.profile" :style="hovered?ActiveProfileStyle:ProfileStyle" @mouseover="hovered=true"
+		 @mouseout="hovered=false"/>
 	</div>
 </template>
 
 <script>
 	export default {
+		components: {
+		},
 		inject: ['news'],
 		props: {
 			size: {
 				type: Number,
 				default: 40,
 			},
-			src: {
-				type: String,
+			data: {
 			},
 		},
 		created() {},
-		mounted() {
-		},
+		mounted() {},
 		data() {
 			return {
 				ProfileStyle: {

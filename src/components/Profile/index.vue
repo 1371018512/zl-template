@@ -1,12 +1,12 @@
 <template>
 	<div>
-		<img v-popover:popover1 :src="src" :style="hovered?ActiveProfileStyle:ProfileStyle" @mouseover="hovered=true"
+		<img v-popover:popover1 :src="$store.getters['user/userDetail'].profile" :style="hovered?ActiveProfileStyle:ProfileStyle" @mouseover="hovered=true"
 		 @mouseout="hovered=false" />
-		<el-popover ref="popover1" placement="bottom-end" title="" width="250" trigger="hover" content="">
+		<el-popover ref="popover1" placement="bottom-end" title="" width="280" trigger="hover" content="">
 			<el-container>
 				<el-header style="padding: 0;height: 30px;">
 					<el-row type="flex" class="row-bg" justify="space-between">
-						<el-col :span="15" style="line-height: 30px;">牛客992973331号</el-col>
+						<el-col :span="15" style="line-height: 30px;font-size: 10px;">{{$store.getters['user/userDetail'].userName}}</el-col>
 						<el-col :span="8">
 							<el-button plain size="mini">个人主页</el-button>
 						</el-col>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+	
 	export default {
 		props: {
 			size: {

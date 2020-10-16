@@ -21,11 +21,18 @@ export const constantRoutes = [{
 		children: [{
 				path: 'home',
 				component: () => import('@/views/home/index'),
-				name: 'home',
-			},
+				name: 'Home',
+			}
+		]
+	},
+	{
+		path: '/person',
+		component: Layout,
+		children: [
 			{
-				path: 'test',
-				name: 'test',
+				path: '',
+				name: 'Person',
+				component: () => import('@/views/person/index'),
 			}
 		]
 	},

@@ -1,13 +1,10 @@
 <template>
-	<div>
-		<div>
-			<div style="font-size: 15px;">
-				{{data.user.userName}}
-				<img :src="badges[data.user.badgeList[0].type]" />
-			</div>
-		</div>
-		<div>
-			{{data.content}}
+	<div class="container">
+		<div style="font-size: 10px;">
+			<zl-name :data="data.user"/>
+			{{' 回复 '}}
+			<zl-name :data="data.target"/>
+			:{{data.content}}
 		</div>
 		<div>
 			<div>
@@ -31,11 +28,13 @@
 	import {
 		mapGetters
 	} from 'vuex'
+	import zlName from '@/components/name/index.vue'
 	
 	export default {
 		name: 'comment',
 		components: {
 			zlProfile,
+			zlName,
 		},
 		computed: {
 			...mapGetters([
@@ -62,4 +61,18 @@
 </script>
 
 <style lang="scss" scoped>
+	.container {
+		font-size: 10px;
+		> :nth-child(2) {
+			display: flex;
+			justify-content: space-between;
+			padding: 10px 0;
+			font-size: 10px;
+			color: #939393;
+			span {
+				padding: 0 5px;
+				color: #25bb9b;
+			}
+		}
+	}
 </style>

@@ -4,14 +4,16 @@
 			<div class="art-header-left">
 				<el-container>
 					<el-aside width="80px" class="art-header-left-aside">
-						<zl-profile :src="$store.getters['artDetail/user'].profile" :size="50" />
+						<zl-profile :data="$store.getters['artDetail/user']" :size="50" v-popover:popover1/>
+						<el-popover ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="">
+							<zl-personal-detail
+								:data="$store.getters['artDetail/user']"
+							/>
+						</el-popover>
 					</el-aside>
 					<el-main class="art-header-left-main">
 						<div>
-							{{$store.getters['artDetail/user'].userName}}
-							<el-tooltip effect="dark" :content="$store.getters['artDetail/user'].badgeList[0].name" placement="bottom">
-								<img :src="badges[$store.getters['artDetail/user'].badgeList[0].type]" />
-							</el-tooltip>
+							<zl-name :data="$store.getters['artDetail/user']"/>
 						</div>
 						<div>
 							{{ $store.getters['artDetail/art'].lastModify == $store.getters['artDetail/art'].date ? '发布于' : '编辑于'}}
@@ -69,7 +71,7 @@
 				    <el-dropdown-item><span class="iconfont">&#xe71a;</span>较赞在前</el-dropdown-item>
 				  </el-dropdown-menu>
 				</el-dropdown>
-				<el-button type="success">回帖</el-button>
+				<el-button type="success"><span class="iconfont" style="color: white;font-size: 0.7em;">&#xf06c;</span> 回帖</el-button>
 			</div>
 			<div class="comment">
 				<zl-comment v-for="(item, i) in $store.getters['artDetail/art'].comments.data" :data="item" :index="i" :key="i"/>
@@ -85,12 +87,16 @@
 	} from 'vuex'
 	import { formatTime } from '../../utils/index.js'
 	import zlComment from '@/components/comment/index.vue'
+	import zlName from '@/components/name/index.vue'
+	import zlPersonalDetail from '@/components/Popovers/PersonalDetail.vue'
 	
 	export default {
 		name: 'artDetail',
 		components: {
 			zlProfile,
-			zlComment
+			zlComment,
+			zlName,
+			zlPersonalDetail
 		},
 		computed: {
 			...mapGetters([
@@ -107,6 +113,7 @@
 			return {
 				formatTime: formatTime,
 				collectFlag: false,
+				
 			}
 		},
 		methods: {}
@@ -120,7 +127,6 @@
 	}
 	
 	.art-header-left, .art-header-right{
-		background-color: #0000FF;
 	}
 	
 	.art-header-right > div{
@@ -135,7 +141,6 @@
 	}
 	
 	.art-header-left-main, .art-header-right {
-		background-color: #55ff93;
 		padding: 10px;
 		font-size: 10px;
 		line-height: 20px;
@@ -148,7 +153,6 @@
 	
 	.art-body {
 		padding: 0px 10px;
-		background-color: #00FF00;
 	}
 	
 	hr {
@@ -184,6 +188,5 @@
 	}
 	
 	.comment {
-		background-color: yellow;
 	}
 </style>

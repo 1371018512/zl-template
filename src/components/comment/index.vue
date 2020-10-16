@@ -2,13 +2,17 @@
 	<div class="container">
 		<el-container>
 			<el-aside width="50px" class="header-aside">
-				<zl-profile :src="data.user.profile"/>
+				<zl-profile :data="data.user" v-popover:popover1/>
+				<el-popover ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="">
+					<zl-personal-detail
+						:data="data.user"
+					/>
+				</el-popover>
 			</el-aside>
 			<el-main class="header-main">
 				<div>
-					<div style="font-size: 15px;">
-						{{data.user.userName}}
-						<img :src="badges[data.user.badgeList[0].type]" />
+					<div style="font-size: 10px;">
+						<zl-name :data="data.user"/>
 					</div>
 					<div>
 						<el-tag type="info">#{{index + 1}}</el-tag>
@@ -31,7 +35,21 @@
 					</div>
 				</div>
 				<div class="recomments">
-					<zl-recomment :data="item" v-for="(item, i) in data.recomments.data" :key="i"/>
+					<template v-for="(item, i) in data.recomments.data">
+						<zl-recomment :data="item" />
+						<hr v-if="i < data.recomments.data.length - 1"/>
+					</template>
+					<div class="inputContainer">
+						<el-input
+						  placeholder="请输入你的观点"
+						  v-model="textarea"
+						  size="small"
+						  clearable>
+						</el-input>
+						<div style="display: flex;flex-direction: row-reverse;padding-top: 10px;">
+							<el-button type="success" size="mini">回复</el-button>
+						</div>
+					</div>
 				</div>
 			</el-main>
 		</el-container>
@@ -43,15 +61,19 @@
 	import zlProfile from '@/components/Profile/profile2.vue'
 	import zlRecomment from './recomment.vue'
 	import { formatTime } from '../../utils/index.js'
+	import zlName from '@/components/name/index.vue'
 	import {
 		mapGetters
 	} from 'vuex'
+	import zlPersonalDetail from '../Popovers/PersonalDetail.vue'
 	
 	export default {
 		name: 'comment',
 		components: {
 			zlProfile,
-			zlRecomment
+			zlRecomment,
+			zlName,
+			zlPersonalDetail
 		},
 		computed: {
 			...mapGetters([
@@ -73,6 +95,7 @@
 		data() {
 			return {
 				formatTime: formatTime,
+				textarea: '',
 			}
 		},
 		methods: {}
@@ -110,6 +133,18 @@
 	}
 	
 	.recomments {
-		background-color: orange;
+		border-radius: 5px;
+		background-color: #eff0f2;
+		padding: 10px;
+	}
+	
+	.inputContainer {
+		padding: 5px 10px;
+	}
+	
+	hr {
+		transform: scale(1.03);
+		border: none;
+		border-top: 1px dashed #cfcfcf;
 	}
 </style>

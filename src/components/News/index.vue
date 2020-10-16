@@ -2,7 +2,7 @@
 	<div class="container">
 		<el-container>
 			<el-aside width="60px" class="profileContainer">
-				<zl-profile2 :src="news[index].user.profile" v-popover:popover1 />
+				<zl-profile2 :data="news[index].user" v-popover:popover1 />
 				<el-popover ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="">
 					<zl-personal-detail
 						:index="index"
