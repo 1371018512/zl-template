@@ -15,7 +15,7 @@
 					<zl-title :index="index" />
 				</el-header>
 				<el-main class="art-body">
-					<zl-art :index="index" v-if="news[index].art" />
+					<zl-art v-if="news[index].art" :data="news[index].art"/>
 					<zl-follow :index="index" v-else-if="news[index].follow" />
 				</el-main>
 			</el-container>
@@ -46,6 +46,9 @@
 				'badges',
 				'level'
 			]),
+		},
+		mounted() {
+			
 		},
 		inject: ['news'],
 		props: {

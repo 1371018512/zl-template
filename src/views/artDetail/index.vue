@@ -60,7 +60,7 @@
 		<div class="art-footer">
 			<div class="art-footer-header">
 				<div>
-					<span class="iconfont">&#xe6de;</span><span>{{$store.getters['artDetail/art'].comments.length + '条回帖'}}</span>
+					<zl-title :data="$store.getters['artDetail/art'].comments.length + '条回帖'"/>
 				</div>
 				<el-dropdown>
 				  <span class="el-dropdown-link">
@@ -89,6 +89,7 @@
 	import zlComment from '@/components/comment/index.vue'
 	import zlName from '@/components/name/index.vue'
 	import zlPersonalDetail from '@/components/Popovers/PersonalDetail.vue'
+	import zlTitle from '@/components/common/title.vue'
 	
 	export default {
 		name: 'artDetail',
@@ -96,7 +97,8 @@
 			zlProfile,
 			zlComment,
 			zlName,
-			zlPersonalDetail
+			zlPersonalDetail,
+			zlTitle,
 		},
 		computed: {
 			...mapGetters([

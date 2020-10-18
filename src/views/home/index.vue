@@ -1,6 +1,6 @@
 <template>
 	<el-container class="main">
-		<el-dialog :visible.sync="DialogVisible" width="700px" top="0">
+		<el-dialog :visible.sync="DialogVisible" width="700px" top="75px">
 			<template v-slot:title>
 				<svg class="icon" aria-hidden="true" style="font-size: 25px;">
 				  <use xlink:href="#el-icon-zlliaotian"></use>
@@ -12,6 +12,7 @@
 		<el-button type="text" @click="DialogVisible = true">点击打开测试页面详情</el-button>
 		<!-- 以上是文章详情页 -->
 		<el-aside width="600px">
+			<zl-post/>
 			<zl-news v-for="(item, i) in news" :index="i" :key='i' />
 		</el-aside>
 		<el-main>Main</el-main>
@@ -19,14 +20,16 @@
 </template>
 
 <script>
-	import zlNews from '../../components/News/index.vue'
+	import zlNews from '@/components/News/index.vue'
 	import zlArtDetail from '@/views/artDetail/index.vue'
+	import zlPost from './post.vue'
 	
 	export default {
 		name: 'home',
 		components: {
 			zlNews,
 			zlArtDetail,
+			zlPost
 		},
 		computed: {
 
@@ -46,6 +49,7 @@
 				DialogVisible: false,
 				news: [{
 					user: {
+						base: '杭州',
 						sex: 0,
 						belikes: 1100,
 						becollects: 1001,
@@ -57,7 +61,7 @@
 						graduationYear: 2021,
 						direction: 'java工程师',
 						badgeList: [{
-							name: '字节跳动_Data_后端开发工程师(准入职)',
+							name: '字节跳动_Data_后端开发工程师',
 							type: 'trainee',
 						}, ],
 						userLevel: 6,
@@ -88,9 +92,10 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 						},
 						views: 1126,
 					},
-					date: new Date(),
+					//date: new Date(),
 				}, {
 					user: {
+						base: '杭州',
 						sex: 0,
 						belikes: 1100,
 						becollects: 1001,
@@ -101,7 +106,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 						school: '华侨大学',
 						graduationYear: 2021,
 						badgeList: [{
-							name: '字节跳动_Data_后端开发工程师(准入职)',
+							name: '字节跳动_Data_后端开发工程师',
 							type: 'trainee',
 						}, ],
 						direction: 'java工程师',
@@ -110,6 +115,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 					},
 					follow: {
 						user: {
+							base: '杭州',
 							sex: 1,
 							belikes: 1100,
 							becollects: 1001,
@@ -117,7 +123,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 							problemPass: 37,
 							highquiltyOutput: 100,
 							badgeList: [{
-								name: '字节跳动_Data_后端开发工程师(准入职)',
+								name: '字节跳动_Data_后端开发工程师',
 								type: 'trainee',
 							}, ],
 							profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
@@ -129,7 +135,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 						},
 						date: new Date(),
 					},
-					date: new Date(),
+					//date: new Date(),
 				}]
 			};
 		},

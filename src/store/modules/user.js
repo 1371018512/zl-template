@@ -1,7 +1,8 @@
 import {
 	login,
 	logout,
-	getInfo
+	getInfo,
+	modifyProfile
 } from '@/api/user'
 import {
 	getStorage,
@@ -22,6 +23,10 @@ const state = {
 	roles: [],
 	// 这里存储实际的用户信息
 	detail: {
+		id: 992973331,
+		introduction: '我是一个保安，爱吃小熊饼干',
+		education: '本科',
+		base: '杭州',
 		sex: 0,
 		belikes: 1100,
 		becollects: 1001,
@@ -33,7 +38,7 @@ const state = {
 		graduationYear: 2021,
 		direction: 'java工程师',
 		badgeList: [{
-			name: '字节跳动_Data_后端开发工程师(准入职)',
+			name: '字节跳动_Data_后端开发工程师',
 			type: 'trainee',
 		}, ],
 		userLevel: 6,
@@ -60,6 +65,20 @@ const mutations = {
 }
 
 const actions = {
+	// 上传
+	modifyProfile({
+		commit
+	}, img) {
+		return new Promise((resolve, reject) => {
+			modifyProfile(img).then(response => {
+				//console.log(response)
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	
 	// user login
 	login({
 		commit

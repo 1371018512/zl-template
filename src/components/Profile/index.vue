@@ -12,6 +12,7 @@
 						</el-col>
 					</el-row>
 				</el-header>
+				<hr/>
 				<el-main class="img-container" @mouseover.native="hoverEffectIn($event)" @mouseleave.native="hoverEffectOut($event)">
 					<el-col :span="7" v-for="(item, index) in imgs" :key="index" style="text-align: center; cursor: pointer;" :class="{'dark-back' : index == activeImg}"
 					 :data-index="index">
@@ -19,6 +20,7 @@
 						<div>{{item.name}}</div>
 					</el-col>
 				</el-main>
+				<hr/>
 				<el-footer class="footer">
 					<el-col @mouseover.native="ButtonIn($event)" @mouseleave.native="ButtonOut($event)" :span="11" style="text-align: center; cursor: pointer;">
 						<div>
@@ -171,5 +173,12 @@
 	.hoverButton {
 		transition: all 0.2s;
 		color: rgba(64, 158, 255, .9);
+	}
+	
+	hr {
+		border: none;
+		width: 100%;
+		transform: scale(1.06);
+		border-top: 1px dashed #cfcfcf;
 	}
 </style>

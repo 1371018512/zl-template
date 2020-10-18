@@ -20,19 +20,27 @@
 			<zl-badge :data="level[data.userLevel].name + ' LV.' + data.userLevel" :color="level[data.userLevel].color" />
 			<div class="details">
 				<span>
-					<span class="iconfont">&#xe86c;</span>
+					<el-tooltip content="获赞与收藏" placement="top">
+						<span class="iconfont">&#xe86c;</span>
+					</el-tooltip>
 					{{likesAndcollects}}
 				</span>
 				<span>
-					<span class="iconfont">&#xe668;</span>
+					<el-tooltip content="通过代码" placement="top">
+						<span class="iconfont">&#xe668;</span>
+					</el-tooltip>
 					{{shortInt(data.codePass)}}
 				</span>
 				<span>
-					<span class="iconfont">&#xe6f2;</span>
+					<el-tooltip content="题目正确" placement="top">
+						<span class="iconfont">&#xe6f2;</span>
+					</el-tooltip>
 					{{shortInt(data.problemPass)}}
 				</span>
 				<span>
-					<span class="iconfont">&#xe672;</span>
+					<el-tooltip content="产出优质内容" placement="top">
+						<span class="iconfont">&#xe672;</span>
+					</el-tooltip>
 					{{shortInt(data.highquiltyOutput)}}
 				</span>
 			</div>
@@ -55,15 +63,15 @@
 				<el-main class="header-main">
 					<div style="font-size: 15px;">
 						{{data.userName}}
-						<svg class="icon" aria-hidden="true" v-if="!data.sex">
+						<svg class="icon" aria-hidden="true" v-if="!data.sex" font-size="15px">
 						  <use xlink:href="#el-icon-zlnv"></use>
 						</svg>
-						<svg class="icon" aria-hidden="true" v-else>
+						<svg class="icon" aria-hidden="true" v-else font-size="15px">
 						  <use xlink:href="#el-icon-zlnan"></use>
 						</svg>
 					</div>
 					<div v-if="data.badgeList.length">
-						<img :src="badges[data.badgeList[0].type]" />
+						<img :src="badges[data.badgeList[0].type]" style="vertical-align: middle;"/>
 						<span>{{data.badgeList[0].name}}</span>
 					</div>
 				</el-main>

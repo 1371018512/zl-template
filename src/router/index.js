@@ -19,22 +19,46 @@ export const constantRoutes = [{
 		component: Layout,
 		redirect: '/home',
 		children: [{
-				path: 'home',
-				component: () => import('@/views/home/index'),
-				name: 'Home',
-			}
-		]
+			path: 'home',
+			component: () => import('@/views/home/index'),
+			name: 'Home',
+		}]
+	},
+	{
+		path: '/test',
+		component: Layout,
+		children: [{
+			path: '/test',
+			component: () => import('@/views/test/index'),
+		}]
 	},
 	{
 		path: '/person',
 		component: Layout,
-		children: [
-			{
-				path: '',
-				name: 'Person',
-				component: () => import('@/views/person/index'),
-			}
-		]
+		children: [{
+			path: '/person/index/:u_id',
+			component: () => import('@/views/person/index'),
+			children: [{
+				path: '/person/index/:u_id',
+				component: () => import('@/views/person/baseInfo'),
+			}, ]
+		}, {
+			path: '/person/post/:u_id',
+			name: 'Person',
+			component: () => import('@/views/person/index'),
+			children: [{
+				path: '/person/post/:u_id',
+				component: () => import('@/views/person/post'),
+			}, ]
+		}, {
+			path: '/person',
+			redirect: '/404',
+			hidden: true
+		}, {
+			path: '/*',
+			redirect: '/404',
+			hidden: true
+		}]
 	},
 ]
 

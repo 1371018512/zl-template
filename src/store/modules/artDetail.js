@@ -11,7 +11,7 @@ const state = {
 		graduationYear: 2021,
 		direction: 'java工程师',
 		badgeList: [{
-			name: '字节跳动_Data_后端开发工程师(准入职)',
+			name: '字节跳动_Data_后端开发工程师',
 			type: 'trainee',
 		}, ],
 		userLevel: 6,
@@ -48,7 +48,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 					problemPass: 37,
 					highquiltyOutput: 100,
 					badgeList: [{
-						name: '字节跳动_Data_后端开发工程师(准入职)',
+						name: '字节跳动_Data_后端开发工程师',
 						type: 'trainee',
 					}, ],
 					profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
@@ -70,7 +70,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 					graduationYear: 2021,
 					direction: 'java工程师',
 					badgeList: [{
-						name: '字节跳动_Data_后端开发工程师(准入职)',
+						name: '字节跳动_Data_后端开发工程师',
 						type: 'trainee',
 					}, ],
 					userLevel: 6,
@@ -94,7 +94,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 							graduationYear: 2021,
 							direction: 'java工程师',
 							badgeList: [{
-								name: '字节跳动_Data_后端开发工程师(准入职)',
+								name: '字节跳动_Data_后端开发工程师',
 								type: 'trainee',
 							}, ],
 							userLevel: 6,
@@ -108,7 +108,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 							problemPass: 37,
 							highquiltyOutput: 100,
 							badgeList: [{
-								name: '字节跳动_Data_后端开发工程师(准入职)',
+								name: '字节跳动_Data_后端开发工程师',
 								type: 'trainee',
 							}, ],
 							profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
@@ -140,7 +140,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 							graduationYear: 2021,
 							direction: 'java工程师',
 							badgeList: [{
-								name: '字节跳动_Data_后端开发工程师(准入职)',
+								name: '字节跳动_Data_后端开发工程师',
 								type: 'trainee',
 							}, ],
 							userLevel: 6,
@@ -154,7 +154,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 							problemPass: 37,
 							highquiltyOutput: 100,
 							badgeList: [{
-								name: '字节跳动_Data_后端开发工程师(准入职)',
+								name: '字节跳动_Data_后端开发工程师',
 								type: 'trainee',
 							}, ],
 							profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
