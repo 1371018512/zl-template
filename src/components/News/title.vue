@@ -3,7 +3,7 @@
 		<zl-name :data="news[index].user"/>
 		<span style="display: inline-block;width: 30px;"></span>
 		<span>{{action}}</span>
-		<span class="pull-right">{{date}}</span>
+		<span class="pull-right">{{this.date}}</span>
 	</div>
 </template>
 
@@ -37,8 +37,10 @@
 		mounted() {
 			if(this.news[this.index].art && this.news[this.index].art.title) {
 				this.action = '发表了';
-			}else {
+			}else if(this.news[this.index].follow){
 				this.action = '关注了';
+			}else {
+				this.action = '说';
 			}
 		},
 		data() {

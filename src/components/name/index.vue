@@ -30,7 +30,7 @@
 		  ]),
 		},
 		props: {
-			data: {}
+			data: {},
 		},
 		mounted() {
 		},

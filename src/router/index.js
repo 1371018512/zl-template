@@ -51,6 +51,13 @@ export const constantRoutes = [{
 				component: () => import('@/views/person/post'),
 			}, ]
 		}, {
+			path: '/person/achievement/:u_id',
+			component: () => import('@/views/person/index'),
+			children: [{
+				path: '/person/achievement/:u_id',
+				component: () => import('@/views/person/achievement'),
+			}, ]
+		}, {
 			path: '/person',
 			redirect: '/404',
 			hidden: true

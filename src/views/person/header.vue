@@ -1,7 +1,14 @@
 <template>
 	<div class="container">
 		<div class="left">
-			<zl-profile :data="user" :size="60" />
+			<el-dialog :visible.sync="DialogVisible" width="600px" top="75px">
+				<template v-slot:title>
+					<zl-title data="头像修改"></zl-title>
+				</template>
+				<!-- <zl-art-detail/> -->
+				<zl-profile-upload @uploaded="DialogVisible=false"/>
+			</el-dialog>
+			<zl-profile :data="user" :size="60" @click.native="DialogVisible = true"/>
 		</div>
 		<div class="mid">
 			<div :style="{ color: level[user.userLevel].color, fontSize: '10px' }">
@@ -37,6 +44,8 @@
 
 <script>
 	import zlProfile from '@/components/Profile/photo.vue'
+	import zlProfileUpload from './profileUpload.vue'
+	import zlTitle from '@/components/common/title.vue'
 	import {
 		mapGetters
 	} from 'vuex'
@@ -44,6 +53,8 @@
 	export default {
 		components: {
 			zlProfile,
+			zlProfileUpload,
+			zlTitle
 		},
 		computed: {
 			...mapGetters([
@@ -64,6 +75,7 @@
 		data() {
 			return {
 				user: this.$store.getters['user/userDetail'],
+				DialogVisible: false,
 			};
 		},
 		methods: {}

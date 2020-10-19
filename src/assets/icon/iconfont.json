@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2530339",
+      "name": "more",
+      "font_class": "more",
+      "unicode": "e7df",
+      "unicode_decimal": 59359
+    },
+    {
+      "icon_id": "1509775",
+      "name": "问号",
+      "font_class": "question",
+      "unicode": "e682",
+      "unicode_decimal": 59010
+    },
+    {
+      "icon_id": "1582883",
+      "name": "讨论",
+      "font_class": "taolun",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "3865279",
+      "name": "讨论",
+      "font_class": "taolun1",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "8817473",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "15391396",
+      "name": "成就",
+      "font_class": "chengjiu",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
       "icon_id": "1393724",
       "name": "photo",
       "font_class": "photo",

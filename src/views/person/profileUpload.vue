@@ -179,8 +179,6 @@
 						let file = this.convertBase64UrlToBlob(data)
 						file.name = this.fileName
 						
-						console.dir(file);
-						
 						this.$store.dispatch('user/modifyProfile', file)
 						  .then(() => {
 						  })

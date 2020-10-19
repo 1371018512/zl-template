@@ -36,6 +36,9 @@
 						title: '发布的帖子',
 						data: [{
 							user: {
+								id: 992973331,
+								introduction: '我是一个保安，爱吃小熊饼干',
+								education: '本科',
 								base: '杭州',
 								sex: 0,
 								belikes: 1100,

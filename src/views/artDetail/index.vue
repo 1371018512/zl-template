@@ -1,5 +1,5 @@
 <template>
-	<div class="art-container">
+	<div class="art-container" ref="container">
 		<div class="art-header">
 			<div class="art-header-left">
 				<el-container>
@@ -71,11 +71,16 @@
 				    <el-dropdown-item><span class="iconfont">&#xe71a;</span>较赞在前</el-dropdown-item>
 				  </el-dropdown-menu>
 				</el-dropdown>
-				<el-button type="success"><span class="iconfont" style="color: white;font-size: 0.7em;">&#xf06c;</span> 回帖</el-button>
+				<el-button type="success" @click.native="scrollToEnd"><span class="iconfont" style="color: white;font-size: 0.7em;">&#xf06c;</span> 回帖</el-button>
 			</div>
 			<div class="comment">
 				<zl-comment v-for="(item, i) in $store.getters['artDetail/art'].comments.data" :data="item" :index="i" :key="i"/>
 			</div>
+		</div>
+		<hr/>
+		<el-input type="textarea" v-model="commentContent" placeholder="请在这里添加你的回帖吧"></el-input>
+		<div class="buttons">
+			<el-button type="primary" size="small">发布</el-button>
 		</div>
 	</div>
 </template>
@@ -90,6 +95,7 @@
 	import zlName from '@/components/name/index.vue'
 	import zlPersonalDetail from '@/components/Popovers/PersonalDetail.vue'
 	import zlTitle from '@/components/common/title.vue'
+	import { scrollTo } from '../../utils/scroll-to.js'
 	
 	export default {
 		name: 'artDetail',
@@ -115,14 +121,28 @@
 			return {
 				formatTime: formatTime,
 				collectFlag: false,
-				
+				commentContent: '',
 			}
 		},
-		methods: {}
+		methods: {
+			scrollToEnd() {
+				scrollTo(9999, 1000, () => {}, this.$refs.container.parentElement.parentElement.parentElement)
+				//window.scrollTo(0,this.top)
+				console.log(this.$refs.container.parentElement.parentElement.parentElement);
+				/* this.$nextTick(() => {
+					this.$refs.container.parentElement.parentElement.parentElement.scrollTop = 1000;
+				}) */
+			}
+		}
 	}
 </script>
 
 <style scoped lang="scss">
+	.buttons {
+		margin-top: 10px;
+		float: right;
+	}
+	
 	.art-header {
 		display: flex;
 		justify-content: space-between;
@@ -189,6 +209,7 @@
 		}
 	}
 	
-	.comment {
+	.art-container {
+		padding-bottom: 20px;
 	}
 </style>
