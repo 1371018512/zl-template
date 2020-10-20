@@ -1,13 +1,13 @@
 <template>
 	<div style="display: inline-block;">
-		<el-popover ref="popover" placement="bottom" title="" width="350" trigger="hover" content="">
+		<el-popover v-if="!onlyName" ref="popover" placement="bottom" title="" width="350" trigger="hover" content="">
 			<zl-personal-detail
 				:data="data"
 			/>
 		</el-popover>
 		<span :style="{ color: level[data.userLevel].color }" v-popover="'popover'">
 			{{data.userName}}
-			<el-tooltip effect="dark" :content="data.badgeList[0].name" placement="bottom">
+			<el-tooltip effect="dark" :content="data.badgeList[0].name" placement="bottom" v-if="!onlyName">
 				<img :src="badges[data.badgeList[0].type]"/>
 			</el-tooltip>
 		</span>
@@ -31,6 +31,9 @@
 		},
 		props: {
 			data: {},
+			onlyName: {
+				default: false,
+			}
 		},
 		mounted() {
 		},

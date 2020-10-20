@@ -2,37 +2,37 @@
 	<div>
 		<div class="container">
 			<div class="profileContainer">
-				<zl-profile :data="news[index].follow.user" v-popover:popover1/>
+				<zl-profile :data="data.follow.user" v-popover:popover1/>
 				<el-popover ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="">
 					<zl-personal-detail
 						:index="index"
-						:data="news[index].follow.user"
+						:data="data.follow.user"
 					/>
 				</el-popover>
 			</div>
 			<div class="infContainer">
-				<zlName :data="news[index].follow.user"/>
-				<!-- <div :style="{ color: level[news[index].follow.user.userLevel].color }" v-popover:popover2>
-					{{news[index].follow.user.userName}}
+				<zlName :data="data.follow.user"/>
+				<!-- <div :style="{ color: level[data.follow.user.userLevel].color }" v-popover:popover2>
+					{{data.follow.user.userName}}
 				</div> -->
 				<!-- <el-popover ref="popover2" placement="bottom" title="" width="350" trigger="hover" content="">
 					<zl-personal-detail
 						:index="index"
-						:data="news[index].follow.user"
+						:data="data.follow.user"
 					/>
 				</el-popover> -->
 				<div style="color: #b3b3b3;">
 					<span class="infDetail">
 						<span>学校</span>
-						<span>{{news[index].follow.user.school}}</span>
+						<span>{{data.follow.user.school}}</span>
 					</span>|
 					<span class="infDetail">
 						<span>毕业</span>
-						<span>{{news[index].follow.user.graduationYear}}</span>
+						<span>{{data.follow.user.graduationYear}}</span>
 					</span>|
 					<span class="infDetail">
 						<span>职业方向</span>
-						<span>{{news[index].follow.user.direction}}</span>
+						<span>{{data.follow.user.direction}}</span>
 					</span>
 				</div>
 				<div class="follow">
@@ -66,6 +66,9 @@
 			index: {
 				type: Number,
 				default: 0,
+			},
+			data: {
+				
 			}
 		},
 		data() {

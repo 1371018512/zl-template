@@ -9,7 +9,6 @@
 	export default {
 		components: {
 		},
-		inject: ['news'],
 		props: {
 			size: {
 				type: Number,

@@ -1,11 +1,11 @@
 <template>
 		<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-			<el-menu-item index="1">首页</el-menu-item>
+			<el-menu-item index="1" @click.native="$router.push('/')">首页</el-menu-item>
 			
-			<el-menu-item index="5" class="el-menu-left">
+			<el-menu-item index="5" class="el-menu-left" >
 				<zl-profile/>
 			</el-menu-item>
-			<el-menu-item index="4" class="el-menu-left">
+			<el-menu-item index="4" class="el-menu-left" @click.native="$router.push('/information')">
 				消息
 				<el-badge class="item" :is-dot="true">
 				</el-badge>

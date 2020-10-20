@@ -41,6 +41,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 			data: [{
 				id: 1,
 				user: {
+					artId: 1,
 					sex: 1,
 					belikes: 1100,
 					becollects: 1001,

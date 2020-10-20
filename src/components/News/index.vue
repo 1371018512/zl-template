@@ -16,7 +16,7 @@
 				</el-header>
 				<el-main class="art-body">
 					<zl-art v-if="news[index].art" :data="news[index].art"/>
-					<zl-follow :index="index" v-else-if="news[index].follow" />
+					<zl-follow :index="index" :data="news[index]" v-else-if="news[index].follow" />
 					<zl-blink v-else :data="news[index].blink"/>
 				</el-main>
 			</el-container>

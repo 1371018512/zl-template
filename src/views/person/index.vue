@@ -92,7 +92,6 @@
 	.head,
 	.aside,
 	.main {
-		background-color: #5473ff;
 		margin: 10px;
 		border-radius: 5px;
 		background-color: #fafafa;

@@ -25,11 +25,24 @@ export const constantRoutes = [{
 		}]
 	},
 	{
-		path: '/test',
+		path: '/information',
 		component: Layout,
 		children: [{
-			path: '/test',
-			component: () => import('@/views/test/index'),
+			// 聊天室
+			path: '/information/talk',
+			component: () => import('@/views/information/index'),
+			children: [{
+				path: '',
+				component: () => import('@/views/test/index'),
+			}, ]
+		}, {
+			// 通知、赞、回复等
+			path: '/information',
+			component: () => import('@/views/information/index'),
+			children: [{
+				path: '/information',
+				component: () => import('@/views/information/rightContainer'),
+			}, ]
 		}]
 	},
 	{

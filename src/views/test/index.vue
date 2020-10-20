@@ -1,48 +1,6 @@
 <template>
-  <div style="display:flex;padding-top: 100px;">
-    <!-- <div class="info-item" style="flex:1;">
-      <div style="width:120px;height:120px;border-radius:50%;overflow:hidden;margin-left:123px;border:1px solid #ddd">
-        <img style="width:120px;height:120px;" :src="headImg" alt="头像">
-      </div>
-    </div> -->
-    <div class="info-item" style="flex:1;margin-left:-160px;margin-top:30px;">
-      <label class="btn btn-orange" for="uploads" style="display:inline-block;width: 70px;padding: 0;text-align: center;line-height: 28px;">选择图片</label>
-      <input type="file" id="uploads" :value="imgFile" style="position:absolute; clip:rect(0 0 0 0);" accept="image/png, image/jpeg, image/gif, image/jpg" @change="uploadImg($event, 1)">
-      <input type="button" class="oper" style="height:20px;width:23px;font-size:20px;margin:3px 5px;" value="+" title="放大" @click="changeScale(1)">
-      <input type="button" class="oper" style="height:20px;width:23px;font-size:20px;margin:3px 5px;" value="-" title="缩小" @click="changeScale(-1)">
-      <input type="button" class="oper" style="height:20px;width:23px;font-size:20px;margin:3px 5px;" value="↓" title="下载" @click="down('blob')">
-      <input type="button" class="btn btn-blue" value="上传头像" @click="finish('blob')">
-      <div class="line" style="margin-left: -280px;margin-top: 85px;">
-        <div class="cropper-content" style="margin-top:-60px;margin-left:260px;">
-          <div class="cropper">
-            <vue-cropper
-              ref="cropper"
-              :img="option.img"
-              :outputSize="option.size"
-              :outputType="option.outputType"
-              :info="true"
-              :full="option.full"
-              :canMove="option.canMove"
-              :canMoveBox="option.canMoveBox"
-              :original="option.original"
-              :autoCrop="option.autoCrop"
-              :autoCropWidth="option.autoCropWidth"
-              :autoCropHeight="option.autoCropHeight"
-              :fixedBox="option.fixedBox"
-              @realTime="realTime"
-              @imgLoad="imgLoad"
-            ></vue-cropper>
-          </div>
-          <div style="margin-left:20px;">
-            <div class="show-preview" :style="{'width': '150px', 'height':'155px',  'overflow': 'hidden', 'margin': '5px'}">
-              <div :style="previews.div" class="preview">
-                <img :src="previews.url" :style="previews.img">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div>
+    TEST!!
   </div>
 </template>
 
