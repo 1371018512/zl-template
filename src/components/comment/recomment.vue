@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container1">
 		<div style="font-size: 10px;">
 			<zl-name :data="data.user"/>
 			{{' 回复 '}}
@@ -15,7 +15,7 @@
 					<span class="iconfont">&#xe71a;</span>
 					赞({{data.likes}})
 				</span>
-				<span>回复</span>
+				<span @click="openInput">回复</span>
 				<span>举报</span>
 			</div>
 		</div>
@@ -55,12 +55,16 @@
 				formatTime: formatTime,
 			}
 		},
-		methods: {}
+		methods: {
+			openInput() {
+				this.$emit('openInput');
+			}
+		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.container {
+	.container1 {
 		font-size: 10px;
 		> :nth-child(2) {
 			display: flex;
@@ -71,6 +75,7 @@
 			span {
 				padding: 0 5px;
 				color: #25bb9b;
+				cursor: pointer;
 			}
 		}
 	}

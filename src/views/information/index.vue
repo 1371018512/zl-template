@@ -4,17 +4,23 @@
 			<el-aside width="250px" class="aside">
 				<div>
 					<zl-title data="消息中心" />
-					<el-button type="text" style="float: right;">文字按钮</el-button>
+					<el-button type="text" style="float: right;">全部标记已读</el-button>
+				</div>
+				<div class="bell">
+					<svg class="icon" aria-hidden="true" >
+					  <use xlink:href="#el-icon-zlbell"></use>
+					</svg>
+					系统消息
 				</div>
 				<zl-search />
 				<div class="talks">
-					<div class="talk">
+					<div class="talk" v-for="(item, i) in leftTalks">
 						<div>
-							<zl-profile :data="leftTalks[0].target"/>
+							<zl-profile :data="item.target"/>
 						</div>
 						<div style="margin-left: 10px;">
-							<zl-name :data="leftTalks[0].target"/>
-							<div>{{leftTalksContent[0]}}</div>
+							<zl-name :data="item.target" :onlyName="true"/>
+							<div>{{leftTalksContent[i]}}</div>
 						</div>
 					</div>
 				</div>
@@ -62,6 +68,7 @@
 		mounted() {},
 		data() {
 			return {
+				talkIndex: 0,
 				leftTalks: [{
 					target: {
 						id: 992973332,
@@ -118,7 +125,17 @@
 		flex-basis: 700px;
 		max-width: 950px;
 	}
-
+	
+	.bell {
+		display: flex;
+		cursor: pointer;
+		color: #25bb9b;
+		width: 100%;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 10px;
+	}
+	
 	.head,
 	.aside,
 	.main {
@@ -127,6 +144,7 @@
 		background-color: #fafafa;
 		border: 1px solid #dddddd;
 		border-radius: 2px;
+		
 	}
 
 	.main {
@@ -141,6 +159,10 @@
 			font-size: 13px;
 			line-height: 1.2em;
 			color: #949494;
+			cursor: pointer;
+			&:hover {
+				background-color: #dddddd;
+			}
 		}
 	}
 	

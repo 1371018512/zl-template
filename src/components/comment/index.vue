@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container2">
 		<el-container>
 			<el-aside width="50px" class="header-aside">
 				<zl-profile :data="data.user" v-popover:popover1/>
@@ -30,16 +30,17 @@
 							<span class="iconfont">&#xe71a;</span>
 							赞({{data.likes}})
 						</span>
-						<span>回复</span>
+						<span @click="openInput = !openInput">回复</span>
 						<span>举报</span>
 					</div>
 				</div>
 				<div class="recomments">
 					<template v-for="(item, i) in data.recomments.data">
-						<zl-recomment :data="item" />
+						<zl-recomment :data="item" @openInput="openInput = !openInput"/>
 						<hr v-if="i < data.recomments.data.length - 1"/>
 					</template>
-					<div class="inputContainer">
+					<!-- todo 这里默认不显示 -->
+					<div class="inputContainer" v-show="openInput">
 						<el-input
 						  placeholder="请输入你的观点"
 						  v-model="textarea"
@@ -96,6 +97,7 @@
 			return {
 				formatTime: formatTime,
 				textarea: '',
+				openInput: false,
 			}
 		},
 		methods: {}
@@ -103,8 +105,10 @@
 </script>
 
 <style lang="scss" scoped>
-	.container {
-		margin-top: 20px;
+	.container2 {
+		//background-color: yellow;
+		//margin-top: 20px;
+		line-height: 1em;
 	}
 	
 	.header-aside {
@@ -114,6 +118,7 @@
 	
 	.header-main{
 		background: transparent;
+		font-size: 10px;
 		padding: 10px;
 		> :first-child {
 			display: flex;
@@ -128,6 +133,7 @@
 			span {
 				padding: 0 5px;
 				color: #25bb9b;
+				cursor: pointer;
 			}
 		}
 	}

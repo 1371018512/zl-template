@@ -1,25 +1,25 @@
 <template>
 	<div>
-		<div v-for="(item, i) in data" class="comment">
-			<div>
-				<zl-profile :data="item.user" :size="50"></zl-profile>
-			</div>
-			<div class="detail">
-				<!-- todo 这里的onlyName迟早去掉 -->
-				<zl-name :data="item.user" :onlyName="true"/>
-				回复：
-				<span style="position: absolute;right: 0;">{{formatTime(item.date)}}</span>
-				<div class="content">{{item.content}}</div>
-				<div class="innerContent" v-if="item.comment">
-					我的评论: {{item.comment.content}}
-				</div>
+		<div v-for="(item, i) in data">
+			<div class="comment">
 				<div>
-					来自: {{item.art ? item.art.title : item.blink.content}}
+					<zl-profile :data="item.user" :size="50"></zl-profile>
+				</div>
+				<div class="detail">
+					<!-- todo 这里的onlyName迟早去掉 -->
+					<zl-name :data="item.user" :onlyName="true"/>
+					回复：
+					<span style="position: absolute;right: 0;">{{formatTime(item.date)}}</span>
+					<div class="content">{{item.content}}</div>
+					<div class="innerContent" v-if="item.comment">
+						我的评论: {{item.comment.content}}
+					</div>
+					<div>
+						来自: {{item.art ? item.art.title : item.blink.content}}
+					</div>
 				</div>
 			</div>
-			<!-- <div>{{item.content}}</div>
-			<div style="text-align: right;">{{formatTime(item.date)}}</div>
-			<hr v-if="i != item.length - 1" /> -->
+			<hr v-if="i != data.length - 1" />
 		</div>
 	</div>
 </template>
@@ -75,13 +75,14 @@
 	}
 	
 	.detail {
-		color: #838383;
+		color: #444444;
 		position: relative;
 		flex: 1;
 		padding-left: 10px;
 	}
 	
 	.innerContent {
+		color: #838383;
 		width: 100%;
 		background-color: #f1f1f1;
 		padding: 10px;

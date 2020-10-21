@@ -56,7 +56,7 @@
 	}
 	
 	.detail {
-		color: #838383;
+		color: #444444;
 		position: relative;
 		flex: 1;
 		padding-left: 10px;

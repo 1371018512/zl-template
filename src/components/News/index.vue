@@ -26,7 +26,7 @@
 				<span class="iconfont">&#xe71a;</span> {{this.entity.likes}}
 				<span>|</span>
 			</div>
-			<div>
+			<div  @click="openComment = !openComment">
 				<span class="iconfont">&#xe683;</span> {{this.entity.comments.length}}
 				<span>|</span>
 			</div>
@@ -38,25 +38,19 @@
 				<span class="iconfont">&#xe7df;</span>
 			</div>
 		</div>
-		<div class="comments" v-if="news[index].blink">
-			<!-- <div class="art-footer-header">
-				<div>
-					<zl-title :data="$store.getters['artDetail/art'].comments.length + '条回帖'"/>
-				</div>
-				<el-dropdown>
-				  <span class="el-dropdown-link">
-				    排序方式<i class="el-icon-arrow-down el-icon--right"></i>
-				  </span>
-				  <el-dropdown-menu slot="dropdown">
-				    <el-dropdown-item><span class="iconfont">&#xe659;</span>较近在前</el-dropdown-item>
-				    <el-dropdown-item><span class="iconfont">&#xe71a;</span>较赞在前</el-dropdown-item>
-				  </el-dropdown-menu>
-				</el-dropdown>
-				<el-button type="success"><span class="iconfont" style="color: white;font-size: 0.7em;">&#xf06c;</span> 回帖</el-button>
+		<div class="comments" v-if="news[index].blink" v-show="openComment">
+			<div v-for="(item, i) in news[index].blink.comments.data">
+				<zl-comment :data="item" :index="i" :key="i"/>
+				<hr v-if="news[index].blink.comments.data.length - 1 != i" />
 			</div>
-			<div class="comment">
-				<zl-comment v-for="(item, i) in $store.getters['artDetail/art'].comments.data" :data="item" :index="i" :key="i"/>
-			</div> -->
+			<hr/>
+			<div style="margin: 10px;height: 90px;">
+				<el-input type="textarea" v-model="commentContent" placeholder="请在这里添加你的回帖吧"></el-input>
+				<div class="button">
+					<el-button type="primary" size="small">发布</el-button>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 </template>
@@ -68,6 +62,7 @@
 	import zlFollow from './follow.vue'
 	import zlPersonalDetail from '../Popovers/PersonalDetail.vue'
 	import zlBlink from './blink.vue'
+	import zlComment from '@/components/comment/index.vue'
 	import {
 		mapGetters
 	} from 'vuex'
@@ -80,6 +75,7 @@
 			zlFollow,
 			zlPersonalDetail,
 			zlBlink,
+			zlComment,
 		},
 		computed: {
 			...mapGetters([
@@ -106,6 +102,8 @@
 		},
 		data() {
 			return {
+				commentContent: '',
+				openComment: false,
 			};
 
 		},
@@ -114,10 +112,23 @@
 </script>
 
 <style scoped lang="scss">
+	.button {
+		margin-top: 10px;
+		float: right;
+	}
+	hr {
+		border: none;
+		border-top: 1px dashed #cfcfcf;
+	}
+	
 	.comments {
 		width: 100%;
-		height: 100px;
-		background-color: #f6f6f6;
+		overflow-y: auto;
+		border-top: 1px solid #dfdfdf;
+	}
+	
+	.comment {
+		 background-color: yellow;
 	}
 	
 	.container {

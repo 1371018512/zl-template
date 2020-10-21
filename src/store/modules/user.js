@@ -44,6 +44,7 @@ const state = {
 		userLevel: 6,
 		profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
 	},
+	
 }
 
 const mutations = {

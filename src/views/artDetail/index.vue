@@ -193,6 +193,7 @@
 	
 	.art-footer-header {
 		position: relative;
+		margin-bottom: 20px;
 		:first-child {
 			span {
 				font-size: 20px;

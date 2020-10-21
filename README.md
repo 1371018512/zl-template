@@ -54,3 +54,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 	3.2图片功能
 4.实现管理员处理举报
 5.实现拉黑
+
+##day7
+0.聊天界面滚动条设计
+1.接下来完善页面跳转
+2.设计路由，适配数据库

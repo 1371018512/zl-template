@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "11913412",
+      "name": "bell",
+      "font_class": "bell",
+      "unicode": "e67a",
+      "unicode_decimal": 59002
+    },
+    {
       "icon_id": "2530339",
       "name": "more",
       "font_class": "more",

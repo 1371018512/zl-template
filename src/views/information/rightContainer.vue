@@ -4,7 +4,7 @@
 			<div v-for="(item, i) in notices" class="notice">
 				<div>{{item.content}}</div>
 				<div style="text-align: right;">{{formatTime(item.date)}}</div>
-				<hr v-if="i != item.length - 1" />
+				<hr v-if="i != notices.length - 1" />
 			</div>
 		</el-tab-pane>
 		<el-tab-pane label="赞" name="like">

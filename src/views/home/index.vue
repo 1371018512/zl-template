@@ -3,20 +3,20 @@
 		<el-dialog :visible.sync="DialogVisible" width="700px" top="75px" ref="div">
 			<template v-slot:title>
 				<svg class="icon" aria-hidden="true" style="font-size: 25px;">
-				  <use xlink:href="#el-icon-zlliaotian"></use>
+					<use xlink:href="#el-icon-zlliaotian"></use>
 				</svg>
 				<span>{{$store.getters['artDetail/art'].title}}</span>
 			</template>
-			<zl-art-detail/>
+			<zl-art-detail />
 		</el-dialog>
 		<el-button type="text" @click="DialogVisible = true">测试页面</el-button>
 		<!-- 以上是文章详情页 -->
 		<el-aside width="600px">
-			<zl-post/>
+			<zl-post />
 			<zl-news v-for="(item, i) in news" :index="i" :key='i' />
 		</el-aside>
 		<el-main>
-			<zl-recommand :data="user"/>
+			<zl-recommand :data="user" />
 		</el-main>
 	</el-container>
 </template>
@@ -26,7 +26,7 @@
 	import zlArtDetail from '@/views/artDetail/index.vue'
 	import zlPost from './post.vue'
 	import zlRecommand from './recommand.vue'
-	
+
 	export default {
 		name: 'home',
 		components: {
@@ -39,15 +39,14 @@
 
 		},
 		watch: {
-		  
+
 		},
 		provide() {
 			return {
 				news: this.news,
 			};
 		},
-		mounted() {
-		},
+		mounted() {},
 		data() {
 			return {
 				DialogVisible: false,
@@ -217,7 +216,100 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 						likes: 2,
 						comments: {
 							length: 1,
-							data: [''],
+							data: [{
+								id: 1,
+								user: {
+									artId: 1,
+									sex: 1,
+									belikes: 1100,
+									becollects: 1001,
+									codePass: 30,
+									problemPass: 37,
+									highquiltyOutput: 100,
+									badgeList: [{
+										name: '字节跳动_Data_后端开发工程师',
+										type: 'trainee',
+									}, ],
+									profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
+									userLevel: 2,
+									userName: 'shining4code',
+									school: '浙江大学',
+									graduationYear: 2021,
+									direction: '产品',
+								},
+								target: {
+									sex: 0,
+									belikes: 1100,
+									becollects: 1001,
+									codePass: 30,
+									problemPass: 37,
+									highquiltyOutput: 100,
+									userName: '今天也是没有收到offer的一天',
+									school: '华侨大学',
+									graduationYear: 2021,
+									direction: 'java工程师',
+									badgeList: [{
+										name: '字节跳动_Data_后端开发工程师',
+										type: 'trainee',
+									}, ],
+									userLevel: 6,
+									profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
+								},
+								content: '啊，老姐之前不是都到hr面了？',
+								date: new Date(),
+								recomments: {
+									length: 1,
+									data: [{
+										id: 2,
+										user: {
+											sex: 0,
+											belikes: 1100,
+											becollects: 1001,
+											codePass: 30,
+											problemPass: 37,
+											highquiltyOutput: 100,
+											userName: '今天也是没有收到offer的一天',
+											school: '华侨大学',
+											graduationYear: 2021,
+											direction: 'java工程师',
+											badgeList: [{
+												name: '字节跳动_Data_后端开发工程师',
+												type: 'trainee',
+											}, ],
+											userLevel: 6,
+											profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
+										},
+										target: {
+											sex: 1,
+											belikes: 1100,
+											becollects: 1001,
+											codePass: 30,
+											problemPass: 37,
+											highquiltyOutput: 100,
+											badgeList: [{
+												name: '字节跳动_Data_后端开发工程师',
+												type: 'trainee',
+											}, ],
+											profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
+											userLevel: 2,
+											userName: 'shining4code',
+											school: '浙江大学',
+											graduationYear: 2021,
+											direction: '产品',
+										},
+										content: '对啊对啊',
+										date: new Date(),
+										recomments: {
+											length: 0,
+											data: [],
+										},
+										likes: 1,
+										mothserId: 1, //id != motherid的后续回复添加到mother上
+									}],
+								},
+								likes: 1,
+								mothserId: 1,
+							}, ],
 						},
 						views: 1126,
 						forwards: 0,
@@ -226,8 +318,7 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 				}]
 			};
 		},
-		methods: {
-		}
+		methods: {}
 	}
 </script>
 

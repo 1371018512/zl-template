@@ -32,8 +32,8 @@ export const constantRoutes = [{
 			path: '/information/talk',
 			component: () => import('@/views/information/index'),
 			children: [{
-				path: '',
-				component: () => import('@/views/test/index'),
+				path: '/information/talk/:t_id',
+				component: () => import('@/views/information/chatRoom'),
 			}, ]
 		}, {
 			// 通知、赞、回复等
