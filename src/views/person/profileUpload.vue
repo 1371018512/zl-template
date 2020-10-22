@@ -181,6 +181,7 @@
 						
 						this.$store.dispatch('user/modifyProfile', file)
 						  .then(() => {
+							  this.$router.go(0);
 						  })
 						  .catch(() => {
 						  })

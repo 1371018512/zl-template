@@ -6,7 +6,7 @@
 			<el-container>
 				<el-header style="padding: 0;height: 30px;">
 					<el-row type="flex" class="row-bg" justify="space-between">
-						<el-col :span="15" style="line-height: 30px;font-size: 10px;">{{$store.getters['user/userDetail'].userName}}</el-col>
+						<el-col :span="15" style="line-height: 30px;font-size: 10px;">{{$store.getters['user/userDetail'].nickName}}</el-col>
 						<el-col :span="8">
 							<el-button plain size="mini">个人主页</el-button>
 						</el-col>
@@ -60,14 +60,11 @@
 					width: this.size + 'px',
 					height: this.size + 'px',
 					borderRadius: Math.floor(this.size / 2) + 'px',
-					border: '2px solid #e7e7e7',
 				},
 				ActiveProfileStyle: {
 					width: this.size + 'px',
 					height: this.size + 'px',
 					borderRadius: Math.floor(this.size / 2) + 'px',
-					border: '2px solid rgba(64, 158, 255, .5)',
-					boxShadow: '0 0 5px rgba(64, 158, 255, .5)',
 				},
 				ContainerStyle: {},
 				//popover2: 'popover1',

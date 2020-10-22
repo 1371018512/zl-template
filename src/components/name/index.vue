@@ -5,10 +5,10 @@
 				:data="data"
 			/>
 		</el-popover>
-		<span :style="{ color: level[data.userLevel].color }" v-popover="'popover'">
-			{{data.userName}}
-			<el-tooltip effect="dark" :content="data.badgeList[0].name" placement="bottom" v-if="!onlyName">
-				<img :src="badges[data.badgeList[0].type]"/>
+		<span :style="{ color: level[data.userLevel].color }">
+			<span v-popover="'popover'">{{data.nickName}}</span>
+			<el-tooltip effect="dark" :content="data.identity.name" placement="bottom" v-if="!onlyName">
+				<img :src="badges[data.identity.type]"/>
 			</el-tooltip>
 		</span>
 	</div>

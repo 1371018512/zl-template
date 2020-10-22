@@ -20,36 +20,22 @@ const state = {
 	introduction: '',
 	// 这几个值权限登录相关,单独列出来
 	token: getStorage(),
+	uId: localStorage.getItem('uId'),
 	roles: [],
 	// 这里存储实际的用户信息
 	detail: {
-		id: 992973331,
-		introduction: '我是一个保安，爱吃小熊饼干',
-		education: '本科',
-		base: '杭州',
-		sex: 0,
-		belikes: 1100,
-		becollects: 1001,
-		codePass: 30,
-		problemPass: 37,
-		highquiltyOutput: 100,
-		userName: '今天也是没有收到offer的一天',
-		school: '华侨大学',
-		graduationYear: 2021,
-		direction: 'java工程师',
-		badgeList: [{
-			name: '字节跳动_Data_后端开发工程师',
-			type: 'trainee',
-		}, ],
-		userLevel: 6,
-		profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
 	},
-	
 }
 
 const mutations = {
 	SET_TOKEN: (state, token) => {
 		state.token = token
+	},
+	SET_UID: (state, uId) => {
+		state.uId = uId
+	},
+	SET_DETAIL: (state, data) => {
+		state.detail = data
 	},
 	SET_INTRODUCTION: (state, introduction) => {
 		state.introduction = introduction
@@ -68,11 +54,11 @@ const mutations = {
 const actions = {
 	// 上传
 	modifyProfile({
-		commit
+		commit,
+		state
 	}, img) {
 		return new Promise((resolve, reject) => {
 			modifyProfile(img).then(response => {
-				//console.log(response)
 				resolve(response)
 			}).catch(error => {
 				reject(error)
@@ -98,8 +84,10 @@ const actions = {
 				} = response
 				// 设置vuex
 				commit('SET_TOKEN', data.token)
+				commit('SET_UID', data.uId)
 				// 设置浏览器中的cookie
 				setStorage(data.token)
+				localStorage.setItem('uId',data.uId);
 				resolve()
 			}).catch(error => {
 				reject(error)
@@ -112,9 +100,10 @@ const actions = {
 	getInfo({
 		commit,
 		state
-	}) {
+	}, uId) {
 		return new Promise((resolve, reject) => {
-			getInfo(state.token).then(response => {
+			uId = uId || state.uId
+			getInfo(state.uId).then(response => {
 				const {
 					data
 				} = response
@@ -123,22 +112,8 @@ const actions = {
 					reject('Verification failed, please Login again.')
 				}
 
-				const {
-					roles,
-					name,
-					avatar,
-					introduction
-				} = data
-
-				// roles must be a non-empty array
-				if (!roles || roles.length <= 0) {
-					reject('getInfo: roles must be a non-null array!')
-				}
-
-				commit('SET_ROLES', roles)
-				commit('SET_NAME', name)
-				commit('SET_AVATAR', avatar)
-				commit('SET_INTRODUCTION', introduction)
+				commit('SET_DETAIL', data)
+				
 				resolve(data)
 			}).catch(error => {
 				reject(error)
@@ -154,9 +129,11 @@ const actions = {
 	}) {
 		return new Promise((resolve, reject) => {
 			logout(state.token).then(() => {
+				commit('SET_UID', 0)
 				commit('SET_TOKEN', '')
 				commit('SET_ROLES', [])
 				removeStorage()
+				localStorage.removeItem('uId')
 				resetRouter()
 
 				// reset visited views and cached views
@@ -216,6 +193,7 @@ const actions = {
 
 const getters = {
 	userDetail: state => state.detail,
+	uId: state => state.uId,
 }
 
 export default {

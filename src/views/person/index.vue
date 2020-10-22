@@ -33,7 +33,9 @@
 				</el-menu>
 			</el-aside>
 			<el-main class="main">
-				<router-view></router-view>
+				<keep-alive>
+					<router-view></router-view>
+				</keep-alive>
 			</el-main>
 		</el-container>
 	</el-container>
@@ -60,15 +62,22 @@
 			return {};
 		},
 		mounted() {
+			this.$store.dispatch('user/getInfo', this.$route.params.u_id).then((data) => {
+				this.user = data;
+			}).catch(error => {
+				console.log(error)
+			})
 		},
 		data() {
 			return {
-				oneself: this.$route.params.u_id == this.$store.getters['user/userDetail'].id,
+				user: {},
+				oneself: this.$route.params.u_id == this.$store.getters['user/userDetail'].uId,
 			};
 		},
 		provide() {
 			return {
 				oneself: this.oneself,
+				ReactiveUser: () => this.user,
 			};
 		},
 		methods: {

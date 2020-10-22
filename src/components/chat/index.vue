@@ -44,7 +44,6 @@
 <style scoped>
 	.message_right {
 		font-size: 14px;
-		background-color: #67f8b0;
 		display: flex;
 		align-items: flex-start;
 		padding: 5px;
@@ -56,7 +55,6 @@
 	}
 	.message_left {
 		font-size: 14px;
-		background-color: #67f8b0;
 		display: flex;
 		align-items: flex-start;
 		padding: 5px;

@@ -13,7 +13,7 @@
 			<div class="infContainer">
 				<zlName :data="data.follow.user"/>
 				<!-- <div :style="{ color: level[data.follow.user.userLevel].color }" v-popover:popover2>
-					{{data.follow.user.userName}}
+					{{data.follow.user.nickName}}
 				</div> -->
 				<!-- <el-popover ref="popover2" placement="bottom" title="" width="350" trigger="hover" content="">
 					<zl-personal-detail

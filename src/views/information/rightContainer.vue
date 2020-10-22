@@ -48,7 +48,7 @@
 						// ...
 						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
 						userLevel: 2,
-						userName: 'shining4code',
+						nickName: 'shining4code',
 					},
 					art: {
 						// ...
@@ -61,7 +61,7 @@
 						// ...
 						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
 						userLevel: 2,
-						userName: 'shining4code',
+						nickName: 'shining4code',
 					},
 					blink: {
 						// ...
@@ -73,7 +73,7 @@
 						// ...
 						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
 						userLevel: 2,
-						userName: 'shining4code',
+						nickName: 'shining4code',
 					},
 					comment: {
 						// ...
@@ -92,7 +92,7 @@
 						// ...
 						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
 						userLevel: 2,
-						userName: 'shining4code',
+						nickName: 'shining4code',
 					},
 					content: '我对文章评论一下',
 					art: {
@@ -106,7 +106,7 @@
 						// ...
 						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
 						userLevel: 2,
-						userName: 'shining4code',
+						nickName: 'shining4code',
 					},
 					content: '啥秘密哦？',
 					comment: {
@@ -121,7 +121,7 @@
 				}],
 				follow: [{
 					user: {
-						id: 992973331,
+						uId: 992973331,
 						introduction: '我是一个保安，爱吃小熊饼干',
 						education: '本科',
 						base: '杭州',
@@ -131,13 +131,13 @@
 						codePass: 30,
 						problemPass: 37,
 						highquiltyOutput: 100,
-						userName: '今天也是没有收到offer的一天',
+						nickName: '今天也是没有收到offer的一天',
 						school: '华侨大学',
 						graduationYear: 2021,
-						badgeList: [{
+						identity: {
 							name: '字节跳动_Data_后端开发工程师',
 							type: 'trainee',
-						}, ],
+						},
 						direction: 'java工程师',
 						userLevel: 6,
 						profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
@@ -151,13 +151,13 @@
 							codePass: 30,
 							problemPass: 37,
 							highquiltyOutput: 100,
-							badgeList: [{
+							identity: {
 								name: '字节跳动_Data_后端开发工程师',
 								type: 'trainee',
-							}, ],
+							},
 							profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
 							userLevel: 2,
-							userName: 'shining4code',
+							nickName: 'shining4code',
 							school: '浙江大学',
 							graduationYear: 2021,
 							direction: '产品',

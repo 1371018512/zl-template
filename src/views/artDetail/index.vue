@@ -126,7 +126,7 @@
 		},
 		methods: {
 			scrollToEnd() {
-				scrollTo(9999, 1000, () => {}, this.$refs.container.parentElement.parentElement.parentElement)
+				scrollTo(9999, 3000, () => {}, this.$refs.container.parentElement.parentElement.parentElement)
 				//window.scrollTo(0,this.top)
 				console.log(this.$refs.container.parentElement.parentElement.parentElement);
 				/* this.$nextTick(() => {

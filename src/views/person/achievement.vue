@@ -74,7 +74,7 @@
 				DialogVisible: false,
 				user: {
 					score:6901,
-					id: 992973331,
+					uId: 992973331,
 					introduction: '我是一个保安，爱吃小熊饼干',
 					education: '本科',
 					// todo: 以上是个人页新增字段,到时候要修改到其他地方
@@ -85,14 +85,14 @@
 					codePass: 30,
 					problemPass: 37,
 					highquiltyOutput: 100,
-					userName: '今天也是没有收到offer的一天',
+					nickName: '今天也是没有收到offer的一天',
 					school: '华侨大学',
 					graduationYear: 2021,
 					direction: 'java工程师',
-					badgeList: [{
+					identity: {
 						name: '字节跳动_Data_后端开发工程师',
 						type: 'trainee',
-					}, ],
+					},
 					userLevel: 6,
 					profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
 				},

@@ -62,7 +62,7 @@
 				</el-aside>
 				<el-main class="header-main">
 					<div style="font-size: 15px;">
-						{{data.userName}}
+						{{data.nickName}}
 						<svg class="icon" aria-hidden="true" v-if="!data.sex" font-size="15px">
 						  <use xlink:href="#el-icon-zlnv"></use>
 						</svg>
@@ -70,9 +70,9 @@
 						  <use xlink:href="#el-icon-zlnan"></use>
 						</svg>
 					</div>
-					<div v-if="data.badgeList.length">
-						<img :src="badges[data.badgeList[0].type]" style="vertical-align: middle;"/>
-						<span>{{data.badgeList[0].name}}</span>
+					<div v-if="data.identity.name">
+						<img :src="badges[data.identity.type]" style="vertical-align: middle;"/>
+						<span>{{data.identity.name}}</span>
 					</div>
 				</el-main>
 			</el-container>

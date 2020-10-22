@@ -1,14 +1,14 @@
 <template>
-	<div class="container">
+	<div class="container" v-if="user.nickName">
 		<div class="header">
 			<zl-title data="基本信息" />
-			{{'ID: (' + user.id + ')'}}
+			{{'ID: (' + user.uId + ')'}}
 			<el-button type="success" style="float: right;" @click.native="readonly=false" v-if="oneself">编辑</el-button>
 		</div>
 		<hr>
 		<el-form ref="form" :model="form" label-width="80px" size="small" :disabled="readonly">
 			<el-form-item label="我的昵称">
-				<el-input v-model="form.userName" style="max-width: 250px;"></el-input>
+				<el-input v-model="form.nickName" style="max-width: 250px;"></el-input>
 			</el-form-item>
 			<el-form-item label="我的性别">
 				<el-radio-group v-model="form.sex">
@@ -29,11 +29,11 @@
 			</el-form-item>
 			<el-form-item label="身份认证">
 				<el-col :span="11">
-					<el-input v-model="form.badgeList[0].name" style="width: 100%;"></el-input>
+					<el-input v-model="form.identity.name" style="width: 100%;"></el-input>
 				</el-col>
 				<el-col style="text-align: center;" :span="2">类型</el-col>
 				<el-col :span="11">
-					<el-select v-model="form.badgeList[0].type" style="width: 100%;" placeholder="请选择">
+					<el-select v-model="form.identity.type" style="width: 100%;" placeholder="请选择">
 						<el-option value="trainer">
 						</el-option>
 						<el-option value="admission">
@@ -71,11 +71,15 @@
 	import zlTitle from '@/components/common/title.vue'
 
 	export default {
-		name: 'artDetail',
 		components: {
 			zlTitle,
 		},
-		computed: {},
+		computed: {
+			// 初次计算之前不可避免的会报错
+			user() {
+				return this.ReactiveUser();
+			}
+		},
 		watch: {
 
 		},
@@ -86,7 +90,16 @@
 				this.dateData.push(i);
 			}
 		},
-		inject: ['oneself'],
+		created() {
+			this.$store.dispatch('user/getInfo',this.$store.getters['user/uId']).then((data) => {
+				this.form = data;
+			}).catch(error => {
+				console.log(error)
+			})
+			//this.form = JSON.parse(JSON.stringify(this.user))
+			//console.log(form)
+		},
+		inject: ['oneself', 'ReactiveUser'],
 		data() {
 			return {
 				dateData: [],
@@ -100,52 +113,7 @@
 					'高中',
 					'其他'
 				],
-				form: {
-					id: 992973331,
-					introduction: '我是一个保安，爱吃小熊饼干',
-					education: '本科',
-					// todo: 以上是个人页新增字段,到时候要修改到其他地方
-					base: '杭州',
-					sex: 0,
-					belikes: 1100,
-					becollects: 1001,
-					codePass: 30,
-					problemPass: 37,
-					highquiltyOutput: 100,
-					userName: '今天也是没有收到offer的一天',
-					school: '华侨大学',
-					graduationYear: 2021,
-					direction: 'java工程师',
-					badgeList: [{
-						name: '字节跳动_Data_后端开发工程师',
-						type: 'trainee',
-					}, ],
-					userLevel: 6,
-					profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
-				},
-				user: {
-					id: 992973331,
-					introduction: '我是一个保安，爱吃小熊饼干',
-					education: '本科',
-					// todo: 以上是个人页新增字段,到时候要修改到其他地方
-					base: '杭州',
-					sex: 0,
-					belikes: 1100,
-					becollects: 1001,
-					codePass: 30,
-					problemPass: 37,
-					highquiltyOutput: 100,
-					userName: '今天也是没有收到offer的一天',
-					school: '华侨大学',
-					graduationYear: 2021,
-					direction: 'java工程师',
-					badgeList: [{
-						name: '字节跳动_Data_后端开发工程师',
-						type: 'trainee',
-					}, ],
-					userLevel: 6,
-					profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
-				},
+				form: {},
 			}
 		},
 		methods: {

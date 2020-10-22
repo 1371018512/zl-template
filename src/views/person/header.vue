@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container" v-if="user.nickName">
 		<div class="left">
 			<el-dialog :visible.sync="DialogVisible" width="600px" top="75px">
 				<template v-slot:title>
@@ -12,7 +12,7 @@
 		</div>
 		<div class="mid">
 			<div :style="{ color: level[user.userLevel].color, fontSize: '10px' }">
-				{{user.userName}}
+				{{user.nickName}}
 				<svg class="icon" aria-hidden="true" v-if="!user.sex" font-size="15px">
 					<use xlink:href="#el-icon-zlnv"></use>
 				</svg>
@@ -61,6 +61,10 @@
 				'badges',
 				'level'
 			]),
+			// 初次计算之前不可避免的会报错
+			user() {
+				return this.ReactiveUser();
+			}
 		},
 		watch: {
 
@@ -68,17 +72,17 @@
 		provide() {
 			return {};
 		},
-		inject: ['oneself'],
+		inject: ['oneself', 'ReactiveUser'],
 		mounted() {
-			console.log(this.$store.getters['user/userDetail'])
+			
 		},
 		data() {
 			return {
-				user: this.$store.getters['user/userDetail'],
 				DialogVisible: false,
 			};
 		},
-		methods: {}
+		methods: {
+		}
 	}
 </script>
 
