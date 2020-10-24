@@ -1,6 +1,8 @@
 <template>
 		<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			<el-menu-item index="1" @click.native="$router.push('/')">首页</el-menu-item>
+			<el-menu-item index="2" @click.native="$router.push('/discussion')">讨论区</el-menu-item>
+			<el-menu-item index="6" @click.native="$router.push('/circle')">圈子</el-menu-item>
 			
 			<el-menu-item index="5" class="el-menu-left" >
 				<zl-profile/>
@@ -27,7 +29,7 @@
 		},
 		data() {
 			return {
-				activeIndex: '1',
+				activeIndex: '',
 			};
 		},
 		methods: {

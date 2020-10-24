@@ -6,7 +6,7 @@
 			</div>
 		</div>
 		<div class="chatWindow" ref="chatWindow">
-			<zl-chat :data="item" :key="i" v-for="(item, i) in talk.talks" :left="talk.target.id == item.user.id"/>
+			<zl-chat :data="item" :key="i" v-for="(item, i) in talk.talks" :left="talk.target.uId == item.user.uId"/>
 		</div>
 		
 		<div>

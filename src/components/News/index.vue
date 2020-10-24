@@ -39,9 +39,9 @@
 			</div>
 		</div>
 		<div class="comments" v-if="news[index].blink" v-show="openComment">
-			<div v-for="(item, i) in news[index].blink.comments.data">
+			<div v-for="(item, i) in news[index].blink.comments">
 				<zl-comment :data="item" :index="i" :key="i"/>
-				<hr v-if="news[index].blink.comments.data.length - 1 != i" />
+				<hr v-if="news[index].blink.comments.length - 1 != i" />
 			</div>
 			<hr/>
 			<div style="margin: 10px;height: 90px;">

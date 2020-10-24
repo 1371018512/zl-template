@@ -4,45 +4,45 @@
 			<div class="art-header-left">
 				<el-container>
 					<el-aside width="80px" class="art-header-left-aside">
-						<zl-profile :data="$store.getters['artDetail/user']" :size="50" v-popover:popover1/>
+						<zl-profile :data="$store.getters['art/user']" :size="50" v-popover:popover1/>
 						<el-popover ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="">
 							<zl-personal-detail
-								:data="$store.getters['artDetail/user']"
+								:data="$store.getters['art/user']"
 							/>
 						</el-popover>
 					</el-aside>
 					<el-main class="art-header-left-main">
 						<div>
-							<zl-name :data="$store.getters['artDetail/user']"/>
+							<zl-name :data="$store.getters['art/user']"/>
 						</div>
 						<div>
-							{{ $store.getters['artDetail/art'].lastModify == $store.getters['artDetail/art'].date ? '发布于' : '编辑于'}}
-							<span style="margin-left: 20px;">{{formatTime($store.getters['artDetail/art'].lastModify)}}</span>
+							{{ $store.getters['art/art'].lastModify == $store.getters['art/art'].date ? '发布于' : '编辑于'}}
+							<span style="margin-left: 20px;">{{formatTime($store.getters['art/art'].lastModify)}}</span>
 						</div>
 					</el-main>
 				</el-container>
 			</div>
 			<div class="art-header-right">
 				<div>
-					<span v-for="(item, index) in $store.getters['artDetail/art'].tag" class="green" :key="item">
+					<span v-for="(item, index) in $store.getters['art/art'].tag" class="green" :key="item">
 						#{{item}}#
 					</span>
 				</div>
 				<div>
-					<span>赞 {{$store.getters['artDetail/art'].likes}}</span>
-					<span>收藏 {{$store.getters['artDetail/art'].collects}}</span>
-					<span>回复 {{$store.getters['artDetail/art'].comments.length}}</span>
-					<span>浏览 {{$store.getters['artDetail/art'].views}}</span>
+					<span>赞 {{$store.getters['art/art'].likes}}</span>
+					<span>收藏 {{$store.getters['art/art'].collects}}</span>
+					<span>回复 {{$store.getters['art/art'].comments.length}}</span>
+					<span>浏览 {{$store.getters['art/art'].views}}</span>
 				</div>
 			</div>
 		</div>
 		<hr/>
 		<div class="art-body">
-			<pre>{{$store.getters['artDetail/art'].content}}</pre>
+			<pre>{{$store.getters['art/art'].content}}</pre>
 			<div class="art-body-bottom">
 				<span>
 					<span class="iconfont">&#xe66d;</span>
-					收藏({{$store.getters['artDetail/art'].collects}})
+					收藏({{$store.getters['art/art'].collects}})
 				</span>
 				<span>
 					<span class="iconfont">&#xe600;</span>
@@ -50,7 +50,7 @@
 				</span>
 				<span>
 					<span class="iconfont">&#xe71a;</span>
-					赞({{$store.getters['artDetail/art'].collects}})
+					赞({{$store.getters['art/art'].collects}})
 				</span>
 				<span>回帖</span>
 				<span>举报</span>
@@ -60,7 +60,7 @@
 		<div class="art-footer">
 			<div class="art-footer-header">
 				<div>
-					<zl-title :data="$store.getters['artDetail/art'].comments.length + '条回帖'"/>
+					<zl-title :data="$store.getters['art/art'].comments.length + '条回帖'"/>
 				</div>
 				<el-dropdown>
 				  <span class="el-dropdown-link">
@@ -74,7 +74,7 @@
 				<el-button type="success" @click.native="scrollToEnd"><span class="iconfont" style="color: white;font-size: 0.7em;">&#xf06c;</span> 回帖</el-button>
 			</div>
 			<div class="comment">
-				<zl-comment v-for="(item, i) in $store.getters['artDetail/art'].comments.data" :data="item" :index="i" :key="i"/>
+				<zl-comment v-for="(item, i) in $store.getters['art/art'].comments" :data="item" :index="i" :key="i"/>
 			</div>
 		</div>
 		<hr/>
@@ -98,7 +98,6 @@
 	import { scrollTo } from '../../utils/scroll-to.js'
 	
 	export default {
-		name: 'artDetail',
 		components: {
 			zlProfile,
 			zlComment,
@@ -116,7 +115,8 @@
 
 		},
 		provide() {},
-		mounted() {},
+		mounted() {
+		},
 		data() {
 			return {
 				formatTime: formatTime,

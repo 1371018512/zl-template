@@ -35,9 +35,9 @@
 					</div>
 				</div>
 				<div class="recomments">
-					<template v-for="(item, i) in data.recomments.data">
+					<template v-for="(item, i) in data.recomments">
 						<zl-recomment :data="item" @openInput="openInput = !openInput"/>
-						<hr v-if="i < data.recomments.data.length - 1"/>
+						<hr v-if="i < data.recomments.length - 1"/>
 					</template>
 					<!-- todo 这里默认不显示 -->
 					<div class="inputContainer" v-show="openInput">

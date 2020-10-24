@@ -1,5 +1,5 @@
 <template>
-	<el-autocomplete popper-class="my-autocomplete" v-model="state3" :fetch-suggestions="querySearch" placeholder="请输入内容"
+	<el-autocomplete size="small" popper-class="my-autocomplete" v-model="state3" :fetch-suggestions="querySearch" placeholder="请输入内容"
 	 @select="handleSelect">
 		<i class="el-icon-search el-input__icon" slot="suffix" @click="handleIconClick">
 		</i>

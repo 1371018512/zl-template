@@ -46,7 +46,7 @@
 			</div>
 		</div>
 		<div class="buttons">
-			<el-button size="small"><span class="iconfont">&#xe668;</span>已关注</el-button>
+			<el-button size="small"><span class="iconfont">&#xe7b8;</span>已关注</el-button>
 			<el-button size="small"><span class="iconfont">&#xe683;</span>私信</el-button>
 			<el-button size="small"><span class="iconfont">&#xe715;</span>个人主页</el-button>
 			<span class="iconfont" v-popover:popover1>&#xe847;</span>

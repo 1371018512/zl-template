@@ -11,16 +11,20 @@ Router.prototype.push = function push(location) {
 Vue.use(Router)
 
 export const constantRoutes = [{
+		// 登录路由
 		path: '/login',
 		component: () => import('@/views/login/index'),
 		hidden: true
 	},
 	{
+		// 404处理路由
 		path: '/404',
 		component: () => import('@/views/error-page/404'),
 		hidden: true
 	},
 	{
+		// 主页路由，'/'重定向至'home'
+		// todo:此页面只显示自己的动态和讨论帖 + 圈子动态讨论帖 + 关注的人动态讨论帖
 		path: '/',
 		component: Layout,
 		redirect: '/home',
@@ -31,6 +35,17 @@ export const constantRoutes = [{
 		}]
 	},
 	{
+		// 讨论区，只有讨论帖
+		path: '/discussion',
+		component: Layout,
+		redirect: '/home',
+		children: [{
+			path: '',
+			component: () => import('@/views/discussion/index'),
+		}]
+	},
+	{
+		// 消息管理路由
 		path: '/information',
 		component: Layout,
 		children: [{
@@ -52,12 +67,14 @@ export const constantRoutes = [{
 		}]
 	},
 	{
+		// 个人管理路由
 		path: '/person',
 		component: Layout,
 		children: [{
 			path: '/person/index/:u_id',
 			component: () => import('@/views/person/index'),
 			children: [{
+				// 个人资料
 				path: '/person/index/:u_id',
 				component: () => import('@/views/person/baseInfo'),
 			}, ]
@@ -66,6 +83,7 @@ export const constantRoutes = [{
 			name: 'Person',
 			component: () => import('@/views/person/index'),
 			children: [{
+				// 讨论帖
 				path: '/person/post/:u_id',
 				component: () => import('@/views/person/post'),
 			}, ]
@@ -73,6 +91,7 @@ export const constantRoutes = [{
 			path: '/person/achievement/:u_id',
 			component: () => import('@/views/person/index'),
 			children: [{
+				// 个人成就
 				path: '/person/achievement/:u_id',
 				component: () => import('@/views/person/achievement'),
 			}, ]

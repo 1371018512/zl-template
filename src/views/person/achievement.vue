@@ -48,7 +48,6 @@
 	} from 'vuex'
 	
 	export default {
-		name: 'artDetail',
 		components: {
 			zlTitle,
 		},

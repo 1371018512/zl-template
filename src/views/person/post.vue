@@ -17,7 +17,6 @@
 	import zlArt from '@/components/News/art.vue'
 
 	export default {
-		name: 'artDetail',
 		components: {
 			zlTitle,
 			zlArt
@@ -76,10 +75,7 @@
 								lastModify: new Date(),
 								likes: 2,
 								collects: 0,
-								comments: {
-									length: 6,
-									data: ['', '', '', '', '', ''],
-								},
+								comments: ['', '', '', '', '', ''],
 								views: 1126,
 							},
 							date: new Date(),
@@ -144,10 +140,7 @@
 								lastModify: new Date(),
 								likes: 2,
 								collects: 0,
-								comments: {
-									length: 6,
-									data: ['', '', '', '', '', ''],
-								},
+								comments: ['', '', '', '', '', ''],
 								views: 1126,
 							},
 							content: '啊，老姐之前不是都到hr面了？',
