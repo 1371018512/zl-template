@@ -64,30 +64,33 @@
 			} */
 			return {
 				topicOptions: [{
-					value: '站内公告',
-					label: '站内公告'
+					label: '站内公告',
+					value: 'announcement',
 				}, {
-					value: '笔经面经',
-					label: '笔经面经'
+					label: '笔经面经',
+					value: 'guide',
 				}, {
-					value: '我要提问',
-					label: '我要提问'
+					label: '我要提问',
+					value: 'question',
 				}, {
-					value: '技术交流',
-					label: '技术交流'
+					label: '技术交流',
+					value: 'technology',
 				}, {
-					value: '招聘信息',
-					label: '招聘信息'
+					label: '招聘信息',
+					value: 'recruit',
+				}, {
+					label: '猿生活',
+					value: 'life',
 				}],
 				tagOptions: [{
-					value: 'HTML',
-					label: 'HTML'
+					value: '简历',
+					label: '简历'
 				}, {
-					value: 'CSS',
-					label: 'CSS'
+					value: 'Java开发',
+					label: 'Java开发'
 				}, {
-					value: 'JavaScript',
-					label: 'JavaScript'
+					value: 'offer求比较',
+					label: 'offer求比较'
 				}],
 				artForm: {
 					title: '',
@@ -107,6 +110,7 @@
 				this.$store.dispatch('art/submitBlink', {
 						uId: this.$store.getters['user/uId'],
 						content: this.blinkForm.content,
+						date: new Date(),
 					})
 					.then((data) => {
 						this.$message({
@@ -122,6 +126,7 @@
 					})
 			},
 			submitArt() {
+				this.artForm = new Date();
 				this.artForm.uId = this.$store.getters['user/uId'];
 				this.$store.dispatch('art/submitArt', this.artForm)
 					.then((data) => {

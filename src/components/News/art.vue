@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<span class="title"><strong>{{data.title}}</strong></span>
+		<span class="title goDetail" @click="innerClick"><strong>{{data.title}}</strong></span>
 		<p class="content">
 			<template v-if="!replaceContent">
 				<span v-for="(item, index) in data.tag" class="green" :key="item">
 					#{{item}}#
 				</span>
-				{{content}}
-				<span v-if="more" class="green">...查看更多</span>
+				<span @click="innerClick" class="goDetail">{{content}}</span>
+				<span v-if="more" class="green" @click="innerClick">...查看更多</span>
 			</template>
 			<template v-else>
 				{{replaceContent}}
@@ -15,7 +15,7 @@
 		</p>
 		<div class="badgeContainer" v-if="needTags">
 			<el-tag v-for="(item, index) in data.topic" size="mini" :key="item">
-				{{item}}
+				{{topicLabel[item]}}
 			</el-tag>
 		</div>
 		<div v-if="needDate" class="artFooter">
@@ -67,15 +67,28 @@
 				default: false,
 			},
 			replaceContent: {
-			}
+			},
+			
 		},
 		data() {
 			return {
 				more: false,
 				formatTime: formatTime,
+				topicLabel: {
+					'announcement': '站内公告',
+					'guide': '笔经面经',
+					'question': '我要提问',
+					'technology': '技术交流',
+					'recruit': '招聘信息',
+					'life': '猿生活',
+				}
 			};
 		},
-		methods: {}
+		methods: {
+			innerClick() {
+				this.$emit('click');
+			}
+		}
 	}
 </script>
 
@@ -108,5 +121,13 @@
 		font-size: 13px;
 		color: #888888;
 		text-align: right;
+	}
+	
+	.goDetail {
+		cursor: pointer;
+	}
+	
+	.goDetail:hover {
+		color: #25bb9b;
 	}
 </style>

@@ -3,7 +3,7 @@
 		<el-container>
 			<el-aside width="50px" class="header-aside">
 				<zl-profile :data="data.user" v-popover:popover1/>
-				<el-popover ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="">
+				<el-popover :open-delay="600" ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="">
 					<zl-personal-detail
 						:data="data.user"
 					/>
@@ -19,22 +19,22 @@
 					</div>
 				</div>
 				<div>
-					{{data.content}}
+					{{data.comment.content}}
 				</div>
 				<div>
 					<div>
-						发表于{{formatTime(data.date)}}
+						发表于{{formatTime(new Date(data.comment.date), '{y}-{m}-{d}')}}
 					</div>
 					<div>
 						<span>
 							<span class="iconfont">&#xe71a;</span>
-							赞({{data.likes}})
+							赞({{data.comment.likes}})
 						</span>
 						<span @click="openInput = !openInput">回复</span>
 						<span>举报</span>
 					</div>
 				</div>
-				<div class="recomments">
+				<div class="recomments" v-if="data.recomments.length">
 					<template v-for="(item, i) in data.recomments">
 						<zl-recomment :data="item" @openInput="openInput = !openInput"/>
 						<hr v-if="i < data.recomments.length - 1"/>
@@ -108,6 +108,8 @@
 		//background-color: yellow;
 		//margin-top: 20px;
 		line-height: 1em;
+		border-bottom: 1px dashed #cfcfcf;
+		margin-bottom: 5px;
 	}
 	
 	.header-aside {
@@ -121,6 +123,7 @@
 		padding: 10px;
 		> :first-child {
 			display: flex;
+			align-items: center;
 			justify-content: space-between;
 		}
 		> :nth-child(3) {

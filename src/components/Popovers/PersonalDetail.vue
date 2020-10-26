@@ -50,7 +50,7 @@
 			<el-button size="small"><span class="iconfont">&#xe683;</span>私信</el-button>
 			<el-button size="small"><span class="iconfont">&#xe715;</span>个人主页</el-button>
 			<span class="iconfont" v-popover:popover1>&#xe847;</span>
-			<el-popover ref="popover1" placement="bottom" title="" width="10" trigger="hover" content="">
+			<el-popover ref="popover1" :open-delay="600" placement="bottom" title="" width="10" trigger="hover" content="">
 				<div class="more">加入黑名单</div>
 				<div class="more">举报他</div>
 			</el-popover>

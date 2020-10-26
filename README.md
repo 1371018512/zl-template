@@ -59,3 +59,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 0.聊天界面滚动条设计
 1.接下来完善页面跳转
 2.设计路由，适配数据库
+
+##day8
+1.完成查询问章功能
+
+##day9
+1.适配文章查询
+
+##day10
+实现回复点赞以及回复的回复功能

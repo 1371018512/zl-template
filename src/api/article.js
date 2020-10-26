@@ -15,3 +15,27 @@ export function submitArt(data) {
     data
   })
 }
+
+export function getArts(data) {
+  return request({
+    url: 'art/getArts',
+    method: 'post',
+    data
+  })
+}
+
+export function submitComment(data) {
+  return request({
+    url: 'comment/submitComment',
+    method: 'post',
+    data
+  })
+}
+
+export function getComments(data) {
+  return request({
+    url: 'comment/getComments',
+    method: 'post',
+    data
+  })
+}

@@ -43,7 +43,7 @@
 			return {};
 		},
 		mounted() {
-			scrollTo(9999, 3000, () => {}, this.$refs.chatWindow)
+			scrollTo(3333, 1000, () => {}, this.$refs.chatWindow)
 			console.dir(this.$refs.chatWindow)
 		},
 		data() {

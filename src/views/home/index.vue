@@ -9,11 +9,10 @@
 			</template>
 			<zl-art-detail />
 		</el-dialog>
-		<el-button type="text" @click="DialogVisible = true">测试页面</el-button>
 		<!-- 以上是文章详情页 -->
 		<el-aside width="600px">
 			<zl-post />
-			<zl-news v-for="(item, i) in news" :index="i" :key='i' />
+			<!-- <zl-news v-for="(item, i) in news" :index="i" :key='i' /> -->
 		</el-aside>
 		<el-main>
 			<zl-recommand :data="user" />
@@ -294,10 +293,10 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 									date: new Date(),
 									recomments: [],
 									likes: 1,
-									mothserId: 1, //id != motherid的后续回复添加到mother上
+									motherId: 1, //id != motherid的后续回复添加到mother上
 								}],
 							likes: 1,
-							mothserId: 1,
+							motherId: 1,
 						}, ],
 						views: 1126,
 						forwards: 0,

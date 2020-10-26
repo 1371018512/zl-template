@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="profileContainer">
 				<zl-profile :data="data.follow.user" v-popover:popover1/>
-				<el-popover ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="">
+				<el-popover ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="" :open-delay="600">
 					<zl-personal-detail
 						:index="index"
 						:data="data.follow.user"

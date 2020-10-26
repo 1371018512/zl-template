@@ -147,7 +147,7 @@
 							date: new Date(),
 							recomments: [],
 							likes: 1,
-							mothserId: 1,
+							motherId: 1,
 						}, ]
 					},
 				},

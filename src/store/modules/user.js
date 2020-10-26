@@ -2,7 +2,9 @@ import {
 	login,
 	logout,
 	getInfo,
-	modifyProfile
+	modifyProfile,
+	getLikes,
+	likeArt
 } from '@/api/user'
 import {
 	getStorage,
@@ -120,7 +122,33 @@ const actions = {
 			})
 		})
 	},
-
+	
+	getLikes({
+		commit,
+		state
+	}, uId) {
+		return new Promise((resolve, reject) => {
+			getLikes(uId).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	
+	likeArt({
+		commit,
+		state
+	}, condition) {
+		return new Promise((resolve, reject) => {
+			likeArt(condition).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	
 	// user logout
 	logout({
 		commit,

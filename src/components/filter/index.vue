@@ -74,6 +74,7 @@
 					value: 'life',
 				}, ],
 				sortBy: [{
+					// 综合时间和活跃度
 					label: '默认',
 					value: '',
 				}, {
@@ -82,12 +83,6 @@
 				}, {
 					label: '最新发布',
 					value: 'publish',
-				}, {
-					label: '最新',
-					value: 'hot',
-				}, {
-					label: '精华',
-					value: 'essence',
 				}]
 			};
 		},

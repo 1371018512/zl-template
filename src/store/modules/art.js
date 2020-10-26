@@ -1,6 +1,9 @@
 import {
 	submitBlink,
-	submitArt
+	submitArt,
+	getArts,
+	submitComment,
+	getComments
 } from '@/api/article'
 
 const state = {
@@ -41,145 +44,37 @@ rt，网易云笔试挂了，被转推到其他部门（企业研发部门），
 		lastModify: new Date(),
 		likes: 2,
 		collects: 0,
-		comments: [{
-			id: 1,
-			user: {
-				artId: 1,
-				sex: 1,
-				belikes: 1100,
-				becollects: 1001,
-				codePass: 30,
-				problemPass: 37,
-				highquiltyOutput: 100,
-				identity: {
-					name: '字节跳动_Data_后端开发工程师',
-					type: 'trainee',
-				},
-				profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
-				userLevel: 2,
-				nickName: 'shining4code',
-				school: '浙江大学',
-				graduationYear: 2021,
-				direction: '产品',
-			},
-			target: {
-				sex: 0,
-				belikes: 1100,
-				becollects: 1001,
-				codePass: 30,
-				problemPass: 37,
-				highquiltyOutput: 100,
-				nickName: '今天也是没有收到offer的一天',
-				school: '华侨大学',
-				graduationYear: 2021,
-				direction: 'java工程师',
-				identity: {
-					name: '字节跳动_Data_后端开发工程师',
-					type: 'trainee',
-				},
-				userLevel: 6,
-				profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
-			},
-			content: '啊，老姐之前不是都到hr面了？',
-			date: new Date(),
-			recomments:[{
-					id: 2,
-					user: {
-						sex: 0,
-						belikes: 1100,
-						becollects: 1001,
-						codePass: 30,
-						problemPass: 37,
-						highquiltyOutput: 100,
-						nickName: '今天也是没有收到offer的一天',
-						school: '华侨大学',
-						graduationYear: 2021,
-						direction: 'java工程师',
-						identity: {
-							name: '字节跳动_Data_后端开发工程师',
-							type: 'trainee',
-						},
-						userLevel: 6,
-						profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
-					},
-					target: {
-						sex: 1,
-						belikes: 1100,
-						becollects: 1001,
-						codePass: 30,
-						problemPass: 37,
-						highquiltyOutput: 100,
-						identity: {
-							name: '字节跳动_Data_后端开发工程师',
-							type: 'trainee',
-						},
-						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						userLevel: 2,
-						nickName: 'shining4code',
-						school: '浙江大学',
-						graduationYear: 2021,
-						direction: '产品',
-					},
-					content: '对啊对啊',
-					date: new Date(),
-					recomments: [],
-					likes: 1,
-					mothserId: 1, //id != motherid的后续回复添加到mother上
-				}, {
-					id: 3,
-					user: {
-						sex: 0,
-						belikes: 1100,
-						becollects: 1001,
-						codePass: 30,
-						problemPass: 37,
-						highquiltyOutput: 100,
-						nickName: '今天也是没有收到offer的一天',
-						school: '华侨大学',
-						graduationYear: 2021,
-						direction: 'java工程师',
-						identity: {
-							name: '字节跳动_Data_后端开发工程师',
-							type: 'trainee',
-						},
-						userLevel: 6,
-						profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
-					},
-					target: {
-						sex: 1,
-						belikes: 1100,
-						becollects: 1001,
-						codePass: 30,
-						problemPass: 37,
-						highquiltyOutput: 100,
-						identity: {
-							name: '字节跳动_Data_后端开发工程师',
-							type: 'trainee',
-						},
-						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						userLevel: 2,
-						nickName: 'shining4code',
-						school: '浙江大学',
-						graduationYear: 2021,
-						direction: '产品',
-					},
-					content: '对啊对啊',
-					date: new Date(),
-					recomments: {
-						length: 0,
-						data: [],
-					},
-					likes: 1,
-					mothserId: 1, //id != motherid的后续回复添加到mother上
-				}],
-			likes: 1,
-			mothserId: 1,
-		}, ],
 		views: 1126,
 	},
+	comments: [],
 }
 
-const mutations = {}
+const mutations = {
+	showDetail(state) {
+		state.showDetail = true;
+	},
+	setArt(state, data) {
+		state.art = data;
+	},
+	setComments(state, data) {
+		state.comments = data;
+	},
+	toggleILike(state) {
+		state.art.iLike = !state.art.iLike;
+	},
+	modifyLikes(state,data) {
+		state.art.likes += data;
+	},
+	addCommentIds(state, data) {
+		state.art.commentIds.push(data);
+	},
+	setUser(state, data) {
+		state.user = data;
+	},
+	addComment(state, data) {
+		state.comments.push(data);
+	}
+}
 
 const actions = {
 	submitBlink({
@@ -206,11 +101,48 @@ const actions = {
 			})
 		})
 	},
+	submitComment({
+		commit,
+		state
+	}, data) {
+		return new Promise((resolve, reject) => {
+			submitComment(data).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	getArts({
+		commit,
+		state
+	}, condition) {
+		return new Promise((resolve, reject) => {
+			getArts(condition).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	getComments({
+		commit,
+		state
+	}, data) {
+		return new Promise((resolve, reject) => {
+			getComments(data).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
 }
 
 const getters = {
 	user: state => state.user,
 	art: state => state.art,
+	comments: state => state.comments
 }
 
 export default {

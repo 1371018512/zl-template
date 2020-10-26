@@ -1,14 +1,14 @@
 <template>
 	<div>
 		<img v-popover:popover1 :src="$store.getters['user/userDetail'].profile" :style="hovered?ActiveProfileStyle:ProfileStyle" @mouseover="hovered=true"
-		 @mouseout="hovered=false" />
-		<el-popover ref="popover1" placement="bottom-end" title="" width="280" trigger="hover" content="">
+		 @mouseout="hovered=false" @click="goSelf"/>
+		<el-popover ref="popover1" placement="bottom-end" title="" width="280" trigger="hover" content="" :open-delay="600">
 			<el-container>
 				<el-header style="padding: 0;height: 30px;">
 					<el-row type="flex" class="row-bg" justify="space-between">
 						<el-col :span="15" style="line-height: 30px;font-size: 10px;">{{$store.getters['user/userDetail'].nickName}}</el-col>
 						<el-col :span="8">
-							<el-button plain size="mini">个人主页</el-button>
+							<el-button plain size="mini" @click="goSelf">个人主页</el-button>
 						</el-col>
 					</el-row>
 				</el-header>
@@ -22,7 +22,7 @@
 				</el-main>
 				<hr/>
 				<el-footer class="footer">
-					<el-col @mouseover.native="ButtonIn($event)" @mouseleave.native="ButtonOut($event)" :span="11" style="text-align: center; cursor: pointer;">
+					<el-col @click.native="goSelf" @mouseover.native="ButtonIn($event)" @mouseleave.native="ButtonOut($event)" :span="11" style="text-align: center; cursor: pointer;">
 						<div>
 							<i class="el-icon-setting"></i>
 							{{footerButton[0].name}}
@@ -106,6 +106,9 @@
 			};
 		},
 		methods: {
+			goSelf() {
+				this.$router.push({ path: '/person/index/' + this.$store.getters['user/uId'] })
+			},
 			hoverEffectIn(e) {
 				let t = e.target;
 				if (t.dataset && t.dataset.index) {

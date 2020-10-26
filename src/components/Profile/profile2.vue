@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<img :src="data.profile" :style="hovered?ActiveProfileStyle:ProfileStyle" @mouseover="hovered=true"
-		 @mouseout="hovered=false"/>
+		 @mouseout="hovered=false" @click="goPerson"/>
 	</div>
 </template>
 
@@ -25,11 +25,13 @@
 					width: this.size + 'px',
 					height: this.size + 'px',
 					borderRadius: Math.floor(this.size / 2) + 'px',
+					cursor: 'pointer',
 				},
 				ActiveProfileStyle: {
 					width: this.size + 'px',
 					height: this.size + 'px',
 					borderRadius: Math.floor(this.size / 2) + 'px',
+					cursor: 'pointer',
 					//boxShadow: '0 0 5px rgba(170, 170, 170, 0.5)',
 				},
 				ContainerStyle: {},
@@ -37,7 +39,11 @@
 				hovered: false,
 			};
 		},
-		methods: {}
+		methods: {
+			goPerson() {
+				this.$router.push({ path: '/person/index/' + this.data.uId })
+			}
+		}
 	}
 </script>
 

@@ -2,32 +2,32 @@
 	<div class="container">
 		<el-container>
 			<el-aside width="60px" class="profileContainer">
-				<zl-profile2 :data="news[index].user" v-popover:popover1 />
-				<el-popover ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="">
+				<zl-profile2 :data="news.user" v-popover:popover1 />
+				<el-popover ref="popover1" placement="bottom" title="" width="350" trigger="hover" content="" :open-delay="600">
 					<zl-personal-detail
 						:index="index"
-						:data="news[index].user"
+						:data="news.user"
 					/>
 				</el-popover>
 			</el-aside>
 			<el-container>
 				<el-header class="title" height="35px">
-					<zl-title :index="index" />
+					<zl-title :news="news"/>
 				</el-header>
 				<el-main class="art-body">
-					<zl-art v-if="news[index].art" :data="news[index].art"/>
-					<zl-follow :index="index" :data="news[index]" v-else-if="news[index].follow" />
-					<zl-blink v-else :data="news[index].blink"/>
+					<zl-art v-if="news.art" :data="news.art" @click="goDetail"/>
+					<zl-follow :index="index" :data="news" v-else-if="news.follow" />
+					<zl-blink v-else :data="news.blink"/>
 				</el-main>
 			</el-container>
 		</el-container>
-		<div class="buttons" v-if="!news[index].follow">
-			<div>
-				<span class="iconfont">&#xe71a;</span> {{this.entity.likes}}
+		<div class="buttons" v-if="!news.follow">
+			<div :class="{ 'active': this.entity.iLike }" @click="likeArt">
+				<span :class="{ 'iconfont': true}">&#xe71a;</span> {{this.entity.likes}}
 				<span>|</span>
 			</div>
-			<div  @click="openComment = !openComment">
-				<span class="iconfont">&#xe683;</span> {{this.entity.comments.length}}
+			<div  @click="commentClick">
+				<span class="iconfont">&#xe683;</span> {{this.entity.commentIds.length}}
 				<span>|</span>
 			</div>
 			<div>
@@ -38,10 +38,10 @@
 				<span class="iconfont">&#xe7df;</span>
 			</div>
 		</div>
-		<div class="comments" v-if="news[index].blink" v-show="openComment">
-			<div v-for="(item, i) in news[index].blink.comments">
+		<div class="comments" v-if="news.blink" v-show="openComment">
+			<div v-for="(item, i) in news.blink.comments">
 				<zl-comment :data="item" :index="i" :key="i"/>
-				<hr v-if="news[index].blink.comments.length - 1 != i" />
+				<hr v-if="news.blink.comments.length - 1 != i" />
 			</div>
 			<hr/>
 			<div style="margin: 10px;height: 90px;">
@@ -83,21 +83,25 @@
 				'level'
 			]),
 			entity() {
-				if(this.news[this.index].art) {
-					return this.news[this.index].art;
+				if(this.news.art) {
+					return this.news.art;
 				}else {
-					return this.news[this.index].blink;
+					return this.news.blink;
 				}
 			}
 		},
 		mounted() {
 			
 		},
-		inject: ['news'],
+		watch: {
+		},
+		//inject: ['news'],
 		props: {
 			index: {
 				type: Number,
 				default: 0,
+			},
+			news: {
 			}
 		},
 		data() {
@@ -107,7 +111,50 @@
 			};
 
 		},
-		methods: {}
+		methods: {
+			commentClick() {
+				this.openComment = !this.openComment;
+				if(this.news.art) {
+					this.goDetail();
+				}
+			},
+			goDetail() {
+				console.log(this.news.comments)
+				this.$store.commit('art/setUser', this.news.user)
+				this.$store.commit('art/setArt', this.news.art)
+				// 这里需要获取comments
+				this.$store.dispatch('art/getComments', {
+						commentIds: this.news.art.commentIds,
+						sort: '',
+					})
+					.then((data) => {
+						data = data.data;
+						console.log(data)
+						this.$store.commit('art/setComments', data)
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+				//this.$store.commit('art/setComments', this.news.comments)
+				//if(this.news.art)
+				this.$emit('goDetail')
+			},
+			likeArt() {
+				this.entity.iLike = !this.entity.iLike;
+				this.$store.dispatch('user/likeArt', {
+					uId: this.$store.getters['user/uId'],
+					aId: this.entity.id,
+				})
+					.then((data) => {
+						data = data.data;
+						this.entity.likes += data;
+						console.log(data)
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			}
+		}
 	}
 </script>
 
@@ -176,5 +223,9 @@
 				color: #25bb9b;
 			}
 		}
+	}
+	
+	.active {
+		color: #25bb9b !important;
 	}
 </style>

@@ -29,3 +29,20 @@ export function modifyProfile(data) {
 	data,
   })
 }
+
+export function getLikes(data) {
+  return request({
+    url: 'user/getLikes',
+    method: 'post',
+	data,
+  })
+}
+
+
+export function likeArt(data) {
+  return request({
+    url: 'user/likeArt',
+    method: 'post',
+    data
+  })
+}

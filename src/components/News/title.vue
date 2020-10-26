@@ -1,9 +1,9 @@
 <template>
 	<div>
-		<zl-name :data="news[index].user"/>
+		<zl-name :data="news.user"/>
 		<span style="display: inline-block;width: 30px;"></span>
 		<span>{{action}}</span>
-		<span class="pull-right">{{this.date}}</span>
+		<span class="pull-right">{{date}}</span>
 	</div>
 </template>
 
@@ -18,26 +18,29 @@
 			zlPersonalDetail,
 			zlName
 		},
-		inject: ['news'],
+		//inject: ['news'],
 		computed: {
 		  ...mapGetters([
 		    'badges',
 			'level'
 		  ]),
 		  date() {
-		  	return formatTime(this.news[this.index].date, '{y}-{m}-{d}');
+		  	return formatTime(new Date(this.news.date), '{y}-{m}-{d}');
 		  },
 		},
 		props: {
 		  index: {
 		    type: Number,
 		    default:0,
+		  },
+		  news: {
+			  
 		  }
 		},
 		mounted() {
-			if(this.news[this.index].art && this.news[this.index].art.title) {
+			if(this.news.art && this.news.art.title) {
 				this.action = '发表了';
-			}else if(this.news[this.index].follow){
+			}else if(this.news.follow){
 				this.action = '关注了';
 			}else {
 				this.action = '说';
