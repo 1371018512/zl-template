@@ -66,6 +66,7 @@
 			if(this.progress > 100) {
 				this.progress = 100;
 			}
+			this.user = this.$store.getters['user/userDetail'];
 		},
 		inject: ['oneself'],
 		data() {

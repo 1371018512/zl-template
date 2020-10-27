@@ -132,7 +132,7 @@
 						date: new Date(),
 						motherId: this.data.comment.id,
 					}).then((data) => {
-						console.log(data.data)
+						//console.log(data.data)
 
 						// 更新评论区
 						this.$store.dispatch('art/getComments', {

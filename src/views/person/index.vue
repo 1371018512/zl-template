@@ -1,12 +1,15 @@
 <template>
 	<el-container class="con">
+		<el-dialog :visible.sync="DialogVisible" width="700px" top="75px" ref="div">
+			<template v-slot:title>
+				<svg class="icon" aria-hidden="true" style="font-size: 25px;">
+					<use xlink:href="#el-icon-zlliaotian"></use>
+				</svg>
+				<span>{{$store.getters['art/art'].title}}</span>
+			</template>
+			<zl-art-detail @Refresh="getArts"/>
+		</el-dialog>
 		<el-header class="head" height="80px">
-			<!-- <el-dialog :visible.sync="DialogVisible" width="600px" top="75px">
-				<template v-slot:title>
-					<zl-title data="头像修改"></zl-title>
-				</template>
-				<zl-profile-upload @uploaded="DialogVisible=false"/>
-			</el-dialog> -->
 			<zl-header style="height: 100%;"/>
 		</el-header>
 		<el-container>
@@ -40,7 +43,7 @@
 			</el-aside>
 			<el-main class="main">
 				<keep-alive>
-					<router-view></router-view>
+					<router-view @goDetail="goDetail"></router-view>
 				</keep-alive>
 			</el-main>
 		</el-container>
@@ -51,21 +54,19 @@
 	import zlHeader from './header.vue'
 	import zlTitle from '@/components/common/title.vue'
 	// import zlProfileUpload from './profileUpload.vue'
+	import zlArtDetail from '@/views/artDetail/index.vue'
 	
 	export default {
 		components: {
 			zlHeader,
 			zlTitle,
-			// zlProfileUpload,
+			zlArtDetail
 		},
 		computed: {
 
 		},
 		watch: {
 
-		},
-		provide() {
-			return {};
 		},
 		mounted() {
 			// 默认是自己，以后弄了多用户再改
@@ -78,6 +79,7 @@
 		data() {
 			return {
 				user: {},
+				DialogVisible: false,
 				oneself: this.$route.params.u_id == this.$store.getters['user/userDetail'].uId,
 			};
 		},
@@ -93,6 +95,12 @@
 					return;
 				}
 				this.$router.push(to);
+			},
+			goDetail() {
+				this.DialogVisible = true
+			},
+			getArts() {
+				
 			}
 		}
 	}

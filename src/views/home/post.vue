@@ -118,7 +118,7 @@
 							type: 'success',
 							customClass:'mzindex'
 						});
-						console.log(data)
+						//console.log(data)
 						this.blinkForm.content = ''
 					})
 					.catch((e) => {
@@ -135,7 +135,7 @@
 							type: 'success',
 							customClass:'mzindex'
 						});
-						console.log(data)
+						//console.log(data)
 						this.artForm = {
 							title: '',
 							content: '',

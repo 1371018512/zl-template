@@ -48,7 +48,7 @@
 					<span class="iconfont">&#xe600;</span>
 					分享
 				</span>
-				<span :class="{ 'active': $store.getters['art/art'].iLike }" @click="likeArt">
+				<span :class="{ 'active': myLike }" @click="likeArt">
 					<span class="iconfont">&#xe71a;</span>
 					赞({{$store.getters['art/art'].likes}})
 				</span>
@@ -108,6 +108,11 @@
 				'badges',
 				'level'
 			]),
+			myLike() {
+				return this.$store.getters['user/artLikes'].find((item) => {
+					return this.$store.getters['art/art'].id == item;
+				});
+			}
 		},
 		watch: {
 			sort(v) {
@@ -135,7 +140,7 @@
 				})
 					.then((data) => {
 						data = data.data;
-						console.log(data)
+						//console.log(data)
 						this.$store.commit('art/setComments', data)
 					})
 					.catch((err) => {
@@ -143,7 +148,7 @@
 					});
 			},
 			likeArt() {
-				this.$store.commit('art/toggleILike');
+				this.$store.commit('user/toggleArtLike',this.$store.getters['art/art'].id);
 				this.$store.dispatch('user/likeArt', {
 					uId: this.$store.getters['user/uId'],
 					aId: this.$store.getters['art/art'].id,
@@ -151,7 +156,7 @@
 					.then((data) => {
 						data = data.data;
 						this.$store.commit('art/modifyLikes',data);
-						console.log(data)
+						//console.log(data)
 					})
 					.catch((err) => {
 						console.log(err);
@@ -170,7 +175,7 @@
 					date: new Date(),
 				})
 					.then((data) => {
-						console.log(data.data)
+						//console.log(data.data)
 						
 						this.$store.commit('art/addCommentIds', data.data.id);
 						// 更新评论区

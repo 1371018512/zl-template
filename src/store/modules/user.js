@@ -29,6 +29,7 @@ const state = {
 	// 这里存储实际的用户信息
 	detail: {
 	},
+	artLikes: [],
 }
 
 const mutations = {
@@ -52,6 +53,16 @@ const mutations = {
 	},
 	SET_ROLES: (state, roles) => {
 		state.roles = roles
+	},
+	SET_ART_LIKES: (state, data) => {
+		state.artLikes = data
+	},
+	toggleArtLike: (state, aId) => {
+		if(state.artLikes.find((item) => item == aId)) {
+			state.artLikes.splice(state.artLikes.findIndex((item) => aId == item), 1)
+		}else {
+			state.artLikes.push(aId)
+		}
 	}
 }
 
@@ -107,6 +118,7 @@ const actions = {
 	}, uId) {
 		return new Promise((resolve, reject) => {
 			uId = uId || state.uId
+			
 			getInfo(state.uId).then(response => {
 				const {
 					data
@@ -143,8 +155,12 @@ const actions = {
 		commit,
 		state
 	}, uId) {
+		uId = uId || state.uId
+		console.log(uId)
 		return new Promise((resolve, reject) => {
-			getLikes(uId).then(response => {
+			getLikes({uId: uId}).then(response => {
+				let data = response.data;
+				commit('SET_ART_LIKES', data.artLikes);
 				resolve(response)
 			}).catch(error => {
 				reject(error)
@@ -251,6 +267,7 @@ const actions = {
 const getters = {
 	userDetail: state => state.detail,
 	uId: state => state.uId,
+	artLikes: state => state.artLikes,
 }
 
 export default {

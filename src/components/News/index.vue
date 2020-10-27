@@ -22,7 +22,7 @@
 			</el-container>
 		</el-container>
 		<div class="buttons" v-if="!news.follow">
-			<div :class="{ 'active': this.entity.iLike }" @click="likeArt">
+			<div :class="{ 'active': this.myLike }" @click="likeArt">
 				<span :class="{ 'iconfont': true}">&#xe71a;</span> {{this.entity.likes}}
 				<span>|</span>
 			</div>
@@ -88,10 +88,18 @@
 				}else {
 					return this.news.blink;
 				}
+			},
+			myLike() {
+				let arr;
+				if(this.news.art) {
+					arr = this.$store.getters['user/artLikes'];
+					return arr.find((item) => {
+						return this.entity.id == item;
+					});
+				}
 			}
 		},
 		mounted() {
-			
 		},
 		watch: {
 		},
@@ -119,7 +127,7 @@
 				}
 			},
 			goDetail() {
-				console.log(this.news.comments)
+				//console.log(this.news.comments)
 				this.$store.commit('art/setUser', this.news.user)
 				this.$store.commit('art/setArt', this.news.art)
 				// 这里需要获取comments
@@ -129,18 +137,21 @@
 					})
 					.then((data) => {
 						data = data.data;
-						console.log(data)
+						//console.log(data)
 						this.$store.commit('art/setComments', data)
 					})
 					.catch((err) => {
-						console.log(err);
+						//console.log(err);
 					});
 				//this.$store.commit('art/setComments', this.news.comments)
 				//if(this.news.art)
 				this.$emit('goDetail')
 			},
 			likeArt() {
-				this.entity.iLike = !this.entity.iLike;
+				if(this.news.art) {
+					this.$store.commit('user/toggleArtLike',this.news.art.id);
+				}
+				
 				this.$store.dispatch('user/likeArt', {
 					uId: this.$store.getters['user/uId'],
 					aId: this.entity.id,
@@ -148,7 +159,7 @@
 					.then((data) => {
 						data = data.data;
 						this.entity.likes += data;
-						console.log(data)
+						//console.log(data)
 					})
 					.catch((err) => {
 						console.log(err);

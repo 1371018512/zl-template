@@ -7,12 +7,12 @@
 				</svg>
 				<span>{{$store.getters['art/art'].title}}</span>
 			</template>
-			<zl-art-detail @Refresh="getArts"/>
+			<zl-art-detail @Refresh="getArts" />
 		</el-dialog>
 		<!-- 以上是文章详情页 -->
 		<el-aside width="600px">
 			<zl-filter @filterCondition="getArts" />
-			<zl-news v-for="(item, i) in news" :key='i' :news="news[i]" @goDetail="goDetail"/>
+			<zl-news v-for="(item, i) in news" :key='i' :news="news[i]" @goDetail="goDetail" />
 		</el-aside>
 		<el-main>
 			main
@@ -60,47 +60,24 @@
 		},
 		methods: {
 			getArts(condition) {
-				if(condition) {
+				if (condition) {
 					this.condition = condition;
 				} else {
 					condition = this.condition;
 				}
-				
+
 				console.log('now the filter condition is ' + condition);
-				let that = this;
-				new Promise(function(resolve, reject) {
-					that.$store.dispatch('art/getArts', condition)
-						.then((data) => {
-							data = data.data;
-							resolve(data);
-						})
-						.catch((err) => {
-							console.log(err);
-							reject(err);
-						});
-				}).then(function(news) {
-					that.$store.dispatch('user/getLikes', { uId:that.$store.getters['user/uId'] })
-						.then((data) => {
-							let artLikes = data.data.artLikes;
-							for(let i = 0;i < news.length;i ++) {
-								if(artLikes.find((item) => {
-									return item == news[i].art.id
-								})) {
-									news[i].art.iLike = true;
-								}
-							}
-							that.news = news;
-							console.log(news)
-						})
-						.catch((err) => {
-							console.log(err);
-						});
-				})
-				
-				
-				
+				this.$store.dispatch('art/getArts', condition)
+					.then((data) => {
+						data = data.data;
+						this.news = data;
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+
 			},
-			goDetail(){
+			goDetail() {
 				this.DialogVisible = true
 			}
 		}

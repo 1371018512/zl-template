@@ -25,9 +25,6 @@ const mutations = {
 	setComments(state, data) {
 		state.comments = data;
 	},
-	toggleILike(state) {
-		state.art.iLike = !state.art.iLike;
-	},
 	modifyLikes(state,data) {
 		state.art.likes += data;
 	},

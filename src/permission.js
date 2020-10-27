@@ -35,6 +35,7 @@ router.beforeEach(async (to, from, next) => {
 		if (!store.getters['user/userDetail'].nickName) {
 			if (store.getters['user/uId']) {
 				await store.dispatch('user/getInfo')
+				await store.dispatch('user/getLikes')
 			}
 		}
 

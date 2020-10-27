@@ -49,7 +49,7 @@
 			leftTalksContent() {
 				let arr = [];
 				arr = this.leftTalks.map(function(item, i) {
-					console.log(item.talks.slice(-1)[0]);
+					//console.log(item.talks.slice(-1)[0]);
 					let temp = item.talks.slice(-1)[0].content;
 					if(temp.length > 11) {
 						temp = temp.slice(0, 7) + ' ...';
@@ -111,9 +111,6 @@
 					}]
 				}]
 			};
-		},
-		provide() {
-			return {};
 		},
 		methods: {}
 	}
