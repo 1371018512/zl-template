@@ -19,7 +19,7 @@
 			</el-tag>
 		</div>
 		<div v-if="needDate" class="artFooter">
-			发表于 {{formatTime(data.date)}}
+			发表于 {{formatTime(new Date(data.date), '{y}-{m}-{d}')}}
 		</div>
 	</div>
 </template>

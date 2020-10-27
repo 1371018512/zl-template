@@ -1,6 +1,15 @@
 <template>
 	<div class="container">
 		<zl-menu class="menu" />
+		<!-- <el-dialog :visible.sync="DialogVisible" width="700px" top="75px" ref="div">
+			<template v-slot:title>
+				<svg class="icon" aria-hidden="true" style="font-size: 25px;">
+					<use xlink:href="#el-icon-zlliaotian"></use>
+				</svg>
+				<span>{{$store.getters['art/art'].title}}</span>
+			</template>
+			<zl-art-detail @Refresh="getArts"/>
+		</el-dialog> -->
 		<router-view></router-view>
 	</div>
 </template>
@@ -17,7 +26,9 @@
 
 		},
 		data() {
-			return {};
+			return {
+				//DialogVisible: false,
+			};
 		},
 		methods: {
 		}

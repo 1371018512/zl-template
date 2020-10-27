@@ -54,6 +54,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 	3.2图片功能
 4.实现管理员处理举报
 5.实现拉黑
+6.实现所有资源动态加载（不要一次性加载完）
+7.加载动画
 
 ##day7
 0.聊天界面滚动条设计
@@ -67,4 +69,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 1.适配文章查询
 
 ##day10
-实现回复点赞以及回复的回复功能
+明天实现给回复回复的功能√
+双用户测试一下
+加经验的模块必须抽离

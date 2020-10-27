@@ -4,7 +4,9 @@ import {
 	getInfo,
 	modifyProfile,
 	getLikes,
-	likeArt
+	likeArt,
+	likeComment,
+	modifyInfo
 } from '@/api/user'
 import {
 	getStorage,
@@ -123,6 +125,20 @@ const actions = {
 		})
 	},
 	
+	// 修改用户资料
+	modifyInfo({
+		commit,
+		state
+	}, data) {
+		return new Promise((resolve, reject) => {
+			modifyInfo(data).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	
 	getLikes({
 		commit,
 		state
@@ -142,6 +158,19 @@ const actions = {
 	}, condition) {
 		return new Promise((resolve, reject) => {
 			likeArt(condition).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	
+	likeComment({
+		commit,
+		state
+	}, condition) {
+		return new Promise((resolve, reject) => {
+			likeComment(condition).then(response => {
 				resolve(response)
 			}).catch(error => {
 				reject(error)

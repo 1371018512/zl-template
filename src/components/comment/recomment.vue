@@ -1,21 +1,20 @@
 <template>
 	<div class="container1">
-		<div style="font-size: 10px;">
+		<div style="font-size: 10px;word-break: break-all;word-wrap:break-word;">
 			<zl-name :data="data.user"/>
 			{{' 回复 '}}
 			<zl-name :data="data.target"/>
-			:{{data.content}}
+			:{{data.recomment.content}}
 		</div>
 		<div>
 			<div>
-				发表于{{formatTime(data.date)}}
+				发表于{{formatTime(new Date(data.recomment.date), '{y}-{m}-{d}')}}
 			</div>
 			<div>
-				<span>
-					<span class="iconfont">&#xe71a;</span>
-					赞({{data.likes}})
+				<span @click="likeComment">
+					赞({{data.recomment.likes}})
 				</span>
-				<span @click="openInput">回复</span>
+				<span @click="publishRecomment">回复</span>
 				<span>举报</span>
 			</div>
 		</div>
@@ -56,9 +55,22 @@
 			}
 		},
 		methods: {
-			openInput() {
-				this.$emit('openInput');
-			}
+			publishRecomment() {
+				this.$emit('openInput', this.data.user.uId);
+			},
+			likeComment() {
+				this.$store.dispatch('user/likeComment', {
+						uId: this.$store.getters['user/uId'],
+						cId: this.data.recomment.id,
+					})
+					.then((data) => {
+						data = data.data;
+						this.data.recomment.likes += data;
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			},
 		}
 	}
 </script>

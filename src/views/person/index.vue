@@ -11,21 +11,27 @@
 		</el-header>
 		<el-container>
 			<el-aside width="250px" class="aside">
-				<el-menu default-active="1" class="el-menu-vertical-demo">
+				<el-menu class="el-menu-vertical-demo">
 					<el-menu-item index="1" @click.native="routerGo('/person/index/' + $route.params.u_id)">
-						<span class="iconfont">&#xe625;</span>
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#el-icon-zlwode"></use>
+						</svg>
 						<span slot="title">
 							基础资料
 						</span>
 					</el-menu-item>
 					<el-menu-item index="2" @click.native="routerGo('/person/post/' + $route.params.u_id)">
-						<span class="iconfont">&#xe605;</span>
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#el-icon-zlshijian"></use>
+						</svg>
 						<span slot="title">
 							讨论帖
 						</span>
 					</el-menu-item>
 					<el-menu-item index="3" @click.native="routerGo('/person/achievement/' + $route.params.u_id)">
-						<span class="iconfont">&#xe627;</span>
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#el-icon-zlxunzhang"></use>
+						</svg>
 						<span slot="title">
 							成就
 						</span>
@@ -62,6 +68,7 @@
 			return {};
 		},
 		mounted() {
+			// 默认是自己，以后弄了多用户再改
 			this.$store.dispatch('user/getInfo', this.$route.params.u_id).then((data) => {
 				this.user = data;
 			}).catch(error => {
@@ -110,5 +117,9 @@
 
 	.aside {
 		padding: 0;
+	}
+	
+	.icon {
+		font-size: 25px;
 	}
 </style>

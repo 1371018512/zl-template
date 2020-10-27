@@ -118,7 +118,18 @@
 		},
 		methods: {
 			onSubmit() {
-
+				this.$store.dispatch('user/modifyInfo', this.form)
+					.then((data) => {
+						this.$message({
+							message: '成功修改个人信息',
+							type: 'success',
+							customClass:'mzindex'
+						});
+						this.readonly = true;
+					})
+					.catch((e) => {
+						console.log(e)
+					})
 			}
 		}
 	}

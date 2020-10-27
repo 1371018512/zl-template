@@ -73,7 +73,7 @@ export function formatTime(time, option) {
     // less 1 hour
     return Math.ceil(diff / 60) + '分钟前'
   } else if (diff < 3600 * 24) {
-    return Math.ceil(diff / 3600) + '小时前 ' + `${d.getMonth()}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}`
+    return Math.ceil(diff / 3600) + '小时前 ' + `${d.getMonth()}-${d.getDate()} ${d.getHours()<10?'0':''}${d.getHours()}:${d.getMinutes()<10?'0':''}${d.getMinutes()}`
   } else if (diff < 3600 * 24 * 2) {
     return '1天前 ' + `${d.getMonth()}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}`
   }

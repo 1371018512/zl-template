@@ -99,6 +99,7 @@
 		border-radius: 2px;
 		box-shadow: 0 0 5px #eeeeee;
 		padding: 10px 20px 10px 10px;
+		margin-top: 13px;
 	}
 	.topic {
 		background-color: #f5f5f5;

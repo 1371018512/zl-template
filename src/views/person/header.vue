@@ -36,7 +36,6 @@
 			</div>
 		</div>
 		<div class="right" v-if="oneself">
-			<el-button type="success" size="small"><span class="iconfont">&#xf06c;</span> 编辑</el-button>
 			<el-button type="success" size="small"><span class="iconfont">&#xe815;</span> 打卡</el-button>
 		</div>
 	</div>
@@ -111,11 +110,9 @@
 	}
 
 	.right {
-		flex-basis: 200px;
 		line-height: 100%;
 		display: flex;
 		align-items: center;
-		justify-content: center;
 	}
 
 	.base>span {

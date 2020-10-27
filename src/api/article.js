@@ -24,6 +24,14 @@ export function getArts(data) {
   })
 }
 
+export function getArtsIcomment(data) {
+  return request({
+    url: 'art/getArtsIcomment',
+    method: 'post',
+    data
+  })
+}
+
 export function submitComment(data) {
   return request({
     url: 'comment/submitComment',

@@ -73,7 +73,7 @@
 				<el-button type="success" @click.native="scrollToEnd"><span class="iconfont" style="color: white;font-size: 0.7em;">&#xf06c;</span> 回帖</el-button>
 			</div>
 			<div class="comment">
-				<zl-comment v-for="(item, i) in $store.getters['art/comments']" :data="item" :index="i" :key="i"/>
+				<zl-comment v-for="(item, i) in $store.getters['art/comments']" :data="item" :index="i" :key="i" :sort="sort"/>
 			</div>
 		</div>
 		<el-input type="textarea" style="margin-top: 10px;" v-model="commentContent" placeholder="请在这里添加你的回帖吧"></el-input>

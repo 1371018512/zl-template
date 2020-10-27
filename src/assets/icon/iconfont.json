@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "17541039",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "edd9",
+      "unicode_decimal": 60889
+    },
+    {
+      "icon_id": "17541049",
+      "name": "勋章",
+      "font_class": "xunzhang",
+      "unicode": "ede2",
+      "unicode_decimal": 60898
+    },
+    {
+      "icon_id": "17541062",
+      "name": "事件",
+      "font_class": "shijian",
+      "unicode": "edef",
+      "unicode_decimal": 60911
+    },
+    {
       "icon_id": "11913412",
       "name": "bell",
       "font_class": "bell",

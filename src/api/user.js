@@ -38,10 +38,25 @@ export function getLikes(data) {
   })
 }
 
-
 export function likeArt(data) {
   return request({
     url: 'user/likeArt',
+    method: 'post',
+    data
+  })
+}
+
+export function likeComment(data) {
+  return request({
+    url: 'user/likeComment',
+    method: 'post',
+    data
+  })
+}
+
+export function modifyInfo(data) {
+  return request({
+    url: 'user/modifyInfo',
     method: 'post',
     data
   })
