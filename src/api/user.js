@@ -15,6 +15,14 @@ export function getInfo(uId) {
   })
 }
 
+export function getInformation(data) {
+  return request({
+    url: 'user/getInformation',
+    method: 'post',
+	data
+  })
+}
+
 export function logout() {
   return request({
     url: 'user/logout',
@@ -33,6 +41,22 @@ export function modifyProfile(data) {
 export function getLikes(data) {
   return request({
     url: 'user/getLikes',
+    method: 'post',
+	data,
+  })
+}
+
+export function getLikeInfo(data) {
+  return request({
+    url: 'info/getLikeInfo',
+    method: 'post',
+	data,
+  })
+}
+
+export function getCommentInfo(data) {
+  return request({
+    url: 'info/getCommentInfo',
     method: 'post',
 	data,
   })

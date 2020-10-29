@@ -3,15 +3,15 @@
 		<el-tab-pane label="通知" name="notice">
 			<div v-for="(item, i) in notices" class="notice">
 				<div>{{item.content}}</div>
-				<div style="text-align: right;">{{formatTime(item.date)}}</div>
+				<div style="text-align: right;">{{formatTime(new Date(item.date), '{y}-{m}-{d}')}}</div>
 				<hr v-if="i != notices.length - 1" />
 			</div>
 		</el-tab-pane>
 		<el-tab-pane label="赞" name="like">
-			<zl-like :data="likes"/>
+			<zl-like :data="likes" @goDetail="goDetail"/>
 		</el-tab-pane>
 		<el-tab-pane label="回复" name="comment">
-			<zl-comment :data="comments"/>
+			<zl-comment :data="comments" @goDetail="goDetail"/>
 		</el-tab-pane>
 		<el-tab-pane label="关注" name="follow">
 			<zl-follow :data="follow"/>
@@ -36,89 +36,9 @@
 		data() {
 			return {
 				activeName: 'notice',
-				notices: [{
-					content: '还记得你参与的offer投票选择吗？现在已在大家的投票努力下出结果啦！',
-					date: new Date(),
-				}, {
-					content: '还记得你参与的offer投票选择吗？现在已在大家的投票努力下出结果啦！',
-					date: new Date(),
-				}],
-				likes: [{
-					user: {
-						// ...
-						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						userLevel: 2,
-						nickName: 'shining4code',
-					},
-					art: {
-						// ...
-						// 文章显示title，动态和评论显示content
-						title: '网易互联网面试是否可推迟',
-					},
-					date: new Date(),
-				}, {
-					user: {
-						// ...
-						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						userLevel: 2,
-						nickName: 'shining4code',
-					},
-					blink: {
-						// ...
-						content: '今天心情好啊，早饭要吃饱啊',
-					},
-					date: new Date(),
-				}, {
-					user: {
-						// ...
-						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						userLevel: 2,
-						nickName: 'shining4code',
-					},
-					comment: {
-						// ...
-						content: '啊，老姐之前不是都到hr面了？',
-						// 下面是额外加的
-						art: {
-							// ...
-							// 文章显示title，动态和评论显示content
-							title: '网易互联网面试是否可推迟',
-						}
-					},
-					date: new Date(),
-				}],
-				comments: [{
-					user: {
-						// ...
-						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						userLevel: 2,
-						nickName: 'shining4code',
-					},
-					content: '我对文章评论一下',
-					art: {
-						// ...
-						// 文章显示title，动态和评论显示content
-						title: '网易互联网面试是否可推迟',
-					},
-					date: new Date(),
-				}, {
-					user: {
-						// ...
-						profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						userLevel: 2,
-						nickName: 'shining4code',
-					},
-					content: '啥秘密哦？',
-					comment: {
-						content: '告诉你个秘密'
-					},
-					art: {
-						// ...
-						// 文章显示title，动态和评论显示content
-						title: '网易互联网面试是否可推迟',
-					},
-					date: new Date(),
-				}],
+				notices: [],
+				likes: [],
+				comments: [],
 				follow: [{
 					user: {
 						uId: 992973331,
@@ -169,8 +89,97 @@
 				formatTime: formatTime,
 			};
 		},
+		mounted() {
+			this.getInformation();
+		},
 		methods: {
-
+			goDetail() {
+				console.log('go')
+				this.$emit('goDetail')
+			},
+			async getInformation() {
+				var infos = [];
+				await this.$store.dispatch('user/getInformation', { tId: this.$store.getters['user/uId'] })
+					.then((data) => {
+						data = data.data;
+						//console.log(data)
+						infos = data;
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+				let likes = [];
+				let normals = [];
+				let comments = [];
+				infos.forEach((item, i) => {
+					if(item.type == 'like') {
+						likes.push(item);
+					}else if(item.type == 'comment'){
+						comments.push(item);
+					}else {
+						normals.push(item);
+					}
+				})
+				// 过滤出like,这里可以优化，保存user
+				await this.$store.dispatch('user/getLikeInfo', likes)
+					.then((data) => {
+						//console.log(data)
+						likes = data.data;
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+				await this.$store.dispatch('user/getCommentInfo', comments)
+					.then((data) => {
+						//console.log(data)
+						comments = data.data;
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+				/* 				
+				// 过滤出comments
+				comments = await Promise.all(comments.map(async (item, i) => {
+					let ans = { date: item.date, content: item.content, matherContent: item.matherContent};
+					await this.$store.dispatch('user/getInfo', item.uId)
+						.then((data) => {
+							data = data;
+							ans.user = data;
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+						
+					await this.$store.dispatch('art/getArts', { aId: item.artId })
+						.then((data) => {
+							data = data.data;
+							ans.art = data;
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+					await this.$store.dispatch('art/getComments', { commentIds: [item.commentId] })
+						.then((data) => {
+							data = data.data
+							// console.log(item.commentId)
+							// console.log(data)
+							if(data.length) {
+								data = data[0].comment;
+								ans.comment = data;
+							}
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+					
+					return ans;
+				})) */
+				
+				this.likes = likes;
+				this.notices = normals;
+				this.comments = comments;
+				//console.log(comments)
+			}
 		}
 	}
 </script>

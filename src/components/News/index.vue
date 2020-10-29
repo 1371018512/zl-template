@@ -16,17 +16,17 @@
 				</el-header>
 				<el-main class="art-body">
 					<zl-art v-if="news.art" :data="news.art" @click="goDetail"/>
-					<zl-follow :index="index" :data="news" v-else-if="news.follow" />
-					<zl-blink v-else :data="news.blink"/>
+					<!-- <zl-follow :index="index" :data="news" v-else-if="news.follow" /> -->
+					<!-- <zl-blink v-else :data="news.blink"/> -->
 				</el-main>
 			</el-container>
 		</el-container>
-		<div class="buttons" v-if="!news.follow">
+		<div class="buttons">
 			<div :class="{ 'active': this.myLike }" @click="likeArt">
 				<span :class="{ 'iconfont': true}">&#xe71a;</span> {{this.entity.likes}}
 				<span>|</span>
 			</div>
-			<div  @click="commentClick">
+			<div @click="commentClick">
 				<span class="iconfont">&#xe683;</span> {{this.entity.commentIds.length}}
 				<span>|</span>
 			</div>
@@ -38,16 +38,15 @@
 				<span class="iconfont">&#xe7df;</span>
 			</div>
 		</div>
-		<div class="comments" v-if="news.blink" v-show="openComment">
-			<div v-for="(item, i) in news.blink.comments">
-				<zl-comment :data="item" :index="i" :key="i"/>
-				<hr v-if="news.blink.comments.length - 1 != i" />
+		<div class="comments" v-if="!news.art.title" v-show="openComment">
+			<div v-for="(item, i) in news.art.comments">
+				<zl-comment :data="item" :index="i" :key="i" @commentsRefresh="commentsRefresh"/>
+				<!-- <hr v-if="news.art.comments.length - 1 != i" /> -->
 			</div>
-			<hr/>
 			<div style="margin: 10px;height: 90px;">
 				<el-input type="textarea" v-model="commentContent" placeholder="请在这里添加你的回帖吧"></el-input>
 				<div class="button">
-					<el-button type="primary" size="small">发布</el-button>
+					<el-button type="primary" size="small" @click="publishComment">发布</el-button>
 				</div>
 			</div>
 			
@@ -59,9 +58,9 @@
 	import zlProfile2 from '../Profile/profile2.vue'
 	import zlTitle from './title.vue'
 	import zlArt from './art.vue'
-	import zlFollow from './follow.vue'
+	//import zlFollow from './follow.vue'
 	import zlPersonalDetail from '../Popovers/PersonalDetail.vue'
-	import zlBlink from './blink.vue'
+	//import zlBlink from './blink.vue'
 	import zlComment from '@/components/comment/index.vue'
 	import {
 		mapGetters
@@ -72,9 +71,9 @@
 			zlProfile2,
 			zlTitle,
 			zlArt,
-			zlFollow,
+			//zlFollow
 			zlPersonalDetail,
-			zlBlink,
+			//zlBlink,
 			zlComment,
 		},
 		computed: {
@@ -83,11 +82,7 @@
 				'level'
 			]),
 			entity() {
-				if(this.news.art) {
-					return this.news.art;
-				}else {
-					return this.news.blink;
-				}
+				return this.news.art;
 			},
 			myLike() {
 				let arr;
@@ -120,9 +115,62 @@
 
 		},
 		methods: {
+			commentsRefresh() {
+				this.$store.dispatch('art/getComments', {
+					commentIds: this.news.art.commentIds,
+					sort: '',
+				})
+					.then((dat) => {
+						dat = dat.data;
+						console.log(dat)
+						//this.$store.commit('art/setComments', data)
+						this.news.art.comments = dat;
+						this.$forceUpdate();
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			},
+			publishComment() {
+				console.log('尝试上传回复');
+				this.$store.dispatch('art/submitComment', {
+					uId: this.$store.getters['user/uId'],
+					tId: this.news.art.uId,
+					content: this.commentContent,
+					ArtId: this.news.art.id,
+					date: new Date(),
+				})
+					.then((data) => {
+						this.news.art.commentIds.push(data.data.id);
+						this.commentsRefresh();
+					})
+					.catch((e) => {
+						console.log(e)
+					})
+			},
 			commentClick() {
-				this.openComment = !this.openComment;
-				if(this.news.art) {
+				// this.openComment = !this.openComment;
+				if(this.openComment) {
+					this.openComment = false;
+					return;
+				}
+				else if(!this.openComment && !this.news.art.title) {
+					this.$store.dispatch('art/getComments', {
+						commentIds: this.news.art.commentIds,
+						sort: '',
+					})
+						.then((data) => {
+							data = data.data;
+							console.log(data)
+							//this.$store.commit('art/setComments', data)
+							this.news.art.comments = data;
+							this.openComment = !this.openComment;
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+				}
+				if(this.news.art.title) {
 					this.goDetail();
 				}
 			},
@@ -180,7 +228,9 @@
 	}
 	
 	.comments {
+		background-color: #faf8f8;
 		width: 100%;
+		padding: 0 20px;
 		overflow-y: auto;
 		border-top: 1px solid #dfdfdf;
 	}

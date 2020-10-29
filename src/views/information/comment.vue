@@ -9,13 +9,16 @@
 					<!-- todo 这里的onlyName迟早去掉 -->
 					<zl-name :data="item.user" :onlyName="true"/>
 					回复：
-					<span style="position: absolute;right: 0;">{{formatTime(item.date)}}</span>
+					<span style="position: absolute;right: 0;">{{formatTime(new Date(item.date), '{y}-{m}-{d}')}}</span>
 					<div class="content">{{item.content}}</div>
-					<div class="innerContent" v-if="item.comment">
-						我的评论: {{item.comment.content}}
+					<div class="innerContent" v-if="item.tContent" @click="goDetail(item)">
+						我的评论: {{item.tContent}}
 					</div>
 					<div>
-						来自: {{item.art ? item.art.title : item.blink.content}}
+						来自
+						<span @click="goDetail(item)" class="from">
+							{{item.art.title ? '帖子: ' + item.art.title : '动态: ' + item.art.content}}
+						</span>
 					</div>
 				</div>
 			</div>
@@ -47,16 +50,39 @@
 				}
 			};
 		},
+		mounted: () => {
+		},
 		methods: {
 			type(obj) {
-				if(obj.art) {
+				if(obj.art.title) {
 					return "我的帖子: " + obj.art.title;
-				} else if(obj.blink) {
-					return "我的动态: " + obj.blink.content;
+				} else if(obj.art) {
+					return "我的动态: " + obj.art.content;
 				} else {
 					return "我的评论: " + obj.comment.content;
 				}
-			}
+			},
+			async goDetail(ite) {
+				await this.$store.commit('art/setUser', ite.user)
+				
+				await this.$store.commit('art/setArt', ite.art)
+				// 这里需要获取comments
+				await this.$store.dispatch('art/getComments', {
+						commentIds: ite.art.commentIds,
+						sort: '',
+					})
+					.then((data) => {
+						data = data.data;
+						//console.log(data)
+						this.$store.commit('art/setComments', data)
+					})
+					.catch((err) => {
+						//console.log(err);
+					});
+				//this.$store.commit('art/setComments', this.news.comments)
+				//if(this.news.art)
+				this.$emit('goDetail')
+			},
 		}
 	}
 </script>
@@ -91,5 +117,14 @@
 	
 	.content {
 		margin: 8px 0;
+	}
+	
+	.innerContent:hover {
+		color: #25bb9b;
+		cursor: pointer;
+	}
+	.from:hover {
+		color: #25bb9b;
+		cursor: pointer;
 	}
 </style>

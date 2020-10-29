@@ -6,7 +6,10 @@ import {
 	getLikes,
 	likeArt,
 	likeComment,
-	modifyInfo
+	modifyInfo,
+	getInformation,
+	getLikeInfo,
+	getCommentInfo
 } from '@/api/user'
 import {
 	getStorage,
@@ -118,19 +121,23 @@ const actions = {
 	}, uId) {
 		return new Promise((resolve, reject) => {
 			uId = uId || state.uId
-			
 			getInfo(state.uId).then(response => {
-				const {
-					data
-				} = response
-
-				if (!data) {
-					reject('Verification failed, please Login again.')
+				// 已经设置过就纯拿data
+				if(state.detail.nickName) {
+					resolve(response.data);
+				}else {
+					const {
+						data
+					} = response
+					
+					if (!data) {
+						reject('Verification failed, please Login again.')
+					}
+					
+					commit('SET_DETAIL', data)
+					
+					resolve(data)
 				}
-
-				commit('SET_DETAIL', data)
-				
-				resolve(data)
 			}).catch(error => {
 				reject(error)
 			})
@@ -156,11 +163,49 @@ const actions = {
 		state
 	}, uId) {
 		uId = uId || state.uId
-		console.log(uId)
 		return new Promise((resolve, reject) => {
 			getLikes({uId: uId}).then(response => {
 				let data = response.data;
 				commit('SET_ART_LIKES', data.artLikes);
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	
+	getInformation({
+		commit,
+		state
+	}, condition) {
+		return new Promise((resolve, reject) => {
+			getInformation(condition).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	
+	getLikeInfo({
+		commit,
+		state
+	}, arr) {
+		return new Promise((resolve, reject) => {
+			getLikeInfo(arr).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	
+	getCommentInfo({
+		commit,
+		state
+	}, arr) {
+		return new Promise((resolve, reject) => {
+			getCommentInfo(arr).then(response => {
 				resolve(response)
 			}).catch(error => {
 				reject(error)

@@ -1,19 +1,19 @@
 <template>
 	<div>
-		<span class="title goDetail" @click="innerClick"><strong>{{data.title}}</strong></span>
+		<span class="title goDetail" @click="innerClick" v-if="data.title"><strong>{{data.title}}</strong></span>
 		<p class="content">
 			<template v-if="!replaceContent">
-				<span v-for="(item, index) in data.tag" class="green" :key="item">
+				<span v-for="(item, index) in data.tag" class="green" :key="item" v-if="data.tag">
 					#{{item}}#
 				</span>
 				<span @click="innerClick" class="goDetail">{{content}}</span>
-				<span v-if="more" class="green" @click="innerClick">...查看更多</span>
+				<span v-if="more && data.title" class="green" @click="innerClick">...查看更多</span>
 			</template>
 			<template v-else>
 				{{replaceContent}}
 			</template>
 		</p>
-		<div class="badgeContainer" v-if="needTags">
+		<div class="badgeContainer" v-if="needTags && data.title">
 			<el-tag v-for="(item, index) in data.topic" size="mini" :key="item">
 				{{topicLabel[item]}}
 			</el-tag>
@@ -86,6 +86,10 @@
 		},
 		methods: {
 			innerClick() {
+				if(!this.data.title) {
+					console.log('blink 不打开detail')
+					return;
+				}
 				this.$emit('click');
 			}
 		}

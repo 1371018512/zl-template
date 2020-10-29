@@ -2,11 +2,11 @@
 	<div class="container">
 		<el-tabs v-model="activeName">
 			<el-tab-pane label="发帖子" name="art">
-				<el-form ref="artForm" :model="artForm" label-width="40px" size="small" class="form">
-					<el-form-item label="标题">
-						<el-input v-model="artForm.title" placeholder="请输入标题"></el-input>
+				<el-form ref="artForm" :model="artForm" label-width="60px" size="small" class="form" :rules="Rules">
+					<el-form-item label="标题" prop="title">
+						<el-input v-model="artForm.title" placeholder="请输入标题" name="title"></el-input>
 					</el-form-item>
-					<el-form-item label="内容">
+					<el-form-item label="内容" prop="content">
 						<el-input type="textarea" v-model="artForm.content" placeholder="请输入内容" style="font-size: 13px;"></el-input>
 					</el-form-item>
 					<el-form-item label="话题">
@@ -55,14 +55,11 @@
 			zlTitle
 		},
 		data() {
-			/* const validateContent = (rule, value, callback) => {
-			  if (!validUsername(value)) {
-			    callback(new Error('Please enter the correct user name'))
-			  } else {
-			    callback()
-			  }
-			} */
 			return {
+				Rules: {
+				  title: [{ required: true, trigger: 'blur', message: '请输入标题' }],
+				  content: [{ required: true, trigger: 'blur', message: '请输入标题' }],
+				},
 				topicOptions: [{
 					label: '站内公告',
 					value: 'announcement',
@@ -111,6 +108,8 @@
 						uId: this.$store.getters['user/uId'],
 						content: this.blinkForm.content,
 						date: new Date(),
+						lastModify: new Date(),
+						lastComment: new Date(),
 					})
 					.then((data) => {
 						this.$message({
@@ -126,26 +125,37 @@
 					})
 			},
 			submitArt() {
-				this.artForm = new Date();
-				this.artForm.uId = this.$store.getters['user/uId'];
-				this.$store.dispatch('art/submitArt', this.artForm)
-					.then((data) => {
-						this.$message({
-							message: '成功发布讨论帖',
-							type: 'success',
-							customClass:'mzindex'
-						});
-						//console.log(data)
-						this.artForm = {
-							title: '',
-							content: '',
-							tag: [],
-							topic: [],
-						};
-					})
-					.catch((e) => {
-						console.log(e)
-					})
+				this.$refs.artForm.validate(valid => {
+				  console.log(valid)
+				  if (valid) {
+				    this.artForm.uId = this.$store.getters['user/uId'];
+					this.artForm.date = new Date();
+					this.artForm.lastModify = new Date();
+					this.artForm.lastComment = new Date();
+				    this.$store.dispatch('art/submitArt', this.artForm)
+				    	.then((data) => {
+				    		this.$message({
+				    			message: '成功发布讨论帖',
+				    			type: 'success',
+				    			customClass:'mzindex'
+				    		});
+				    		//console.log(data)
+				    		this.artForm = {
+				    			title: '',
+				    			content: '',
+				    			tag: [],
+				    			topic: [],
+				    		};
+				    	})
+				    	.catch((e) => {
+				    		console.log(e)
+				    	})
+				  } else {
+				    console.log('error submit!!')
+				    return false
+				  }
+				})
+				
 			},
 		}
 	}

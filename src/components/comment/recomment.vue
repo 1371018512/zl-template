@@ -56,7 +56,7 @@
 		},
 		methods: {
 			publishRecomment() {
-				this.$emit('openInput', this.data.user.uId);
+				this.$emit('openInput', this.data.user.uId, this.data.recomment.content);
 			},
 			likeComment() {
 				this.$store.dispatch('user/likeComment', {
@@ -66,6 +66,7 @@
 					.then((data) => {
 						data = data.data;
 						this.data.recomment.likes += data;
+						this.$forceUpdate();
 					})
 					.catch((err) => {
 						console.log(err);

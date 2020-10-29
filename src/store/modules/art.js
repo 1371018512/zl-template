@@ -1,5 +1,5 @@
 import {
-	submitBlink,
+	//submitBlink,
 	submitArt,
 	getArts,
 	submitComment,
@@ -45,7 +45,7 @@ const actions = {
 		state
 	}, blink) {
 		return new Promise((resolve, reject) => {
-			submitBlink(blink).then(response => {
+			submitArt(blink).then(response => {
 				resolve(response)
 			}).catch(error => {
 				reject(error)

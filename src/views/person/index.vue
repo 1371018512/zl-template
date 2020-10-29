@@ -108,7 +108,7 @@
 
 <style scoped lang="scss">
 	.con {
-		margin-top: 60px;
+		margin-top: 73px;
 		flex-basis: 700px;
 		max-width: 950px;
 	}

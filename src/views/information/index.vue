@@ -1,5 +1,14 @@
 <template>
 	<el-container class="con">
+		<el-dialog :visible.sync="DialogVisible" width="700px" top="75px" ref="div">
+			<template v-slot:title>
+				<svg class="icon" aria-hidden="true" style="font-size: 25px;">
+					<use xlink:href="#el-icon-zlliaotian"></use>
+				</svg>
+				<span>{{$store.getters['art/art'].title}}</span>
+			</template>
+			<zl-art-detail @Refresh="getArts"/>
+		</el-dialog>
 		<el-container>
 			<el-aside width="250px" class="aside">
 				<div>
@@ -26,7 +35,7 @@
 				</div>
 			</el-aside>
 			<el-main class="main">
-				<router-view></router-view>
+				<router-view @goDetail="goDetail"></router-view>
 			</el-main>
 		</el-container>
 	</el-container>
@@ -37,13 +46,15 @@
 	import zlSearch from '@/components/Search/search.vue'
 	import zlProfile from '@/components/Profile/profile2.vue'
 	import zlName from '@/components/name/index.vue'
+	import zlArtDetail from '@/views/artDetail/index.vue'
 
 	export default {
 		components: {
 			zlTitle,
 			zlSearch,
 			zlProfile,
-			zlName
+			zlName,
+			zlArtDetail
 		},
 		computed: {
 			leftTalksContent() {
@@ -69,6 +80,7 @@
 		data() {
 			return {
 				talkIndex: 0,
+				DialogVisible: false,
 				leftTalks: [{
 					target: {
 						uId: 992973332,
@@ -112,13 +124,20 @@
 				}]
 			};
 		},
-		methods: {}
+		methods: {
+			goDetail() {
+				this.DialogVisible = true
+			},
+			getArts() {
+				
+			}
+		}
 	}
 </script>
 
 <style scoped lang="scss">
 	.con {
-		margin-top: 60px;
+		margin-top: 73px;
 		flex-basis: 700px;
 		max-width: 950px;
 	}

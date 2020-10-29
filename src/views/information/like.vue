@@ -9,12 +9,12 @@
 					<!-- todo 这里的onlyName迟早去掉 -->
 					<zl-name :data="item.user" :onlyName="true"></zl-name>
 					点赞了
-					<span style="position: absolute;right: 0;">{{formatTime(item.date)}}</span>
-					<div class="innerContent">
-						{{type(item)}}
+					<span style="position: absolute;right: 0;">{{formatTime(new Date(item.date), '{y}-{m}-{d}')}}</span>
+					<div class="innerContent" @click="goDetail(item)">
+						{{item.content}}
 					</div>
-					<div v-if="item.comment">
-						来自: {{item.comment.art.title}}
+					<div v-if="item.art">
+						来自: {{item.art.title}}
 					</div>
 				</div>
 			</div>
@@ -47,15 +47,30 @@
 			};
 		},
 		methods: {
-			type(obj) {
-				if(obj.art) {
-					return "我的帖子: " + obj.art.title;
-				} else if(obj.blink) {
-					return "我的动态: " + obj.blink.content;
-				} else {
-					return "我的评论: " + obj.comment.content;
-				}
-			}
+			
+			async goDetail(ite) {
+				let art = ite.art;
+				let user = ite.user;
+	
+				await this.$store.commit('art/setUser', user)
+				await this.$store.commit('art/setArt', art)
+				// 这里需要获取comments
+				await this.$store.dispatch('art/getComments', {
+						commentIds: ite.art.commentIds,
+						sort: '',
+					})
+					.then((data) => {
+						data = data.data;
+						//console.log(data)
+						this.$store.commit('art/setComments', data)
+					})
+					.catch((err) => {
+						//console.log(err);
+					});
+				//this.$store.commit('art/setComments', this.news.comments)
+				//if(this.news.art)
+				this.$emit('goDetail')
+			},
 		}
 	}
 </script>
@@ -86,5 +101,10 @@
 		background-color: #f1f1f1;
 		padding: 10px;
 		margin: 5px;
+	}
+	
+	.innerContent:hover {
+		color: #25bb9b;
+		cursor: pointer;
 	}
 </style>

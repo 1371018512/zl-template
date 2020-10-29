@@ -86,37 +86,46 @@
 			sort: {},
 		},
 		provide() {},
-		mounted() {},
+		mounted() {
+			console.log(this.data)
+		},
 		data() {
 			return {
 				formatTime: formatTime,
 				textarea: '',
 				openInput: false,
 				tId: this.data.comment.uId,
+				// 被回复的评论content
+				tContent: this.data.comment.content,
 			}
 		},
 		methods: {
-			openInputFn(tId) {
+			openInputFn(tId, content) {
 				this.openInput = !this.openInput;
 				this.$nextTick(() => {
 					this.$refs.commentInput.focus();
 				})
 
 				// 修改tId
-				if (tId)
+				if (tId){
 					this.tId = tId;
+					this.tContent = content;
+				}
 				else {
 					this.tId = this.data.comment.uId;
+					this.tContent = this.data.comment.content;
 				}
 			},
 			likeComment() {
+				let that = this;
 				this.$store.dispatch('user/likeComment', {
 						uId: this.$store.getters['user/uId'],
 						cId: this.data.comment.id,
 					})
 					.then((data) => {
 						data = data.data;
-						this.data.comment.likes += data;
+						that.data.comment.likes += data;
+						this.$forceUpdate();
 					})
 					.catch((err) => {
 						console.log(err);
@@ -127,26 +136,14 @@
 						uId: this.$store.getters['user/uId'],
 						// 这个值根据回复按钮来
 						tId: this.tId,
+						tContent: this.tContent,
 						content: this.textarea,
-						ArtId: this.$store.getters['art/art'].id,
+						ArtId: this.data.comment.ArtId,
 						date: new Date(),
 						motherId: this.data.comment.id,
 					}).then((data) => {
-						//console.log(data.data)
-
 						// 更新评论区
-						this.$store.dispatch('art/getComments', {
-								commentIds: this.$store.getters['art/art'].commentIds,
-								sort: this.sort,
-							})
-							.then((data) => {
-								data = data.data;
-								console.log(data)
-								this.$store.commit('art/setComments', data)
-							})
-							.catch((err) => {
-								console.log(err);
-							});
+						this.$emit('commentsRefresh');
 
 						this.$message({
 							message: '成功发布回复',
