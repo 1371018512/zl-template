@@ -58,15 +58,30 @@
 			]),
 		},
 		watch: {
-
+			data: function (val) {
+				this.user = val;
+			}
+		},
+		props: {
+			data: {
+			},
+		},
+		created: () => {
+			
 		},
 		provide() {},
-		mounted() {
+		async mounted() {
+			await this.$store.dispatch('user/getInfo', this.$route.params.u_id).then((data) => {
+				this.user = data;
+			}).catch(error => {
+				console.log(error)
+			})
+			
 			this.progress= Math.floor((100 / 7) * (this.user.userLevel + 0.5));
 			if(this.progress > 100) {
 				this.progress = 100;
 			}
-			this.user = this.$store.getters['user/userDetail'];
+			//this.user = this.$store.getters['user/userDetail'];
 		},
 		inject: ['oneself'],
 		data() {
@@ -97,6 +112,7 @@
 					profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
 				},
 				progress: 0,
+				
 			}
 		},
 		methods: {

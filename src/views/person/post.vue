@@ -23,7 +23,6 @@
 		},
 		computed: {},
 		watch: {
-
 		},
 		provide() {},
 		mounted() {
@@ -49,7 +48,8 @@
 			onSubmit() {},
 			getMyArts() {
 				this.$store.dispatch('art/getArts', {
-						uId: this.$store.getters['user/uId']
+						uId: this.$route.params.u_id,
+						sort: 'publish',
 					})
 					.then((data) => {
 						data = data.data;
@@ -61,7 +61,7 @@
 			},
 			getArtsIcomment() {
 				this.$store.dispatch('art/getArtsIcomment', {
-						uId: this.$store.getters['user/uId']
+						uId: this.$route.params.u_id
 					})
 					.then((data) => {
 						data = data.data;

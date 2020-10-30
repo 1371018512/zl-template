@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "12052277",
+      "name": "加",
+      "font_class": "jia",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "17541057",
+      "name": "标签",
+      "font_class": "biaoqian",
+      "unicode": "edea",
+      "unicode_decimal": 60906
+    },
+    {
       "icon_id": "17541039",
       "name": "我的",
       "font_class": "wode",

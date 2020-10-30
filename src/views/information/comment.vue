@@ -63,7 +63,15 @@
 				}
 			},
 			async goDetail(ite) {
-				await this.$store.commit('art/setUser', ite.user)
+				let user;
+				await this.$store.dispatch('user/getInfo', ite.art.uId).then((data) => {
+					user = data;
+				}).catch(error => {
+					console.log(error)
+				})
+					
+				await this.$store.commit('art/setUser', user)
+				//await this.$store.commit('art/setUser', ite.user)
 				
 				await this.$store.commit('art/setArt', ite.art)
 				// 这里需要获取comments

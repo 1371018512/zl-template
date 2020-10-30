@@ -120,10 +120,10 @@
 						normals.push(item);
 					}
 				})
+				console.log(normals)
 				// 过滤出like,这里可以优化，保存user
 				await this.$store.dispatch('user/getLikeInfo', likes)
 					.then((data) => {
-						//console.log(data)
 						likes = data.data;
 					})
 					.catch((err) => {

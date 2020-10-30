@@ -46,10 +46,15 @@
 			</div>
 		</div>
 		<div class="buttons">
-			<el-button size="small"><span class="iconfont">&#xe7b8;</span>已关注</el-button>
-			<el-button size="small"><span class="iconfont">&#xe683;</span>私信</el-button>
-			<el-button size="small"><span class="iconfont">&#xe715;</span>个人主页</el-button>
-			<span class="iconfont" v-popover:popover1>&#xe847;</span>
+			<el-button size="small" v-show="data.uId != $store.getters['user/uId'] && followed" @click="follow">
+				<span class="iconfont">&#xe7b8; </span>已关注
+			</el-button>
+			<el-button size="small" v-show="data.uId != $store.getters['user/uId'] && !followed" @click="follow">
+				<span class="iconfont">&#xe606; </span>未关注
+			</el-button>
+			<el-button size="small" v-if="data.uId != $store.getters['user/uId']"><span class="iconfont">&#xe683; </span>私信</el-button>
+			<el-button size="small"><span class="iconfont">&#xe715; </span>个人主页</el-button>
+			<span class="iconfont" v-popover:popover1 v-if="data.uId != $store.getters['user/uId']">&#xe847;</span>
 			<el-popover ref="popover1" :open-delay="600" placement="bottom" title="" width="10" trigger="hover" content="">
 				<div class="more">加入黑名单</div>
 				<div class="more">举报他</div>
@@ -104,6 +109,11 @@
 			]),
 			likesAndcollects() {
 				return shortInt(this.data.belikes + this.data.becollects);
+			},
+			followed() {
+				return this.$store.getters['user/userDetail'].followIds.find((item) => {
+					return item == this.data.uId;
+				})
 			}
 		},
 		//inject: ['news'],
@@ -117,7 +127,19 @@
 			};
 
 		},
-		methods: {}
+		methods: {
+			follow() {
+				this.$store.dispatch('user/follow', {
+						uId: this.$store.getters['user/uId'],
+						tId: this.data.uId,
+					})
+					.then((data) => {
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			}
+		}
 	}
 </script>
 
@@ -154,8 +176,9 @@
 
 	.buttons {
 		margin-top: 10px;
+		width: 100%;
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
 	}
 

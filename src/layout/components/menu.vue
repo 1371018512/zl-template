@@ -9,7 +9,7 @@
 			</el-menu-item>
 			<el-menu-item index="4" class="el-menu-left" @click.native="$router.push('/information')">
 				消息
-				<el-badge class="item" :is-dot="true">
+				<el-badge class="item" :is-dot="$store.getters['user/userDetail'].newsInfo">
 				</el-badge>
 			</el-menu-item>
 			<el-menu-item index="3" class="el-menu-left">

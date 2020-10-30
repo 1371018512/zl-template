@@ -25,9 +25,24 @@
 		computed: {
 
 		},
+		created() {
+			//this.ws = new WebSocket("ws://localhost:8181");
+		},
+		mounted() {
+			/* this.ws.onopen = function(e) {
+				//成功连接服务器回调
+				console.log('客户端（client）：与服务器的websocket已打开')
+			}
+			
+			this.ws.onmessage = function(e) {
+				var speedData = JSON.parse(e.data);
+				console.log("收到数据：" + JSON.stringify(speedData));
+			}; */
+		},
 		data() {
 			return {
 				//DialogVisible: false,
+				ws: {},
 			};
 		},
 		methods: {

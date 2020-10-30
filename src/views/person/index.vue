@@ -43,7 +43,7 @@
 			</el-aside>
 			<el-main class="main">
 				<keep-alive>
-					<router-view @goDetail="goDetail"></router-view>
+					<router-view @goDetail="goDetail" :data="user"></router-view>
 				</keep-alive>
 			</el-main>
 		</el-container>
@@ -66,7 +66,14 @@
 
 		},
 		watch: {
-
+			$route(v, ov) {
+				// 防止已经在个人页中却不跳转
+				let str1 = v.path.split('/');
+				let str2 = ov.path.split('/');
+				if(str1[str1.length - 1] != str2[str2.length - 1]) {
+					this.$router.go(0);
+				}
+			}
 		},
 		mounted() {
 			// 默认是自己，以后弄了多用户再改

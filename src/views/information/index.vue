@@ -76,7 +76,12 @@
 		provide() {
 			return {};
 		},
-		mounted() {},
+		mounted() {
+			this.$store.commit('user/oldInfo')
+			this.$store.dispatch('user/oldInfo', {
+				uId: this.$store.getters['user/uId'],
+			}) 
+		},
 		data() {
 			return {
 				talkIndex: 0,

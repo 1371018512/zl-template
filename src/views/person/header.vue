@@ -35,8 +35,10 @@
 				</span>
 			</div>
 		</div>
-		<div class="right" v-if="oneself">
-			<el-button type="success" size="small"><span class="iconfont">&#xe815;</span> 打卡</el-button>
+		<div class="right">
+			<el-button type="success" size="small" v-if="oneself"><span class="iconfont">&#xe815;</span> 打卡</el-button>
+			<el-button type="info" size="small" v-show="!oneself && followed" @click="follow"><span class="iconfont">&#xe7b8;</span> 已关注</el-button>
+			<el-button type="success" size="small" v-show="!oneself && !followed" @click="follow"><span class="iconfont">&#xe606;</span> 未关注</el-button>
 		</div>
 	</div>
 </template>
@@ -63,6 +65,11 @@
 			// 初次计算之前不可避免的会报错
 			user() {
 				return this.ReactiveUser();
+			},
+			followed() {
+				return this.$store.getters['user/userDetail'].followIds.find((item) => {
+					return item == this.user.uId;
+				})
 			}
 		},
 		watch: {
@@ -81,6 +88,17 @@
 			};
 		},
 		methods: {
+			follow() {
+				this.$store.dispatch('user/follow', {
+						uId: this.$store.getters['user/uId'],
+						tId: this.user.uId,
+					})
+					.then((data) => {
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			}
 		}
 	}
 </script>

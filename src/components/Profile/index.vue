@@ -105,9 +105,16 @@
 				]
 			};
 		},
+		watch: {
+		
+		},
 		methods: {
 			goSelf() {
 				this.$router.push({ path: '/person/index/' + this.$store.getters['user/uId'] })
+				/* setTimeout(() => {
+					this.$router.go(0);
+				},100) */
+				//this.$router.go(0);
 			},
 			hoverEffectIn(e) {
 				let t = e.target;

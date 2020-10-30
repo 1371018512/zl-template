@@ -28,12 +28,12 @@
 				<el-input v-model="form.introduction" style="max-width: 250px;"></el-input>
 			</el-form-item>
 			<el-form-item label="身份认证">
-				<el-col :span="11">
+				<el-col :span="11" v-if="form.identity">
 					<el-input v-model="form.identity.name" style="width: 100%;"></el-input>
 				</el-col>
 				<el-col style="text-align: center;" :span="2">类型</el-col>
 				<el-col :span="11">
-					<el-select v-model="form.identity.type" style="width: 100%;" placeholder="请选择">
+					<el-select v-if="form.identity" v-model="form.identity.type" style="width: 100%;" placeholder="请选择">
 						<el-option value="trainer">
 						</el-option>
 						<el-option value="admission">
@@ -78,26 +78,27 @@
 			// 初次计算之前不可避免的会报错
 			user() {
 				return this.ReactiveUser();
-			}
+			},
 		},
 		watch: {
-
+			data: function (val) {   
+				this.form = val;
+			}
 		},
-		provide() {},
+		provide() {
+		},
 		created() {
-			//console.log(new Date().getFullYear())
 			for (let i = new Date().getFullYear() + 4; i >= 1970; i--) {
 				this.dateData.push(i);
 			}
+			
 		},
-		created() {
-			this.$store.dispatch('user/getInfo',this.$store.getters['user/uId']).then((data) => {
+		mounted() {
+			this.$store.dispatch('user/getInfo', this.$route.params.u_id).then((data) => {
 				this.form = data;
 			}).catch(error => {
 				console.log(error)
 			})
-			//this.form = JSON.parse(JSON.stringify(this.user))
-			//console.log(form)
 		},
 		inject: ['oneself', 'ReactiveUser'],
 		data() {
@@ -113,13 +114,20 @@
 					'高中',
 					'其他'
 				],
-				form: {},
+				form: {
+					name: '',
+				},
 			}
+		},
+		props: {
+			data: {
+			},
 		},
 		methods: {
 			onSubmit() {
 				this.$store.dispatch('user/modifyInfo', this.form)
 					.then((data) => {
+						this.$store.commit('user/SET_DETAIL', data.data)
 						this.$message({
 							message: '成功修改个人信息',
 							type: 'success',

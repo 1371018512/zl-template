@@ -9,7 +9,9 @@ import {
 	modifyInfo,
 	getInformation,
 	getLikeInfo,
-	getCommentInfo
+	getCommentInfo,
+	oldInfo,
+	follow
 } from '@/api/user'
 import {
 	getStorage,
@@ -66,6 +68,9 @@ const mutations = {
 		}else {
 			state.artLikes.push(aId)
 		}
+	},
+	oldInfo: (state) => {
+		state.detail.newsInfo = false;
 	}
 }
 
@@ -121,7 +126,7 @@ const actions = {
 	}, uId) {
 		return new Promise((resolve, reject) => {
 			uId = uId || state.uId
-			getInfo(state.uId).then(response => {
+			getInfo(uId).then(response => {
 				// 已经设置过就纯拿data
 				if(state.detail.nickName) {
 					resolve(response.data);
@@ -226,12 +231,48 @@ const actions = {
 		})
 	},
 	
+	oldInfo({
+		commit,
+		state
+	}, data) {
+		return new Promise((resolve, reject) => {
+			oldInfo(data).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	
 	likeComment({
 		commit,
 		state
 	}, condition) {
 		return new Promise((resolve, reject) => {
 			likeComment(condition).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	
+	follow({
+		commit,
+		state
+	}, dat) {
+		return new Promise((resolve, reject) => {
+			follow(dat).then(response => {
+				let data = response.data;
+				let temp = state.detail;
+				if(data == 1) {
+					temp.followIds.push(dat.tId);
+				}else {
+					temp.followIds.splice(temp.followIds.findIndex((item) => {
+						return item == dat.tId;
+					}), 1);
+				}
+				state.detail = temp;
 				resolve(response)
 			}).catch(error => {
 				reject(error)
@@ -250,6 +291,7 @@ const actions = {
 				commit('SET_UID', 0)
 				commit('SET_TOKEN', '')
 				commit('SET_ROLES', [])
+				commit('SET_DETAIL', {})
 				removeStorage()
 				localStorage.removeItem('uId')
 				resetRouter()

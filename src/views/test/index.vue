@@ -38,7 +38,6 @@
       //VueCropper 
     }, 
 	mounted() {
-		console.log(this.$parent.$data)
 	},
     methods: { 
       //放大/缩小

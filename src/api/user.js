@@ -70,6 +70,14 @@ export function likeArt(data) {
   })
 }
 
+export function oldInfo(data) {
+  return request({
+    url: 'info/oldInfo',
+    method: 'post',
+    data
+  })
+}
+
 export function likeComment(data) {
   return request({
     url: 'user/likeComment',
@@ -81,6 +89,14 @@ export function likeComment(data) {
 export function modifyInfo(data) {
   return request({
     url: 'user/modifyInfo',
+    method: 'post',
+    data
+  })
+}
+
+export function follow(data) {
+  return request({
+    url: 'user/follow',
     method: 'post',
     data
   })
