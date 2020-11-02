@@ -46,6 +46,8 @@
 				}
 			};
 		},
+		mounted: () => {
+		},
 		methods: {
 			
 			async goDetail(ite) {

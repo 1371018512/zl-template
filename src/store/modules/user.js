@@ -11,7 +11,9 @@ import {
 	getLikeInfo,
 	getCommentInfo,
 	oldInfo,
-	follow
+	follow,
+	getInfos,
+	getinfosBysth
 } from '@/api/user'
 import {
 	getStorage,
@@ -148,7 +150,32 @@ const actions = {
 			})
 		})
 	},
-	
+	// 根据id获取users
+	getInfos({
+		commit,
+		state
+	}, uIds) {
+		return new Promise((resolve, reject) => {
+			getInfos(uIds).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	// 根据自定义条件获取指定个数的用户信息
+	getinfosBysth({
+		commit,
+		state
+	}, data) {
+		return new Promise((resolve, reject) => {
+			getinfosBysth(data).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
 	// 修改用户资料
 	modifyInfo({
 		commit,

@@ -52,7 +52,7 @@
 			<el-button size="small" v-show="data.uId != $store.getters['user/uId'] && !followed" @click="follow">
 				<span class="iconfont">&#xe606; </span>未关注
 			</el-button>
-			<el-button size="small" v-if="data.uId != $store.getters['user/uId']"><span class="iconfont">&#xe683; </span>私信</el-button>
+			<el-button size="small" v-if="data.uId != $store.getters['user/uId']" @click="talkwith"><span class="iconfont">&#xe683; </span>私信</el-button>
 			<el-button size="small"><span class="iconfont">&#xe715; </span>个人主页</el-button>
 			<span class="iconfont" v-popover:popover1 v-if="data.uId != $store.getters['user/uId']">&#xe847;</span>
 			<el-popover ref="popover1" :open-delay="600" placement="bottom" title="" width="10" trigger="hover" content="">
@@ -138,6 +138,9 @@
 					.catch((err) => {
 						console.log(err);
 					});
+			},
+			talkwith() {
+				this.$router.push({ path: '/information/talk/' + this.data.uId })
 			}
 		}
 	}

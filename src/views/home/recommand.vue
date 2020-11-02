@@ -13,7 +13,10 @@
 				<div>{{item.introduction}}</div>
 			</div>
 			<div style="display: flex;align-items: center;">
-				<el-button type="success" size="mini">关注</el-button>
+				<el-button v-show="item.uId != $store.getters['user/uId'] && !followed[i]"
+				type="success" size="mini" @click="follow(item)">关注</el-button>
+				<el-button v-show="item.uId != $store.getters['user/uId'] && followed[i]"
+				type="info" size="mini" @click="follow(item)">取关</el-button>
 			</div>
 		</div>
 		
@@ -36,11 +39,33 @@
 		props: {
 			data: {},
 		},
+		computed: {
+			followed() {
+				return this.data.map((item) => {
+					return this.$store.getters['user/userDetail'].followIds.find((ite) => {
+						return ite == item.uId;
+					})
+				})
+			}
+		},
 		data() {
 			return {
 			}
 		},
 		methods: {
+			follow(item) {
+				console.log(item.uId)
+				this.$store.dispatch('user/follow', {
+						uId: this.$store.getters['user/uId'],
+						tId: item.uId,
+					})
+					.then((data) => {
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			},
+			
 		}
 	}
 </script>

@@ -6,7 +6,7 @@
 			/>
 		</el-popover>
 		<span :style="{ color: level[data.userLevel].color }">
-			<span v-popover="'popover'" style="cursor: pointer;" @click="goPerson">{{data.nickName}}</span>
+			<span v-popover="'popover'" style="cursor: pointer;" @click.stop="goPerson">{{data.nickName}}</span>
 			<el-tooltip effect="dark" :content="data.identity.name" placement="bottom" v-if="!onlyName" :open-delay="300">
 				<img :src="badges[data.identity.type]"/>
 			</el-tooltip>

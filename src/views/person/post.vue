@@ -76,12 +76,12 @@
 						console.log(err);
 					});
 			},
-			goDetail(news) {
+			async goDetail(news) {
 				//console.log(news)
-				this.$store.commit('art/setUser', news.user)
-				this.$store.commit('art/setArt', news.art)
+				await this.$store.commit('art/setUser', news.user)
+				await this.$store.commit('art/setArt', news.art)
 				// 这里需要获取comments
-				this.$store.dispatch('art/getComments', {
+				await this.$store.dispatch('art/getComments', {
 						commentIds: news.art.commentIds,
 						sort: '',
 					})

@@ -101,3 +101,19 @@ export function follow(data) {
     data
   })
 }
+
+export function getInfos(data) {
+  return request({
+    url: 'user/getInfos',
+    method: 'post',
+    data
+  })
+}
+
+export function getinfosBysth(data) {
+  return request({
+    url: 'user/getinfosBysth',
+    method: 'post',
+    data
+  })
+}

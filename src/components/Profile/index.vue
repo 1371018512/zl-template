@@ -142,7 +142,8 @@
 					.then(() => {
 						this.$message({
 							message: '成功退出登录！',
-							type: 'success'
+							type: 'success',
+							customClass: 'mzindex',
 						});
 						this.$router.push({
 							path: '/login',

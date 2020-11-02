@@ -8,7 +8,7 @@
 				<!-- todo 这里的onlyName迟早去掉 -->
 				<zl-name :data="item.user" :onlyName="true"></zl-name>
 				关注了 我
-				<span style="position: absolute;right: 0;">{{formatTime(item.date)}}</span>
+				<span style="position: absolute;right: 0;">{{formatTime(new Date(item.date), '{y}-{m}-{d}')}}</span>
 			</div>
 		</div>
 	</div>

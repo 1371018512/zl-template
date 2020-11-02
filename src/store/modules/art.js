@@ -4,7 +4,10 @@ import {
 	getArts,
 	submitComment,
 	getComments,
-	getArtsIcomment
+	getArtsIcomment,
+	getBlinks,
+	submitArtHistory,
+	getArtHistory
 } from '@/api/article'
 
 const state = {
@@ -76,12 +79,36 @@ const actions = {
 			})
 		})
 	},
+	submitArtHistory({
+		commit,
+		state
+	}, data) {
+		return new Promise((resolve, reject) => {
+			submitArtHistory(data).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
 	getArts({
 		commit,
 		state
 	}, condition) {
 		return new Promise((resolve, reject) => {
 			getArts(condition).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	getBlinks({
+		commit,
+		state
+	}, data) {
+		return new Promise((resolve, reject) => {
+			getBlinks(data).then(response => {
 				resolve(response)
 			}).catch(error => {
 				reject(error)
@@ -106,6 +133,18 @@ const actions = {
 	}, data) {
 		return new Promise((resolve, reject) => {
 			getComments(data).then(response => {
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	getArtHistory({
+		commit,
+		state
+	}, data) {
+		return new Promise((resolve, reject) => {
+			getArtHistory(data).then(response => {
 				resolve(response)
 			}).catch(error => {
 				reject(error)

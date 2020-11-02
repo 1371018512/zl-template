@@ -30,10 +30,12 @@
 				</el-form>
 			</el-tab-pane>
 			<el-tab-pane label="发动态" name="blink">
-				<el-form ref="blinkForm" label-width="40px" size="small" class="form" :model="blinkForm">
-					<el-input style="font-size: 13px;" type="textarea" v-model="blinkForm.content" placeholder="请输入内容,动态长度不超过200字"
-					 :maxlength="200">
-					</el-input>
+				<el-form ref="blinkForm" label-width="10px" size="small" class="form" :model="blinkForm" :rules="Rules2">
+					<el-form-item prop="content">
+						<el-input style="font-size: 13px;" type="textarea" v-model="blinkForm.content" placeholder="请输入内容,动态长度不超过200字"
+						 :maxlength="200">
+						</el-input>
+					</el-form-item>
 					<div class="buttons">
 						<el-button type="primary" size="small" @click.native="submitBlink">发布</el-button>
 					</div>
@@ -55,10 +57,31 @@
 			zlTitle
 		},
 		data() {
+			var validateContent = (rule, value, callback) => {
+				if (!value) {
+					return callback(new Error('不能为空'));
+				} else {
+					callback();
+				}
+			};
 			return {
 				Rules: {
-				  title: [{ required: true, trigger: 'blur', message: '请输入标题' }],
-				  content: [{ required: true, trigger: 'blur', message: '请输入标题' }],
+					title: [{
+						required: true,
+						trigger: 'blur',
+						message: '请输入标题'
+					}],
+					content: [{
+						required: true,
+						trigger: 'blur',
+						message: '请输入标题'
+					}],
+				},
+				Rules2: {
+					content: [{
+						trigger: 'blur',
+						validator: validateContent,
+					}],
 				},
 				topicOptions: [{
 					label: '站内公告',
@@ -104,58 +127,65 @@
 		},
 		methods: {
 			submitBlink() {
-				this.$store.dispatch('art/submitBlink', {
-						uId: this.$store.getters['user/uId'],
-						content: this.blinkForm.content,
-						date: new Date(),
-						lastModify: new Date(),
-						lastComment: new Date(),
-					})
-					.then((data) => {
-						this.$message({
-							message: '成功发布动态',
-							type: 'success',
-							customClass:'mzindex'
-						});
-						//console.log(data)
-						this.blinkForm.content = ''
-					})
-					.catch((e) => {
-						console.log(e)
-					})
+				this.$refs.blinkForm.validate(valid => {
+					if (valid) {
+						this.$store.dispatch('art/submitBlink', {
+								uId: this.$store.getters['user/uId'],
+								content: this.blinkForm.content,
+								date: new Date(),
+								lastModify: new Date(),
+								lastComment: new Date(),
+							})
+							.then((data) => {
+								this.$message({
+									message: '成功发布动态',
+									type: 'success',
+									customClass: 'mzindex'
+								});
+								//console.log(data)
+								this.blinkForm.content = ''
+							})
+							.catch((e) => {
+								console.log(e)
+							})
+					} else {
+						console.log('error submit!!')
+						return false
+					}
+				})
 			},
 			submitArt() {
 				this.$refs.artForm.validate(valid => {
-				  console.log(valid)
-				  if (valid) {
-				    this.artForm.uId = this.$store.getters['user/uId'];
-					this.artForm.date = new Date();
-					this.artForm.lastModify = new Date();
-					this.artForm.lastComment = new Date();
-				    this.$store.dispatch('art/submitArt', this.artForm)
-				    	.then((data) => {
-				    		this.$message({
-				    			message: '成功发布讨论帖',
-				    			type: 'success',
-				    			customClass:'mzindex'
-				    		});
-				    		//console.log(data)
-				    		this.artForm = {
-				    			title: '',
-				    			content: '',
-				    			tag: [],
-				    			topic: [],
-				    		};
-				    	})
-				    	.catch((e) => {
-				    		console.log(e)
-				    	})
-				  } else {
-				    console.log('error submit!!')
-				    return false
-				  }
+					console.log(valid)
+					if (valid) {
+						this.artForm.uId = this.$store.getters['user/uId'];
+						this.artForm.date = new Date();
+						this.artForm.lastModify = new Date();
+						this.artForm.lastComment = new Date();
+						this.$store.dispatch('art/submitArt', this.artForm)
+							.then((data) => {
+								this.$message({
+									message: '成功发布讨论帖',
+									type: 'success',
+									customClass: 'mzindex'
+								});
+								//console.log(data)
+								this.artForm = {
+									title: '',
+									content: '',
+									tag: [],
+									topic: [],
+								};
+							})
+							.catch((e) => {
+								console.log(e)
+							})
+					} else {
+						console.log('error submit!!')
+						return false
+					}
 				})
-				
+
 			},
 		}
 	}

@@ -2,20 +2,29 @@
 	<div>
 		<div class="tName">
 			<div>
-				与 <zl-name :data="talk.target" :onlyName="true"/> 的对话
+				与
+				<zl-name :data="target" :onlyName="true" v-if="target.uId" /> 的对话
 			</div>
 		</div>
 		<div class="chatWindow" ref="chatWindow">
-			<zl-chat :data="item" :key="i" v-for="(item, i) in talk.talks" :left="talk.target.uId == item.user.uId"/>
+			<zl-chat 
+			:data="item" 
+			:key="i" 
+			:target="target"
+			v-for="(item, i) in messages" :left="$store.getters['user/uId'] != item.uId"/>
 		</div>
-		
+
 		<div>
 			<div class="buttons"></div>
 			<div>
-				<el-input type="textarea" v-model="commentContent" placeholder="请在这里添加你的回帖吧"></el-input>
-				<div class="submit">
-					<el-button type="primary" size="small">发送</el-button>
-				</div>
+				<el-form :rules="Rules" ref="Form" :model="form" label-width="0">
+					<el-form-item prop="content">
+						<el-input type="textarea" v-model="form.content" placeholder="请输入..."></el-input>
+					</el-form-item>
+					<div class="submit">
+						<el-button type="primary" size="small" @click.native="submitMessage">发送</el-button>
+					</div>
+				</el-form>
 			</div>
 		</div>
 	</div>
@@ -24,32 +33,72 @@
 <script>
 	import zlName from '@/components/name/index.vue'
 	import zlProfile from '@/components/Profile/profile2.vue'
-	import { formatTime } from '../../utils/index.js'
+	import {
+		formatTime
+	} from '../../utils/index.js'
 	import zlChat from '@/components/chat/index.vue'
-	import { scrollTo } from '../../utils/scroll-to.js'
-	
+	import {
+		scrollTo
+	} from '../../utils/scroll-to.js'
+
 	export default {
 		components: {
 			zlName,
 			zlProfile,
 			zlChat
 		},
-		computed: {
-		},
+		computed: {},
 		watch: {
-	
+			$route() {
+				this.Refresh();
+			}
 		},
 		provide() {
-			return {};
 		},
-		mounted() {
-			scrollTo(3333, 1000, () => {}, this.$refs.chatWindow)
-			console.dir(this.$refs.chatWindow)
+		destroyed() {
+			this.ws.close();
+		},
+		async mounted() {
+			this.Refresh();
+			//console.log(this.$store.getters['user/uId'], this.$route.params.t_id)
+			this.ws = new WebSocket('ws://localhost:8085/' + this.$store.getters['user/uId']);
+			// 客户端接收消息
+			this.ws.onmessage = (event) =>{
+				console.log(event.data)
+				this.messages.push(JSON.parse(event.data))
+				scrollTo(9999, 1000, () => {}, this.$refs.chatWindow)
+			}
+			// 出错
+			this.ws.onerror = (error) =>{
+			  console.log(error);
+			}
+			// 关闭
+			this.ws.onclose = ()=>{
+			  console.log('webSocket断开连接')
+			}
 		},
 		data() {
+			var validateContent = (rule, value, callback) => {
+				if (!value) {
+					return callback(new Error('不能为空'));
+				} else {
+					callback();
+				}
+			};
 			return {
-				commentContent: '',
+				ws: {},
+				Rules: {
+					content: [{
+						validator: validateContent,
+						trigger: 'blur'
+					}],
+				},
+				form: {
+					content: '',
+				},
 				formatTime: formatTime,
+				target: {},
+				messages: [],
 				talk: {
 					target: {
 						uId: 992973332,
@@ -73,67 +122,63 @@
 						graduationYear: 2021,
 						direction: '产品',
 					},
-					talks: [{
-						date: new Date(),
-						content: '你好啊!!!!!!!!!!!!!',
-						user: {
-							uId: 992973332,
-							nickName: 'shining4code',
-							profile: 'https://images.nowcoder.com/images/20200919/34603254_1600499186421_6EB5793282AABB100FAD68C33C19AFD0?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						}
-					},{
-						date: new Date(),
-						content: '你也好!!!!!!!!!!!!!',
-						user: {
-							uId: 992973331,
-							nickName: '今天也是没有收到offer的一天',
-							profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						}
-					}, {
-						date: new Date(),
-						content: '你也好!!!!!!!!!!!!!',
-						user: {
-							uId: 992973331,
-							nickName: '今天也是没有收到offer的一天',
-							profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						}
-					}, {
-						date: new Date(),
-						content: '你也好!!!!!!!!!!!!!',
-						user: {
-							uId: 992973331,
-							nickName: '今天也是没有收到offer的一天',
-							profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						}
-					}, {
-						date: new Date(),
-						content: '你也好!!!!!!!!!!!!!',
-						user: {
-							uId: 992973331,
-							nickName: '今天也是没有收到offer的一天',
-							profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						}
-					}, {
-						date: new Date(),
-						content: '你也好!!!!!!!!!!!!!',
-						user: {
-							uId: 992973331,
-							nickName: '今天也是没有收到offer的一天',
-							profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						}
-					}, {
-						date: new Date(),
-						content: '你也好!!!!!!!!!!!!!',
-						user: {
-							uId: 992973331,
-							nickName: '今天也是没有收到offer的一天',
-							profile: 'https://images.nowcoder.com/images/20200630/785377050_1593485967382_32C2759010B286BB3B7CC509E4721490?x-oss-process=image/resize,m_mfit,h_200,w_200',
-						}
-					}]
+					talks: []
 				}
 			};
 		},
-		methods: {}
+		methods: {
+			async Refresh() {
+				await this.$store.dispatch('talk/getTalk', {
+						uId: this.$store.getters['user/uId'],
+						tId: this.$route.params.t_id,
+						read: true
+					})
+					.then((data) => {
+						this.$emit('readed');
+						this.messages = data.data.messages;
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+				await this.$store.dispatch('user/getInfo', this.$route.params.t_id)
+					.then((data) => {
+						this.target = data;
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+				scrollTo(9999, 1000, () => {}, this.$refs.chatWindow)
+			},
+			submitMessage() {
+				this.$refs.Form.validate(async valid => {
+					if (valid) {
+						//console.log(this.form.content)
+						await this.$store.dispatch('talk/submitTalk', {
+							uId: this.$store.getters['user/uId'],
+							tId: this.$route.params.t_id,
+							content: this.form.content,
+						})
+							.then((data) => {
+								this.messages.push({
+									uId: this.$store.getters['user/uId'],
+									content: this.form.content,
+									date: new Date(),
+								})
+								this.form.content = '';
+								this.$message({
+									message: '成功发送',
+									type: 'success',
+									customClass: 'mzindex',
+								});
+								scrollTo(9999, 1000, () => {}, this.$refs.chatWindow)
+							})
+					} else {
+						console.log('error submit!!')
+						return false
+					}
+				})
+			},
+		}
 	}
 </script>
 
@@ -144,15 +189,18 @@
 		padding: 10px;
 		background-color: #fafafa;
 	}
+
 	.tName {
 		display: flex;
 		justify-content: center;
 	}
+
 	.buttons {
 		padding: 10px 5px;
 	}
-	.con {
-	}
+
+	.con {}
+
 	.submit {
 		margin-top: 10px;
 		float: right;

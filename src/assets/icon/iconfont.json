@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9664052",
+      "name": "错",
+      "font_class": "cuo",
+      "unicode": "e7a9",
+      "unicode_decimal": 59305
+    },
+    {
       "icon_id": "12052277",
       "name": "加",
       "font_class": "jia",

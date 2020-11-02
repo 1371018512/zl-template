@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<img :src="data.profile" :style="hovered?ActiveProfileStyle:ProfileStyle" @mouseover="hovered=true"
-		 @mouseout="hovered=false" @click="goPerson"/>
+		 @mouseout="hovered=false" @click.stop="goPerson"/>
 	</div>
 </template>
 

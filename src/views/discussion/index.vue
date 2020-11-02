@@ -15,7 +15,7 @@
 			<zl-news v-for="(item, i) in news" :key='i' :news="news[i]" @goDetail="goDetail" />
 		</el-aside>
 		<el-main>
-			main
+			<zl-history :data="histories" @goDetail="goDetail"/>
 		</el-main>
 	</el-container>
 </template>
@@ -24,13 +24,15 @@
 	import zlNews from '@/components/News/index.vue'
 	import zlArtDetail from '@/views/artDetail/index.vue'
 	import zlFilter from '@/components/filter/index.vue'
+	import zlHistory from './history.vue'
 
 	export default {
 		name: 'home',
 		components: {
 			zlNews,
 			zlArtDetail,
-			zlFilter
+			zlFilter,
+			zlHistory
 		},
 		computed: {
 
@@ -48,6 +50,7 @@
 		mounted() {
 			// 获取数据
 			this.getArts();
+			this.getHistory();
 		},
 		data() {
 			return {
@@ -56,6 +59,7 @@
 				DialogVisible: false,
 				news: [],
 				condition: '',
+				histories: [],
 			};
 		},
 		methods: {
@@ -75,10 +79,36 @@
 					.catch((err) => {
 						console.log(err);
 					});
-
+			},
+			getHistory() {
+				this.$store.dispatch('art/getArtHistory', {
+					uId: this.$store.getters['user/uId'],
+				})
+					.then((data) => {
+						this.histories = data.data;
+						console.log(data)
+					})
+					.catch((err) => {
+						console.log(err);
+					});
 			},
 			goDetail() {
 				this.DialogVisible = true
+				//console.log(this.$store.getters['art/art'])
+				this.$store.dispatch('art/submitArtHistory', {
+					title: this.$store.getters['art/art'].title,
+					uId: this.$store.getters['user/uId'],
+					artId: this.$store.getters['art/art'].id,
+					authorId: this.$store.getters['art/art'].uId
+				})
+					.then((data) => {
+						data = data.data;
+						console.log(data)
+						//this.news = data;
+					})
+					.catch((err) => {
+						console.log(err);
+					});
 			}
 		}
 	}

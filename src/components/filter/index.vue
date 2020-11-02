@@ -3,7 +3,7 @@
 		<div>
 			<zl-title data="分享与求助"/>
 			<zl-search style="margin: 0 10px;"/>
-			<el-button type="success" size="mini" style="float: right; margin-top: 3px;">
+			<el-button type="success" size="mini" style="float: right; margin-top: 3px;" @click="goHome">
 				<span class="iconfont">&#xf06c;</span> 我要发布
 			</el-button>
 		</div>
@@ -86,7 +86,11 @@
 				}]
 			};
 		},
-		methods: {}
+		methods: {
+			goHome() {
+				this.$router.push({ path: '/'})
+			}
+		}
 	}
 </script>
 

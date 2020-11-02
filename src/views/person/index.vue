@@ -104,7 +104,21 @@
 				this.$router.push(to);
 			},
 			goDetail() {
-				this.DialogVisible = true
+				this.DialogVisible = true;
+				this.$store.dispatch('art/submitArtHistory', {
+					title: this.$store.getters['art/art'].title,
+					uId: this.$store.getters['user/uId'],
+					artId: this.$store.getters['art/art'].id,
+					authorId: this.$store.getters['art/art'].uId
+				})
+					.then((data) => {
+						data = data.data;
+						console.log(data)
+						//this.news = data;
+					})
+					.catch((err) => {
+						console.log(err);
+					});
 			},
 			getArts() {
 				

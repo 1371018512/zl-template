@@ -16,6 +16,13 @@ export function submitArt(data) {
   })
 }
 
+export function submitArtHistory(data) {
+  return request({
+    url: 'user/submitArtHistory',
+    method: 'post',
+    data
+  })
+}
 export function getArts(data) {
   return request({
     url: 'art/getArts',
@@ -43,6 +50,22 @@ export function submitComment(data) {
 export function getComments(data) {
   return request({
     url: 'comment/getComments',
+    method: 'post',
+    data
+  })
+}
+
+export function getBlinks(data) {
+  return request({
+    url: 'art/getBlinks',
+    method: 'post',
+    data
+  })
+}
+
+export function getArtHistory(data) {
+  return request({
+    url: 'user/getArtHistory',
     method: 'post',
     data
   })

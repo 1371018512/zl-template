@@ -1,8 +1,8 @@
 <template>
 	<div :class="left ? 'message_left' : 'message_right'">
-		<zl-profile :data="data.user"/>
+		<zl-profile :data="left ? target : $store.getters['user/userDetail']"/>
 		<div class="bubble">
-			<div class="time">{{formatTime(data.date)}}</div>
+			<div :class="left ? 'time' : 'time_right'">{{formatTime(new Date(data.date), '{y}-{m}-{d}')}}</div>
 			<div :class="left ? 'triangle_left' : 'triangle_right'"></div>
 			<span>{{data.content}}</span>
 		</div>
@@ -18,11 +18,12 @@
 			zlProfile,
 		},
 		computed: {
-			
 		},
 		props: {
 			data: {},
 			left: {},
+			target: {
+			},
 		},
 		watch: {
 		},
@@ -65,7 +66,7 @@
 		background-color: #ebf8f5;
 		color: #666666;
 		margin: 0 20px;
-		padding: 12px 6px;
+		padding: 12px 15px;
 		margin-top: 5px;
 		border-radius: 6px;
 		word-break:break-all;
@@ -93,5 +94,15 @@
 		font-size: 12px;
 		bottom: -20px;
 		left: 1px;
+		white-space:nowrap;
+	}
+	
+	.time_right {
+		color: #8d8d8d;
+		position: absolute;
+		font-size: 12px;
+		bottom: -20px;
+		right: 1px;
+		white-space:nowrap;
 	}
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container" v-clickoutside="clickoutside">
 		<el-container>
 			<el-aside width="60px" class="profileContainer">
 				<zl-profile2 :data="news.user" v-popover:popover1 />
@@ -142,6 +142,7 @@
 				})
 					.then((data) => {
 						this.news.art.commentIds.push(data.data.id);
+						this.commentContent = '';
 						this.commentsRefresh();
 					})
 					.catch((e) => {
@@ -174,12 +175,12 @@
 					this.goDetail();
 				}
 			},
-			goDetail() {
+			async goDetail() {
 				//console.log(this.news.comments)
-				this.$store.commit('art/setUser', this.news.user)
-				this.$store.commit('art/setArt', this.news.art)
+				await this.$store.commit('art/setUser', this.news.user)
+				await this.$store.commit('art/setArt', this.news.art)
 				// 这里需要获取comments
-				this.$store.dispatch('art/getComments', {
+				await this.$store.dispatch('art/getComments', {
 						commentIds: this.news.art.commentIds,
 						sort: '',
 					})
@@ -212,6 +213,12 @@
 					.catch((err) => {
 						console.log(err);
 					});
+			},
+			clickoutside() {
+				if(this.openComment) {
+					this.openComment = false;
+					return;
+				}
 			}
 		}
 	}
