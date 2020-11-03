@@ -163,13 +163,23 @@
 									uId: this.$store.getters['user/uId'],
 									content: this.form.content,
 									date: new Date(),
+									refused: data.data
 								})
 								this.form.content = '';
-								this.$message({
-									message: '成功发送',
-									type: 'success',
-									customClass: 'mzindex',
-								});
+								if(data.data) {
+									this.$message({
+										message: '你已被拉黑，对方无法收到你的消息',
+										type: 'warning',
+										customClass: 'mzindex',
+									});
+								}else {
+									this.$message({
+										message: '成功发送',
+										type: 'success',
+										customClass: 'mzindex',
+									});
+								}
+								
 								scrollTo(9999, 1000, () => {}, this.$refs.chatWindow)
 							})
 					} else {

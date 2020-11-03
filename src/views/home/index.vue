@@ -58,13 +58,12 @@
 		},
 		methods: {
 			getBlinks() {
-				let uIds = this.$store.getters['user/userDetail'].followIds;
+				let uIds = [].concat(this.$store.getters['user/userDetail'].followIds);
 				uIds.push(this.$store.getters['user/uId'])
 				this.$store.dispatch('art/getBlinks', uIds)
 					.then((data) => {
 						data = data.data;
 						this.news = data;
-						console.log(data);
 					})
 					.catch((err) => {
 						console.log(err);

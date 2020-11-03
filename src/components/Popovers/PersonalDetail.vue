@@ -52,12 +52,16 @@
 			<el-button size="small" v-show="data.uId != $store.getters['user/uId'] && !followed" @click="follow">
 				<span class="iconfont">&#xe606; </span>未关注
 			</el-button>
-			<el-button size="small" v-if="data.uId != $store.getters['user/uId']" @click="talkwith"><span class="iconfont">&#xe683; </span>私信</el-button>
+			<el-button size="small" v-if="data.uId != $store.getters['user/uId']" @click="talkwith"><span class="iconfont">&#xe683;
+				</span>私信</el-button>
 			<el-button size="small"><span class="iconfont">&#xe715; </span>个人主页</el-button>
-			<span class="iconfont" v-popover:popover1 v-if="data.uId != $store.getters['user/uId']">&#xe847;</span>
-			<el-popover ref="popover1" :open-delay="600" placement="bottom" title="" width="10" trigger="hover" content="">
-				<div class="more">加入黑名单</div>
-				<div class="more">举报他</div>
+			<span class="iconfont" v-popover:popover1 v-if="data.uId != $store.getters['user/uId']" style="display: inline-block;margin: 0 10px;">
+				&#xe847;
+			</span>
+			<el-popover ref="popover1" :open-delay="600" placement="bottom" title="" width="0" trigger="hover" content="">
+				<div class="more" @click="black(true)" v-show="!hated">拉黑</div>
+				<div class="more" @click="black(false)" v-show="hated">取消拉黑</div>
+				<div class="more">举报</div>
 			</el-popover>
 		</div>
 		<div class="header">
@@ -69,14 +73,14 @@
 					<div style="font-size: 15px;">
 						{{data.nickName}}
 						<svg class="icon" aria-hidden="true" v-if="!data.sex" font-size="15px">
-						  <use xlink:href="#el-icon-zlnv"></use>
+							<use xlink:href="#el-icon-zlnv"></use>
 						</svg>
 						<svg class="icon" aria-hidden="true" v-else font-size="15px">
-						  <use xlink:href="#el-icon-zlnan"></use>
+							<use xlink:href="#el-icon-zlnan"></use>
 						</svg>
 					</div>
 					<div v-if="data.identity.name">
-						<img :src="badges[data.identity.type]" style="vertical-align: middle;"/>
+						<img :src="badges[data.identity.type]" style="vertical-align: middle;" />
 						<span>{{data.identity.name}}</span>
 					</div>
 				</el-main>
@@ -100,8 +104,7 @@
 			zlBadge,
 			zlProfile2
 		},
-		mounted() {
-		},
+		mounted() {},
 		computed: {
 			...mapGetters([
 				'badges',
@@ -112,6 +115,11 @@
 			},
 			followed() {
 				return this.$store.getters['user/userDetail'].followIds.find((item) => {
+					return item == this.data.uId;
+				})
+			},
+			hated() {
+				return this.$store.getters['user/userDetail'].hateIds.find((item) => {
 					return item == this.data.uId;
 				})
 			}
@@ -133,14 +141,57 @@
 						uId: this.$store.getters['user/uId'],
 						tId: this.data.uId,
 					})
-					.then((data) => {
-					})
+					.then((data) => {})
 					.catch((err) => {
 						console.log(err);
 					});
 			},
 			talkwith() {
-				this.$router.push({ path: '/information/talk/' + this.data.uId })
+				this.$router.push({
+					path: '/information/talk/' + this.data.uId
+				})
+			},
+			black(flag) {
+				if(flag)
+					this.$confirm('此操作将拉黑该用户，你将无法收到该用户的私信，请问是否继续?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						this.$store.dispatch('user/hate', {
+							uId: this.$store.getters['user/uId'],
+							tId: this.data.uId,
+						})
+						this.$message({
+							type: 'success',
+							message: '拉黑成功!'
+						});
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '已取消拉黑'
+						});
+					});
+				else
+					this.$confirm('将用户从你的黑名单移除?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						this.$store.dispatch('user/hate', {
+							uId: this.$store.getters['user/uId'],
+							tId: this.data.uId,
+						})
+						this.$message({
+							type: 'success',
+							message: '移除成功!'
+						});
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '已取消移除'
+						});
+					});
 			}
 		}
 	}
@@ -205,12 +256,14 @@
 		background: transparent;
 		padding: 0;
 	}
+
 	.header-main {
 		padding: 5px;
 		color: white;
 		font-size: 11px;
 	}
-	.header-main > * {
+
+	.header-main>* {
 		margin-bottom: 5px;
 	}
 </style>

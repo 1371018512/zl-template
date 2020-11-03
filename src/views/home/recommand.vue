@@ -7,10 +7,12 @@
 					:data="item"
 				/>
 			</el-popover>
-			<zl-profile :data="item" v-popover="'popover' + i"/>
-			<div class="text">
-				<zl-name :data="item" class="name"/>
-				<div>{{item.introduction}}</div>
+			<div style="display: flex;width: 100%;">
+				<zl-profile :data="item" v-popover="'popover' + i"/>
+				<div class="text">
+					<zl-name :data="item" class="name"/>
+					<div>{{item.introduction}}</div>
+				</div>
 			</div>
 			<div style="display: flex;align-items: center;">
 				<el-button v-show="item.uId != $store.getters['user/uId'] && !followed[i]"
@@ -52,9 +54,10 @@
 			return {
 			}
 		},
+		mounted() {
+		},
 		methods: {
 			follow(item) {
-				console.log(item.uId)
 				this.$store.dispatch('user/follow', {
 						uId: this.$store.getters['user/uId'],
 						tId: item.uId,
@@ -73,7 +76,7 @@
 <style scoped>
 	.user {
 		display: flex;
-		justify-content: space-around;
+		justify-content: space-between;
 		padding: 5px 0;
 	}
 	
@@ -88,9 +91,6 @@
 	}
 	
 	.text {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-around;
-		width: 180px;
+		margin-left: 10px;
 	}
 </style>

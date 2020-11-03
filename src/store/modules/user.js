@@ -13,7 +13,8 @@ import {
 	oldInfo,
 	follow,
 	getInfos,
-	getinfosBysth
+	getinfosBysth,
+	hate,
 } from '@/api/user'
 import {
 	getStorage,
@@ -294,8 +295,39 @@ const actions = {
 				let temp = state.detail;
 				if(data == 1) {
 					temp.followIds.push(dat.tId);
+					// 在本地移除黑名单
+					temp.hateIds.splice(temp.hateIds.findIndex((item) => {
+						return item == dat.tId;
+					}), 1);
 				}else {
 					temp.followIds.splice(temp.followIds.findIndex((item) => {
+						return item == dat.tId;
+					}), 1);
+				}
+				state.detail = temp;
+				resolve(response)
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	
+	hate({
+		commit,
+		state
+	}, dat) {
+		return new Promise((resolve, reject) => {
+			hate(dat).then(response => {
+				let data = response.data;
+				let temp = state.detail;
+				if(data == 1) {
+					temp.hateIds.push(dat.tId);
+					// 在本地移除关注
+					temp.followIds.splice(temp.followIds.findIndex((item) => {
+						return item == dat.tId;
+					}), 1);
+				}else {
+					temp.hateIds.splice(temp.hateIds.findIndex((item) => {
 						return item == dat.tId;
 					}), 1);
 				}

@@ -6,6 +6,12 @@
 			<div :class="left ? 'triangle_left' : 'triangle_right'"></div>
 			<span>{{data.content}}</span>
 		</div>
+		<el-tooltip class="item" effect="dark" content="对方无法接收你的消息" placement="bottom">
+			<svg class="icon warning" aria-hidden="true" v-if="data.refused">
+				<use xlink:href="#el-icon-zljinggao"></use>
+			</svg>
+		</el-tooltip>
+		
 	</div>
 </template>
 
@@ -46,18 +52,20 @@
 	.message_right {
 		font-size: 14px;
 		display: flex;
-		align-items: flex-start;
+		//align-items: flex-start;
 		padding: 5px;
 		padding-bottom: 25px;
 		width: 70%;
+		position: relative;
 		
 		float: right;
 		flex-direction: row-reverse;
 	}
 	.message_left {
+		position: relative;
 		font-size: 14px;
 		display: flex;
-		align-items: flex-start;
+		//align-items: flex-start;
 		padding: 5px;
 		padding-bottom: 25px;
 		width: 70%;
@@ -104,5 +112,10 @@
 		bottom: -20px;
 		right: 1px;
 		white-space:nowrap;
+	}
+	
+	.warning {
+		position: relative;
+		top: 17px;
 	}
 </style>

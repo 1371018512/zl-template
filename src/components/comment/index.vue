@@ -31,7 +31,7 @@
 						<span>举报</span>
 					</div>
 				</div>
-				<div class="recomments">
+				<div class="recomments" v-show="data.recomments.length">
 					<template v-for="(item, i) in data.recomments">
 						<zl-recomment :data="item" @openInput="openInputFn" @publishRecomment="publishRecomment" />
 						<hr v-if="i < data.recomments.length - 1" />

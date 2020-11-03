@@ -102,6 +102,14 @@ export function follow(data) {
   })
 }
 
+export function hate(data) {
+  return request({
+    url: 'user/hate',
+    method: 'post',
+    data
+  })
+}
+
 export function getInfos(data) {
   return request({
     url: 'user/getInfos',

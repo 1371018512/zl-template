@@ -39,6 +39,22 @@
 							成就
 						</span>
 					</el-menu-item>
+					<el-menu-item index="4" @click.native="routerGo('/person/follow/' + $route.params.u_id)">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#el-icon-zlxihuan"></use>
+						</svg>
+						<span slot="title">
+							关注
+						</span>
+					</el-menu-item>
+					<el-menu-item index="5" @click.native="routerGo('/person/hate/' + $route.params.u_id)">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#el-icon-zlyujing"></use>
+						</svg>
+						<span slot="title">
+							黑名单
+						</span>
+					</el-menu-item>
 				</el-menu>
 			</el-aside>
 			<el-main class="main">

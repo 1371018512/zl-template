@@ -96,6 +96,22 @@ export const constantRoutes = [{
 				component: () => import('@/views/person/achievement'),
 			}, ]
 		}, {
+			path: '/person/follow/:u_id',
+			component: () => import('@/views/person/index'),
+			children: [{
+				// 个人成就
+				path: '/person/follow/:u_id',
+				component: () => import('@/views/person/follow'),
+			}, ]
+		}, {
+			path: '/person/hate/:u_id',
+			component: () => import('@/views/person/index'),
+			children: [{
+				// 个人成就
+				path: '/person/hate/:u_id',
+				component: () => import('@/views/person/hate'),
+			}, ]
+		}, {
 			path: '/person',
 			redirect: '/404',
 			hidden: true
