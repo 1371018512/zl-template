@@ -12,7 +12,7 @@
 		<!-- 以上是文章详情页 -->
 		<el-aside width="600px">
 			<zl-post />
-			<zl-news v-for="(item, i) in news" :news="news[i]" :index="i" :key='i' />
+			<zl-news v-for="(item, i) in news" :news="news[i]" :index="i" :key='item.art.id' />
 		</el-aside>
 		<el-main>
 			<zl-recommand :data="user" />

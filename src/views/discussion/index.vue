@@ -12,7 +12,7 @@
 		<!-- 以上是文章详情页 -->
 		<el-aside width="600px">
 			<zl-filter @filterCondition="getArts" />
-			<zl-news v-for="(item, i) in news" :key='i' :news="news[i]" @goDetail="goDetail" />
+			<zl-news v-for="(item, i) in news" :key='item.art.id' :news="news[i]" @goDetail="goDetail" />
 		</el-aside>
 		<el-main>
 			<zl-history :data="histories" @goDetail="goDetail"/>

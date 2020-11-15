@@ -14,7 +14,7 @@
 				</el-header>
 				<hr/>
 				<el-main class="img-container" @mouseover.native="hoverEffectIn($event)" @mouseleave.native="hoverEffectOut($event)">
-					<el-col :span="7" v-for="(item, index) in imgs" :key="index" style="text-align: center; cursor: pointer;" :class="{'dark-back' : index == activeImg}"
+					<el-col :span="7" v-for="(item, index) in imgs" :key="item.name" style="text-align: center; cursor: pointer;" :class="{'dark-back' : index == activeImg}"
 					 :data-index="index">
 						<img :src="item.src" style="width: 50%;">
 						<div>{{item.name}}</div>
@@ -72,23 +72,23 @@
 				// todo: 数据不该放在此处
 				imgs: [{
 						src: require("../../assets/logo.png"),
-						name: '收藏'
+						name: '收1'
 					},
 					{
 						src: require("../../assets/logo.png"),
-						name: '收藏'
+						name: '收2'
 					},
 					{
 						src: require("../../assets/logo.png"),
-						name: '收藏'
+						name: '收3'
 					},
 					{
 						src: require("../../assets/logo.png"),
-						name: '收藏'
+						name: '收4'
 					},
 					{
 						src: require("../../assets/logo.png"),
-						name: '收藏'
+						name: '收5'
 					},
 					{
 						src: require("../../assets/logo.png"),

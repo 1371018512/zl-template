@@ -5,7 +5,7 @@
 		</div>
 		<hr>
 		<div class="body">
-			<div v-for="(item, i) in data" :key="i" class="user">
+			<div v-for="(item, i) in data" :key="item.uId" class="user">
 				<el-popover :ref="'popover' + i" placement="bottom" title="" width="350" trigger="hover" content="">
 					<zl-personal-detail
 						:data="item"

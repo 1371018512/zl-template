@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<zl-title data="浏览历史"/>
-		<div v-for="(item, i) in data" :key="i" class="info">
+		<div v-for="(item, i) in data" :key="item.id" class="info">
 			<div class="title" @click="goDetail(item)">{{item.title}}</div>
 			<div class="time">{{formatTime(new Date(item.date), '{y}-{m}-{d}')}}</div>
 			<hr v-if="i < data.length - 1" />

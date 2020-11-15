@@ -20,25 +20,25 @@
 			<zl-badge :data="level[data.userLevel].name + ' LV.' + data.userLevel" :color="level[data.userLevel].color" />
 			<div class="details">
 				<span>
-					<el-tooltip content="获赞与收藏" placement="top">
+					<el-tooltip content="获赞与收藏" placement="top" :open-delay="300">
 						<span class="iconfont">&#xe86c;</span>
 					</el-tooltip>
 					{{likesAndcollects}}
 				</span>
 				<span>
-					<el-tooltip content="通过代码" placement="top">
+					<el-tooltip content="通过代码" placement="top" :open-delay="300">
 						<span class="iconfont">&#xe668;</span>
 					</el-tooltip>
 					{{shortInt(data.codePass)}}
 				</span>
 				<span>
-					<el-tooltip content="题目正确" placement="top">
+					<el-tooltip content="题目正确" placement="top" :open-delay="300">
 						<span class="iconfont">&#xe6f2;</span>
 					</el-tooltip>
 					{{shortInt(data.problemPass)}}
 				</span>
 				<span>
-					<el-tooltip content="产出优质内容" placement="top">
+					<el-tooltip content="产出优质内容" placement="top" :open-delay="300">
 						<span class="iconfont">&#xe672;</span>
 					</el-tooltip>
 					{{shortInt(data.highquiltyOutput)}}
@@ -114,11 +114,13 @@
 				return shortInt(this.data.belikes + this.data.becollects);
 			},
 			followed() {
-				return this.$store.getters['user/userDetail'].followIds.find((item) => {
-					return item == this.data.uId;
-				})
+				if(this.$store.getters['user/userDetail'].followIds)
+					return this.$store.getters['user/userDetail'].followIds.find((item) => {
+						return item == this.data.uId;
+					})
 			},
 			hated() {
+				if(this.$store.getters['user/userDetail'].hateIds)
 				return this.$store.getters['user/userDetail'].hateIds.find((item) => {
 					return item == this.data.uId;
 				})

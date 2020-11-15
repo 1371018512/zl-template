@@ -48,7 +48,7 @@
 			</el-form-item>
 			<el-form-item label="毕业年份">
 				<el-select v-model="form.graduationYear" placeholder="请选择毕业年份">
-					<el-option :value="item" v-for="(item, i) in dateData" :key="i"></el-option>
+					<el-option :value="item" v-for="(item, i) in dateData" :key="item"></el-option>
 				</el-select>
 			</el-form-item>
 			<el-form-item label="学历">

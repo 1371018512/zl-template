@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<zl-title data="推荐关注"/>
-		<div v-for="(item, i) in data" :key="i" class="user">
+		<div v-for="(item, i) in data" :key="item.uId" class="user">
 			<el-popover :ref="'popover' + i" placement="bottom" title="" width="350" trigger="hover" content="">
 				<zl-personal-detail
 					:data="item"
@@ -43,11 +43,12 @@
 		},
 		computed: {
 			followed() {
-				return this.data.map((item) => {
-					return this.$store.getters['user/userDetail'].followIds.find((ite) => {
-						return ite == item.uId;
+				if(this.$store.getters['user/userDetail'].followIds)
+					return this.data.map((item) => {
+						return this.$store.getters['user/userDetail'].followIds.find((ite) => {
+							return ite == item.uId;
+						})
 					})
-				})
 			}
 		},
 		data() {

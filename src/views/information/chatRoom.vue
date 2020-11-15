@@ -9,7 +9,7 @@
 		<div class="chatWindow" ref="chatWindow">
 			<zl-chat 
 			:data="item" 
-			:key="i" 
+			:key="item.date + ''" 
 			:target="target"
 			v-for="(item, i) in messages" :left="$store.getters['user/uId'] != item.uId"/>
 		</div>

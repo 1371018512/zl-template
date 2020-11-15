@@ -6,7 +6,7 @@
 			<div :class="left ? 'triangle_left' : 'triangle_right'"></div>
 			<span>{{data.content}}</span>
 		</div>
-		<el-tooltip class="item" effect="dark" content="对方无法接收你的消息" placement="bottom">
+		<el-tooltip class="item" effect="dark" content="对方无法接收你的消息" placement="bottom" :open-delay="300">
 			<svg class="icon warning" aria-hidden="true" v-if="data.refused">
 				<use xlink:href="#el-icon-zljinggao"></use>
 			</svg>

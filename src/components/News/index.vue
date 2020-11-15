@@ -40,7 +40,7 @@
 		</div>
 		<div class="comments" v-if="!news.art.title" v-show="openComment">
 			<div v-for="(item, i) in news.art.comments">
-				<zl-comment :data="item" :index="i" :key="i" @commentsRefresh="commentsRefresh"/>
+				<zl-comment :data="item" :index="i" :key="item.comment.id" @commentsRefresh="commentsRefresh"/>
 				<!-- <hr v-if="news.art.comments.length - 1 != i" /> -->
 			</div>
 			<div style="margin: 10px;height: 90px;">
