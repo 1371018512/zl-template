@@ -1,8 +1,8 @@
 <template>
 	<div class="container">
 		<el-tabs v-model="activeTab">
-			<el-tab-pane label="我发布的帖子" name="publish"></el-tab-pane>
-			<el-tab-pane label="我回复的帖子" name="reply"></el-tab-pane>
+			<el-tab-pane label="发布的帖子" name="publish"></el-tab-pane>
+			<el-tab-pane label="回复的帖子" name="reply"></el-tab-pane>
 		</el-tabs>
 		<zl-title :data="map[activeTab].title + `(${map[activeTab].data.length})`" size="16" />
 		<div v-for="(item, i) in map[activeTab].data" class="art">
